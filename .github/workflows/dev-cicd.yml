@@ -149,8 +149,8 @@ jobs:
     needs: [create-pull-request, run-tests, dev-deploy]
     if: |
       always() &&
-      needs.test-reports.result == 'success' &&
-      needs.e2e-tests.result == 'success' &&
-      needs.create-pull-request.result == 'success'
+      needs.create-pull-request.result == 'success' &&
+      needs.run-tests.result == 'success' &&
+      needs.dev-deploy.result == 'success'
     steps:
       - run: echo "All checks passed"
