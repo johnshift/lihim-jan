@@ -1,0 +1,40 @@
+name-template: 'v$RESOLVED_VERSION 🚀'
+
+tag-template: 'v$RESOLVED_VERSION'
+
+categories:
+  - title: '✨🔥 Features 🔥✨'
+    labels:
+      - 'feat'
+  - title: '🐛🪓 Bug Fixes 🐛🪓'
+    labels:
+      - 'fix'
+  - title: '💻 Code Changes 💻'
+    labels:
+      - 'refactor'
+      - 'style'
+  - title: '🛡 Tests 🛡'
+    labels:
+      - 'test'
+  - title: '🧰 Maintenance 🧰'
+    labels:
+      - 'chore'
+      - 'ci'
+      - 'docs'
+
+change-template: '- $TITLE ([#$NUMBER]($URL))'
+
+change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+
+version-resolver:
+  major:
+    # all `major-release` label will bump repo to next major version e.g. v1.x.x -> v2.x.x
+    labels: ['major-release']
+  minor:
+    # all `feat` labels will bump to next minor version e.g. v1.1.x -> v1.2.x
+    labels: ['feat', 'minor']
+  # all other labels will bump to next patch e.g. v1.1.1 -> v.1.1.2
+  default: patch
+
+template: |
+  $CHANGES

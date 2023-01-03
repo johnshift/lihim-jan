@@ -1,0 +1,23 @@
+name: On Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  save-tag-sha:
+    name: Save Tag SHA
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GA_PAT }}
+
+      - uses: gliech/create-github-secret-action@v1
+        with:
+          name: LATEST_TAG_SHA
+          value: ${{ github.sha }}
+          pa_token: ${{ secrets.GA_PAT }}
