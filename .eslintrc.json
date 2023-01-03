@@ -1,11 +1,28 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "extends": [
+    "plugin:unicorn/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "xo",
+    "xo-react/space",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "plugins": [
+    "unicorn",
+    "testing-library",
+    "prefer-arrow",
+    "jest-dom",
+    "@nrwl/nx",
+    "simple-import-sort"
+  ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        // nx rules
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -18,7 +35,74 @@
               }
             ]
           }
-        ]
+        ],
+        // sort rules
+        "simple-import-sort/exports": "error",
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Side effects first e.g. 'server-only'
+              ["^\\u0000"],
+              // `react`, `next
+              ["^(react|next)"],
+              // Other npm libraries.
+              ["^@?\\w"],
+              // Internal packages
+              ["^(~)(/.*|$)"],
+              // Parent imports `..`
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports '.'
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+            ]
+          }
+        ],
+        // enforce arrow functions
+        "prefer-arrow/prefer-arrow-functions": [
+          "error",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": true,
+            "classPropertiesAllowed": false
+          }
+        ],
+        // override xo default
+        "react/boolean-prop-naming": [
+          "error",
+          { "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+" }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/function-component-definition": [
+          "error",
+          {
+            "namedComponents": "arrow-function",
+            "unnamedComponents": "arrow-function"
+          }
+        ],
+        "no-unused-expressions": [
+          "error",
+          {
+            "allowTernary": true
+          }
+        ],
+        "no-warning-comments": "warn",
+        "dot-notation": "off",
+        "new-cap": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "import/no-anonymous-default-export": "off",
+        // override unicorn lint
+        "unicorn/prefer-module": "off",
+        "unicorn/no-empty-file": "off",
+        "unicorn/filename-case": [
+          "error",
+          {
+            "cases": {
+              "kebabCase": true
+            }
+          }
+        ],
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/no-null": "off"
       }
     },
     {
