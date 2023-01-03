@@ -1,11 +1,10 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 
 import {
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider as BaseMantineProvider,
 } from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 
 import { theme } from './theme';
@@ -16,10 +15,15 @@ type Props = {
 };
 
 export const MantineProvider: FC<Props> = (props) => {
-  const preferredColorScheme = useColorScheme();
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(
-    props.colorScheme ?? preferredColorScheme,
-  );
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('dark');
+
+  // Used to sync theme based from external sources outside of react
+  // e.g. storybook theme toggle
+  useEffect(() => {
+    if (props.colorScheme) {
+      setColorScheme(props.colorScheme);
+    }
+  }, [props.colorScheme]);
 
   const toggle = (value?: ColorScheme) => {
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
