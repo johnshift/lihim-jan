@@ -7,8 +7,12 @@
     "dev": "nx serve web",
     "start": "nx serve web --prod",
     "build": "nx build",
+    "lint": "nx affected:lint --uncommitted --parallel=8",
+    "lint:all": "nx run-many --target=lint --all --parallel=8",
     "test": "nx affected:test --codeCoverage",
-    "test:all": "nx run-many --target=test --all --codeCoverage"
+    "test:all": "nx run-many --target=test --all --codeCoverage",
+    "push": "git push origin $(git rev-parse --abbrev-ref HEAD)",
+    "pull": "node tools/scripts/pull-remote.js"
   },
   "dependencies": {
     "@nrwl/next": "15.4.2",
@@ -21,6 +25,8 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-nx-scopes": "^17.2.0",
     "@nrwl/cypress": "15.4.2",
     "@nrwl/eslint-plugin-nx": "15.4.2",
     "@nrwl/jest": "15.4.2",
