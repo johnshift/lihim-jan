@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nx serve web",
     "start": "nx serve web --prod",
-    "build": "nx build",
+    "build": "nx build web",
     "lint": "nx affected:lint --uncommitted --parallel=8",
     "lint:all": "nx run-many --target=lint --all --parallel=8",
     "test": "nx affected:test --codeCoverage",
