@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# run lint
+yarn lint:all
+
+# run all unit test
+yarn test:all --parallel=3
+
+# run build
+yarn build
