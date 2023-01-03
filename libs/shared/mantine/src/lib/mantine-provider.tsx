@@ -5,29 +5,24 @@ import {
   ColorSchemeProvider,
   MantineProvider as BaseMantineProvider,
 } from '@mantine/core';
+import { useColorScheme } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
-
-import { setCookie } from 'cookies-next';
 
 import { theme } from './theme';
 
 type Props = {
   children: ReactNode;
-  colorScheme: ColorScheme;
+  colorScheme?: ColorScheme;
 };
 
 export const MantineProvider: FC<Props> = (props) => {
+  const preferredColorScheme = useColorScheme();
   const [colorScheme, setColorScheme] = useState<ColorScheme>(
-    props.colorScheme,
+    props.colorScheme ?? preferredColorScheme,
   );
 
   const toggle = (value?: ColorScheme) => {
-    const nextColorScheme =
-      value || (colorScheme === 'dark' ? 'light' : 'dark');
-    setColorScheme(nextColorScheme);
-    setCookie('mantine-color-scheme', nextColorScheme, {
-      maxAge: 60 * 60 * 24 * 30,
-    });
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
   };
 
   return (
@@ -40,7 +35,7 @@ export const MantineProvider: FC<Props> = (props) => {
           ...theme,
         }}
       >
-        <NotificationsProvider position="bottom-center" containerWidth={300}>
+        <NotificationsProvider position="bottom-center" containerWidth={280}>
           {props.children}
         </NotificationsProvider>
       </BaseMantineProvider>

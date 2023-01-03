@@ -1,17 +1,9 @@
-import { GetServerSidePropsContext } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { ColorScheme } from '@mantine/core';
-
 import { MantineProvider } from '@lihim/shared/mantine';
-import { getCookie } from 'cookies-next';
 
-const App = ({
-  Component,
-  pageProps,
-  colorScheme,
-}: AppProps & { colorScheme: ColorScheme }) => (
+const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       <title>Lihim App</title>
@@ -21,16 +13,11 @@ const App = ({
       />
     </Head>
     <main>
-      <MantineProvider colorScheme={colorScheme}>
+      <MantineProvider colorScheme="dark">
         <Component {...pageProps} />
       </MantineProvider>
     </main>
   </>
 );
-
-App.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
-  // Get color scheme from cookie (defaults to dark)
-  colorScheme: getCookie('mantine-color-scheme', ctx) || 'dark',
-});
 
 export default App;
