@@ -19,9 +19,8 @@ const exec = util.promisify(require('node:child_process').exec);
     // Delete branch
     await exec(`git branch -D ${branchName}`);
 
-    // (Skipped: Auto delete merged PR is set in repo)
-    // // Delete remote branch
-    // await exec(`HUSKY=0 git push origin :${branchName}`);
+    // Delete remote branch
+    await exec(`HUSKY=0 git push origin :${branchName}`);
 
     // Pull origin main
     await exec('git pull origin main --rebase');
