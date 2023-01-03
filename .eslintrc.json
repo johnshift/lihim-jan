@@ -46,6 +46,8 @@
               ["^\\u0000"],
               // `react`, `next
               ["^(react|next)"],
+              // `mantine`, `react-icons
+              ["^(@mantine|react-icons)"],
               // Other npm libraries.
               ["^@?\\w"],
               // Internal packages
