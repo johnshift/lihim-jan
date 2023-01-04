@@ -13,8 +13,6 @@
     "test:all": "nx run-many --target=test --all --codeCoverage",
     "push": "git push origin $(git rev-parse --abbrev-ref HEAD)",
     "pull": "node tools/scripts/pull-remote.js",
-    "storybook": "nx storybook web",
-    "build-storybook": "nx build-storybook web",
     "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
