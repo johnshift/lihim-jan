@@ -21,10 +21,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # We cache deps using main branch so that any feature branch
-  # derived from main-branch will have their cache restored
-  deps-cache:
-    name: Cache dependencies
+  get-affected:
+    name: Get NX Affected Libraries
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,39 +30,48 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GA_PAT }}
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'yarn'
-
       - name: Install deps
         run: yarn install --frozen-lockfile
+      - name: Get storybook affected libs
+        run: echo "storybook_libs=$(node tools/scripts/get-affected-libs.js build-storybook ${{ secrets.LATEST_TAG_SHA }} ${{ github.sha }})" >> $GITHUB_ENV
+      - name: Echo Storybook E2E Affected Libraries
+        run: echo "affected storybook libs = ${{ env.storybook_libs }}"
+    outputs:
+      storybook_libs: ${{ env.storybook_libs }}
 
   chromatic:
-    name: Chromatic Main Branch
+    name: ${{ matrix.projectName }}
     runs-on: ubuntu-latest
+    needs: [get-affected]
+    if: ${{ fromJson(needs.get-affected.outputs.storybook_libs)[0] }}
+    strategy:
+      matrix:
+        projectName: ${{ fromJson(needs.get-affected.outputs.storybook_libs ) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: ${{ secrets.GA_PAT }}
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'yarn'
-
       - name: Install deps
         run: yarn install --frozen-lockfile
-
+      - name: Build storybook
+        run: yarn nx build-storybook ${{ matrix.projectName }}
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: dist/storybook/${{ matrix.projectName }}
           autoAcceptChanges: true # (checks happen in PR, main branch means already accepted)
 
 
