@@ -110,7 +110,7 @@ jobs:
           node-version: 18
           cache: 'yarn'
       - name: Install deps
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
       - name: Get storybook affected libs
         run: echo "storybook_libs=$(node tools/scripts/get-affected-libs.js build-storybook ${{ secrets.LATEST_TAG_SHA }} ${{ github.sha }})" >> $GITHUB_ENV
       - name: Echo Storybook E2E Affected Libraries
@@ -137,7 +137,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install deps
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Unit Test Affected by Release
         run: yarn test:all --base ${{ secrets.LATEST_TAG_SHA }}
@@ -162,7 +162,7 @@ jobs:
           node-version: 18
           cache: 'yarn'
       - name: Install deps
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
       - name: Build storybook
         run: yarn nx build-storybook ${{ matrix.projectName }}
       - name: Publish to Chromatic
