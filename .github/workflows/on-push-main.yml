@@ -42,4 +42,30 @@ jobs:
       - name: Install deps
         run: yarn install --frozen-lockfile
 
+  chromatic:
+    name: Chromatic Main Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GA_PAT }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install --frozen-lockfile
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          autoAcceptChanges: true # (checks happen in PR, main branch means already accepted)
+
+
   # TODO: test report
