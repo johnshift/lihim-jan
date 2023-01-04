@@ -29,8 +29,6 @@ export default {
 export const Primary: StoryObj<TestButtonProps> = {
   args: {
     text: 'Hello Storybook',
-    // eslint-disable-next-line no-alert
-    onClick: () => alert('Hello from storybook'),
   },
   async play({ canvasElement }) {
     const canvas = within(canvasElement);
