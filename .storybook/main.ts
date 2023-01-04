@@ -6,5 +6,6 @@ export const rootMain: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-dark-mode',
+    '@storybook/addon-a11y',
   ],
 };

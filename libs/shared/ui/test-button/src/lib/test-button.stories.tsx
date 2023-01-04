@@ -2,9 +2,12 @@ import { ComponentProps } from 'react';
 
 import { Center } from '@mantine/core';
 
-import { MantineProvider } from '@lihim/shared/mantine';
+import { expect } from '@storybook/jest';
 import { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 import { useDarkMode } from 'storybook-dark-mode';
+
+import { MantineProvider } from '@lihim/shared/mantine';
 
 import { TestButton } from './test-button';
 
@@ -28,5 +31,18 @@ export const Primary: StoryObj<TestButtonProps> = {
     text: 'Hello Storybook',
     // eslint-disable-next-line no-alert
     onClick: () => alert('Hello from storybook'),
+  },
+  async play({ canvasElement }) {
+    const canvas = within(canvasElement);
+
+    // Expect defaults
+    expect(canvas.getByTestId('clicked-status')).toHaveTextContent('false');
+
+    await userEvent.click(
+      canvas.getByRole('button', { name: 'Hello Storybook' }),
+    );
+
+    // Expect defaults
+    expect(canvas.getByTestId('clicked-status')).toHaveTextContent('true');
   },
 };
