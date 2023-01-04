@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@lihim/shared/mantine": ["libs/shared/mantine/src/index.ts"]
+      "@lihim/shared/mantine": ["libs/shared/mantine/src/index.ts"],
+      "@lihim/shared/ui/test-button": [
+        "libs/shared/ui/test-button/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

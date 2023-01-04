@@ -48,9 +48,12 @@
               ["^(react|next)"],
               // `mantine`, `react-icons
               ["^(@mantine|react-icons)"],
+              // `storybook`, `testing-library'
+              ["^(@storybook|@testing-library|storybook)"],
               // Other npm libraries.
               ["^@?\\w"],
               // Internal packages
+              ["^(@lihim)"],
               ["^(~)(/.*|$)"],
               // Parent imports `..`
               ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
