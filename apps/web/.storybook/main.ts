@@ -1,4 +1,5 @@
 import type { Options, StorybookConfig } from '@storybook/core-common';
+
 import path from 'node:path';
 
 import { rootMain } from '../../../.storybook/main';
