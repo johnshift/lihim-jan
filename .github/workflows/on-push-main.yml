@@ -30,13 +30,19 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GA_PAT }}
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install deps
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
       - name: Get storybook affected libs
         run: echo "storybook_libs=$(node tools/scripts/get-affected-libs.js build-storybook ${{ secrets.LATEST_TAG_SHA }} ${{ github.sha }})" >> $GITHUB_ENV
       - name: Echo Storybook E2E Affected Libraries
@@ -58,15 +64,21 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GA_PAT }}
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install deps
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
       - name: Build storybook
-        run: yarn nx build-storybook ${{ matrix.projectName }}
+        run: pnpm nx build-storybook ${{ matrix.projectName }}
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
