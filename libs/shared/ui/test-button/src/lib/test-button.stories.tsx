@@ -28,7 +28,7 @@ export default {
 
 export const Primary: StoryObj<TestButtonProps> = {
   args: {
-    text: 'Hello Storybook',
+    text: 'Hello from Storybook',
   },
   async play({ canvasElement }) {
     const canvas = within(canvasElement);
@@ -37,7 +37,7 @@ export const Primary: StoryObj<TestButtonProps> = {
     expect(canvas.getByTestId('clicked-status')).toHaveTextContent('false');
 
     await userEvent.click(
-      canvas.getByRole('button', { name: 'Hello Storybook' }),
+      canvas.getByRole('button', { name: 'Hello from Storybook' }),
     );
 
     // Expect defaults
