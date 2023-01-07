@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # run lint on staged files
-yarn lint
+pnpm lint
 
 # run affected tests
-yarn test --parallel=4
+pnpm test --parallel=4

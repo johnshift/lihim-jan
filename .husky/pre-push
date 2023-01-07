@@ -2,10 +2,10 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # run lint
-yarn lint:all
+pnpm lint:all
 
 # run all unit test
-yarn test:all --parallel=3
+pnpm test:all --parallel=3
 
 # run build
-yarn build
+pnpm build
