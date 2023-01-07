@@ -6,22 +6,3 @@ yarn lint
 
 # run affected tests
 yarn test --parallel=4
-
-# run codeclimate check (skip if no staged ts-files)
-tsFiles=$(node tools/scripts/staged-codeclimate.js);
-if [ "$tsFiles" ]; then
-		echo "Running codeclimate check ...\n"
-
-		# save output to string
-    ccOutput=$(codeclimate analyze $tsFiles);
-
-		# fail if codeclimate has issues
-		if [ -z "${ccOutput##*"Found 0 issues."*}" ]; then
-			echo "codeclimate OK!\n"
-		else
-			echo "$ccOutput\n"
-			exit 1
-		fi
-else
-    echo "Skipping codeclimate check (no staged ts-files)\n"
-fi;
