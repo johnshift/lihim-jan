@@ -117,18 +117,26 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install --frozen-lockfile
+      - name: Get test affected libs
+        run: echo "test_libs=$(node tools/scripts/get-affected-libs.js test ${{ secrets.LATEST_TAG_SHA }} ${{ github.sha }})" >> $GITHUB_ENV
+      - name: Echo Test Affected Libraries
+        run: echo "affected test libs = ${{ env.test_libs }}"
       - name: Get storybook affected libs
         run: echo "storybook_libs=$(node tools/scripts/get-affected-libs.js build-storybook ${{ secrets.LATEST_TAG_SHA }} ${{ github.sha }})" >> $GITHUB_ENV
-      - name: Echo Storybook E2E Affected Libraries
+      - name: Echo Storybook Affected Libraries
         run: echo "affected storybook libs = ${{ env.storybook_libs }}"
     outputs:
+      test_libs: ${{ env.test_libs }}
       storybook_libs: ${{ env.storybook_libs }}
 
-  # TODO: nx unit test affected matrix
-  # TODO: test report
   run-tests:
-    name: Run Tests
+    name: ${{ matrix.projectName }}
     runs-on: ubuntu-latest
+    needs: [get-affected]
+    if: ${{ fromJson(needs.get-affected.outputs.test_libs)[0] }}
+    strategy:
+      matrix:
+        projectName: ${{ fromJson(needs.get-affected.outputs.test_libs ) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -150,7 +158,18 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Unit Test Affected by Release
-        run: pnpm test:all --base ${{ secrets.LATEST_TAG_SHA }}
+        run: pnpm nx test ${{ matrix.projectName }} --codeCoverage
+
+      - name: Move shard coverage
+        run: mv coverage/coverage-final.json coverage/${{matrix.shard}}.json
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-artifacts
+          path: coverage/
+
+  # TODO: test report
 
   chromatic:
     name: ${{ matrix.projectName }}
