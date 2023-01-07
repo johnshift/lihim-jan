@@ -48,5 +48,11 @@ exclude_patterns:
   - 'dist/'
   - 'public/'
   - 'tools/'
+  - 'coverage/'
   - '**/node_modules/'
   - '**/.next/'
+  - '**/jest.config.ts'
+  # we need test files to be explicit as much as possible
+  # avoiding DRY for tests tends make debugging harder,
+  # and also increases cognitive complexity
+  - '**/*.spec.ts'
