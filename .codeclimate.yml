@@ -56,3 +56,6 @@ exclude_patterns:
   # avoiding DRY for tests tends make debugging harder,
   # and also increases cognitive complexity
   - '**/*.spec.ts'
+  # exclude testutils
+  - '**/*.faker.ts'
+  - '**/*.msw.ts'
