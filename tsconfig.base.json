@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@lihim/auth/core": ["libs/auth/core/src/index.ts"],
       "@lihim/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@lihim/shared/core": ["libs/shared/core/src/index.ts"],
       "@lihim/shared/data-access": ["libs/shared/data-access/src/index.ts"],
