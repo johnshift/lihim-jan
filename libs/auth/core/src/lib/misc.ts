@@ -13,7 +13,7 @@ export const lengths = {
 } as const;
 
 export const regex = {
-  name: /^[A-Z][a-z]$/,
+  name: /^[A-Z][a-z]*$/,
   username: /^[A-Za-z][\dA-Za-z-]*$/,
 } as const;
 
