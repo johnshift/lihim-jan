@@ -24,6 +24,7 @@
     "@mantine/next": "^5.9.6",
     "@mantine/notifications": "^5.9.6",
     "@nrwl/next": "15.4.2",
+    "@tanstack/react-query": "^4.20.9",
     "core-js": "^3.6.5",
     "next": "^13.1.1",
     "react": "18.2.0",
