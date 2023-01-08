@@ -13,6 +13,7 @@ export default {
     '<rootDir>/src/lib/**/*.{js,jsx,ts,tsx}',
     '!**/*.stories.{js,jsx,ts,tsx}',
   ],
+  coverageReporters: ['json', 'lcov', 'html'],
   coverageThreshold: {
     global: {
       branches: 100,
