@@ -21,6 +21,7 @@
       "@lihim/shared/core": ["libs/shared/core/src/index.ts"],
       "@lihim/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@lihim/shared/mantine": ["libs/shared/mantine/src/index.ts"],
+      "@lihim/shared/react-query": ["libs/shared/react-query/src/index.ts"],
       "@lihim/shared/testutils/ui": ["libs/shared/testutils/ui/src/index.ts"],
       "@lihim/shared/ui/test-button": [
         "libs/shared/ui/test-button/src/index.ts"
