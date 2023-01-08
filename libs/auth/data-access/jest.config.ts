@@ -9,6 +9,7 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/auth/data-access',
+  collectCoverageFrom: ['<rootDir>/src/lib/**/*.{js,jsx,ts,tsx}'],
   coverageReporters: ['json', 'lcov', 'html'],
   coverageThreshold: {
     global: {
