@@ -7,7 +7,7 @@ export const fakeSession = (isAnon = false): Session => ({
   avatar: faker.image.people(40, 40, true),
   email: faker.internet.email(),
   username: faker.internet.domainWord(),
-  firstname: faker.name.firstName(),
-  lastname: faker.name.lastName(),
+  firstname: 'Firstname',
+  lastname: 'Lastname',
   isAnon,
 });
