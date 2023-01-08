@@ -1,0 +1,16 @@
+{
+  "name": "shared-react-query",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/react-query/src",
+  "projectType": "library",
+  "tags": ["type:util"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/react-query/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

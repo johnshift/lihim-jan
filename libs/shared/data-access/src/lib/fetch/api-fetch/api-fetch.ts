@@ -1,4 +1,8 @@
-import type { GenericResponse, Undefined } from '@lihim/shared/core';
+import {
+  GenericResponse,
+  GenericResponseSchema,
+  Undefined,
+} from '@lihim/shared/core';
 import { httpErrors, UndefinedSchema } from '@lihim/shared/core';
 import { parseObject } from '@lihim/shared/utils';
 
@@ -20,14 +24,17 @@ export const apiFetch =
     options: ApiFetchOptions<R, E, P>,
   ): FetchFn<R, P> =>
   async (_payload?: P) => {
-    const { method, payloadSchema, responseSchema, errorSchema } = options;
+    const {
+      method,
+      responseSchema,
+      payloadSchema = UndefinedSchema,
+      errorSchema = GenericResponseSchema,
+    } = {
+      ...options,
+    };
 
     try {
-      const payload = parseObject(
-        _payload,
-        invalidRequestError,
-        payloadSchema ?? UndefinedSchema,
-      );
+      const payload = parseObject(_payload, invalidRequestError, payloadSchema);
 
       const { url, body } = getUrlBody(reqUrl, method, payload);
 
@@ -40,7 +47,10 @@ export const apiFetch =
 
       return parseObject(jsonBody, invalidResponseError, responseSchema);
     } catch (error) {
-      const parsedError = getParsedError<E>(error, errorSchema);
+      const parsedError = getParsedError<E | GenericResponse>(
+        error,
+        errorSchema,
+      );
       throw parsedError;
     }
   };

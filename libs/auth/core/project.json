@@ -1,0 +1,16 @@
+{
+  "name": "auth-core",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/auth/core/src",
+  "projectType": "library",
+  "tags": ["type:core"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/auth/core/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}
