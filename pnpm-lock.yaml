@@ -8,6 +8,7 @@ specifiers:
   '@commitlint/config-nx-scopes': ^17.2.0
   '@emotion/react': ^11.10.5
   '@emotion/server': ^11.10.0
+  '@faker-js/faker': ^7.6.0
   '@mantine/core': ^5.9.6
   '@mantine/hooks': ^5.9.6
   '@mantine/next': ^5.9.6
@@ -111,6 +112,7 @@ devDependencies:
   '@babel/preset-typescript': 7.12.13_@babel+core@7.12.13
   '@commitlint/cli': 17.4.0_iquupanxhvhyfxgvdronrzc3xa
   '@commitlint/config-nx-scopes': 17.4.0_nx@15.4.2
+  '@faker-js/faker': 7.6.0
   '@nrwl/cypress': 15.4.2_7wpmug4vtbm5w7gengsjvnja3e
   '@nrwl/eslint-plugin-nx': 15.4.2_fuz6q66j3d6b5jixslfgstepfi
   '@nrwl/jest': 15.4.2_u7ggidc5fkwykxke7jyk2jtro4
@@ -3269,6 +3271,11 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: true
 
   /@floating-ui/core/1.1.0:
     resolution: {integrity: sha512-zbsLwtnHo84w1Kc8rScAo5GMk1GdecSlrflIbfnEBJwvTSj1SL6kkOYV+nHraMCPEy+RNZZUaZyL8JosDGCtGQ==}
