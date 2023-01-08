@@ -16,4 +16,9 @@ export const errSuffix = {
   invalid: 'is invalid',
 } as const;
 
+export const texts = {
+  brand: 'lihim',
+  loading: 'Loading',
+} as const;
+
 export type ErrSuffix = ObjectValues<typeof errSuffix>;
