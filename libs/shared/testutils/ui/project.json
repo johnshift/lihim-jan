@@ -1,0 +1,16 @@
+{
+  "name": "shared-testutils-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/testutils/ui/src",
+  "projectType": "library",
+  "tags": ["type:util"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/testutils/ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}
