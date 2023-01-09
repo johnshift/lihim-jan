@@ -57,5 +57,4 @@ exclude_patterns:
   # and also increases cognitive complexity
   - '**/*.spec.ts'
   # exclude testutils
-  - '**/*.faker.ts'
-  - '**/*.msw.ts'
+  - '**/testutils'

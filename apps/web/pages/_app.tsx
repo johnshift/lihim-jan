@@ -1,7 +1,10 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { Appbar } from '@lihim/shared/appbar';
+import { RootProvider } from '@lihim/shared/data-access';
 import { MantineProvider } from '@lihim/shared/mantine';
+import { ReactQueryProvider } from '@lihim/shared/react-query';
 
 const App = ({ Component, pageProps }: AppProps) => (
   <>
@@ -14,7 +17,12 @@ const App = ({ Component, pageProps }: AppProps) => (
     </Head>
     <main>
       <MantineProvider colorScheme="dark">
-        <Component {...pageProps} />
+        <ReactQueryProvider>
+          <RootProvider>
+            <Appbar />
+            <Component {...pageProps} />
+          </RootProvider>
+        </ReactQueryProvider>
       </MantineProvider>
     </main>
   </>

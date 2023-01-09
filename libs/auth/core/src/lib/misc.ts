@@ -19,4 +19,9 @@ export const regex = {
 
 export const urls = {
   session: '/api/auth/session',
-};
+} as const;
+
+export const texts = {
+  login: 'Login',
+  logout: 'Logout',
+} as const;
