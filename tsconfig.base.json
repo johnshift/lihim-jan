@@ -30,9 +30,6 @@
         "libs/shared/testutils/feature/src/index.ts"
       ],
       "@lihim/shared/testutils/ui": ["libs/shared/testutils/ui/src/index.ts"],
-      "@lihim/shared/ui/test-button": [
-        "libs/shared/ui/test-button/src/index.ts"
-      ],
       "@lihim/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
