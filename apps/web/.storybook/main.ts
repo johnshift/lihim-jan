@@ -1,16 +1,29 @@
 import type { Options, StorybookConfig } from '@storybook/core-common';
 
-import { rootMain } from '../../../../../.storybook/main';
+import path from 'node:path';
+
+import { rootMain } from '../../../.storybook/main';
 
 const config: StorybookConfig = {
   ...rootMain,
   core: { ...rootMain.core, builder: 'webpack5' },
   stories: [
     ...rootMain.stories,
-    '../src/lib/**/*.stories.mdx',
-    '../src/lib/**/*.stories.@(js|jsx|ts|tsx)',
+    '../stories/**/*.stories.mdx',
+    '../stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [...(rootMain.addons || []), '@nrwl/react/plugins/storybook'],
+  addons: [
+    ...(rootMain.addons || []),
+    '@nrwl/react/plugins/storybook',
+
+    'storybook-addon-swc',
+    {
+      name: 'storybook-addon-next',
+      options: {
+        nextConfigPath: path.resolve(__dirname, '../next.config.js'),
+      },
+    },
+  ],
   async webpackFinal(config, { configType }: Options) {
     // Apply any global webpack configs that might have been specified in .storybook/main.ts
     if (rootMain.webpackFinal) {

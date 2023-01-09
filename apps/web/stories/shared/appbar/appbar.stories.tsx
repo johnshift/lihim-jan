@@ -6,10 +6,8 @@ import { expect } from '@storybook/jest';
 import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
+import { Appbar, appbarAria } from '@lihim/shared/appbar';
 import { texts } from '@lihim/shared/core';
-
-import { Appbar } from './appbar';
-import { aria } from './constants';
 
 type Props = ComponentProps<typeof Appbar>;
 
@@ -34,11 +32,11 @@ export const Default: StoryObj<Props> = {
 
     // Toggle theme (dark mode set in parameters)
     const toggleTheme = canvas.getByRole('button', {
-      name: aria.toggleTheme,
+      name: appbarAria.toggleTheme,
     });
     expect(toggleTheme).toBeVisible();
     const toggleThemeIcon = await within(toggleTheme).findByRole('img', {
-      name: aria.sunIcon,
+      name: appbarAria.sunIcon,
     });
     expect(toggleThemeIcon).toBeVisible();
   },
@@ -52,19 +50,19 @@ export const ToggleTheme: StoryObj<Props> = {
     // Locate theme-toggle component
     const findThemeToggle = async () =>
       canvas.findByRole('button', {
-        name: aria.toggleTheme,
+        name: appbarAria.toggleTheme,
       });
 
     // Toggle theme and assert theme switched
     await userEvent.click(await findThemeToggle());
     expect(
-      await canvas.findByRole('img', { name: aria.moonIcon }),
+      await canvas.findByRole('img', { name: appbarAria.moonIcon }),
     ).toBeVisible();
 
     // Toggle and assert again
     await userEvent.click(await findThemeToggle());
     expect(
-      await canvas.findByRole('img', { name: aria.sunIcon }),
+      await canvas.findByRole('img', { name: appbarAria.sunIcon }),
     ).toBeVisible();
   },
 };

@@ -1,12 +1,6 @@
 import '@testing-library/jest-dom';
 import 'whatwg-fetch';
 
-import { setGlobalConfig } from '@storybook/testing-react';
-
-import * as globalStorybookConfig from './.storybook/preview'; // Path of your preview.js file
-
-setGlobalConfig(globalStorybookConfig);
-
 // Mock media fix
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

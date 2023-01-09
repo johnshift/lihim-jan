@@ -1,17 +1,22 @@
-import { composeStories } from '@storybook/testing-react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, user } from '@lihim/shared/testutils/ui';
 
-import * as stories from './test-button.stories';
-
-const { Primary } = composeStories(stories);
+import { TestButton } from './test-button';
 
 describe('TestButton', () => {
   test('defaults', async () => {
-    const { container } = render(<Primary />);
+    // Setup
+    const text = 'My Button';
 
-    // Expect defaults
+    // Render component
+    render(<TestButton text={text} />);
+
+    // Expect default to false
     expect(screen.getByTestId('clicked-status')).toHaveTextContent('false');
 
-    await Primary.play({ canvasElement: container });
+    // Click button
+    await user.click(screen.getByRole('button', { name: text }));
+
+    // Expect text toggled to true
+    expect(screen.getByTestId('clicked-status')).toHaveTextContent('true');
   });
 });
