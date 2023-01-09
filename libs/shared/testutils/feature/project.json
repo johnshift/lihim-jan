@@ -1,0 +1,18 @@
+{
+  "name": "shared-testutils-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/testutils/feature/src",
+  "projectType": "library",
+  "tags": ["type:feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/testutils/feature/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  }
+}

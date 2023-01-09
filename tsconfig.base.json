@@ -26,6 +26,9 @@
       "@lihim/shared/testutils/data-access": [
         "libs/shared/testutils/data-access/src/index.ts"
       ],
+      "@lihim/shared/testutils/feature": [
+        "libs/shared/testutils/feature/src/index.ts"
+      ],
       "@lihim/shared/testutils/ui": ["libs/shared/testutils/ui/src/index.ts"],
       "@lihim/shared/ui/test-button": [
         "libs/shared/ui/test-button/src/index.ts"
