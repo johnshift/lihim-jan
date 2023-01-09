@@ -14,20 +14,19 @@ export default {
     '!**/*.stories.{js,jsx,ts,tsx}',
   ],
   coverageReporters: ['json', 'lcov', 'html'],
-  // Temporary disable coverage
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 95,
-  //     functions: 95,
-  //     lines: 95,
-  //     statements: 95,
-  //     watermark: {
-  //       branches: [80, 95],
-  //       functions: [80, 95],
-  //       lines: [80, 95],
-  //       statements: [80, 95],
-  //     },
-  //   },
-  // },
+  coverageThreshold: {
+    global: {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
+      watermark: {
+        branches: [80, 95],
+        functions: [80, 95],
+        lines: [80, 95],
+        statements: [80, 95],
+      },
+    },
+  },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
