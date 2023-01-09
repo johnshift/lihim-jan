@@ -17,9 +17,9 @@ export const ThemeToggle = ({ isDark, toggleTheme }: Props) => (
     onClick={() => toggleTheme()}
   >
     {isDark ? (
-      <HiOutlineSun title={aria.sunIcon} size={28} />
+      <HiOutlineSun title={aria.sunIcon} size={28} role="img" />
     ) : (
-      <HiMoon title={aria.moonIcon} size={28} />
+      <HiMoon title={aria.moonIcon} size={28} role="img" />
     )}
   </ActionIcon>
 );

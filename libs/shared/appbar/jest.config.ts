@@ -9,7 +9,10 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/shared/appbar',
-  collectCoverageFrom: ['<rootDir>/src/lib/**/*.{js,jsx,ts,tsx}'],
+  collectCoverageFrom: [
+    '<rootDir>/src/lib/**/*.{js,jsx,ts,tsx}',
+    '!**/*.stories.{js,jsx,ts,tsx}',
+  ],
   coverageReporters: ['json', 'lcov', 'html'],
   coverageThreshold: {
     global: {
