@@ -22,3 +22,12 @@ export const texts = {
 } as const;
 
 export type ErrSuffix = ObjectValues<typeof errSuffix>;
+
+export const aria = {
+  showPasswordIcon: 'show password icon',
+  hidePasswordIcon: 'hide password icon',
+};
+
+export const testid = {
+  passwordVisibility: 'password-visibility',
+};
