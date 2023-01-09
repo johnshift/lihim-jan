@@ -32,7 +32,7 @@ specifiers:
   '@storybook/jest': ^0.0.10
   '@storybook/manager-webpack5': ^6.5.15
   '@storybook/react': ^6.5.15
-  '@storybook/test-runner': ^0.7.2
+  '@storybook/test-runner': ^0.9.2
   '@storybook/testing-library': ^0.0.13
   '@storybook/testing-react': ^1.3.0
   '@svgr/webpack': ^5.4.0
@@ -133,7 +133,7 @@ devDependencies:
   '@storybook/jest': 0.0.10_biqbaboplfbrettd7655fr4n2y
   '@storybook/manager-webpack5': 6.5.15_nkojzrqqi4zgqpkhiqq6exh5ye
   '@storybook/react': 6.5.15_s2vjsxnolcggrcvr44z7g6k6oa
-  '@storybook/test-runner': 0.7.2_ff7tslz5tgizdlpp4girg44hm4
+  '@storybook/test-runner': 0.9.2_5we7u5wsyywlgbt7ntxipfzixq
   '@storybook/testing-library': 0.0.13_biqbaboplfbrettd7655fr4n2y
   '@storybook/testing-react': 1.3.0_5j7jfcwzr6almhblsbj47cdeh4
   '@svgr/webpack': 5.5.0
@@ -6536,8 +6536,8 @@ packages:
       - webpack-command
     dev: true
 
-  /@storybook/test-runner/0.7.2_ff7tslz5tgizdlpp4girg44hm4:
-    resolution: {integrity: sha512-3BaI7c1Hpzank/iUVHOb8+mc3qqHwS16G756x0mhHl6C/EGCnjsshfI7SfgjIyK2KYZ726+YSN0f2utREXrKVQ==}
+  /@storybook/test-runner/0.9.2_5we7u5wsyywlgbt7ntxipfzixq:
+    resolution: {integrity: sha512-S2TJqslCWaxM9Z9Y9qt5soYUNFlgNJZ1qS8rsvUcyzofG0BXvKlRviuM15/lj58KGA2FnhoX6IPGOJtuNVaoBQ==}
     hasBin: true
     dependencies:
       '@babel/core': 7.20.12
@@ -6545,6 +6545,8 @@ packages:
       '@babel/preset-env': 7.20.2_@babel+core@7.20.12
       '@babel/preset-react': 7.18.6_@babel+core@7.20.12
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.12
+      '@babel/template': 7.20.7
+      '@babel/types': 7.20.7
       '@storybook/core-common': 6.5.15_ywglwq3qlegft3hudmnx5ien6y
       '@storybook/csf': 0.0.2--canary.4566f4d.1
       '@storybook/csf-tools': 6.5.15
@@ -6552,8 +6554,9 @@ packages:
       can-bind-to-host: 1.1.2
       commander: 9.5.0
       expect-playwright: 0.8.0
-      global: 4.4.0
       jest: 28.1.1_odkjkoia5xunhxkdrka32ib6vi
+      jest-circus: 28.1.3
+      jest-environment-node: 28.1.3
       jest-junit: 14.0.1
       jest-playwright-preset: 2.0.0_df6gkf2grztjktvv6x3tktl7fq
       jest-runner: 28.1.3
@@ -6561,6 +6564,7 @@ packages:
       jest-watch-typeahead: 2.2.1_jest@28.1.1
       node-fetch: 2.6.7
       playwright: 1.29.2
+      read-pkg-up: 7.0.1
       regenerator-runtime: 0.13.11
       semver: 7.3.8
       tempy: 1.0.1
@@ -6571,8 +6575,6 @@ packages:
       - debug
       - encoding
       - eslint
-      - jest-circus
-      - jest-environment-node
       - node-notifier
       - react
       - react-dom
