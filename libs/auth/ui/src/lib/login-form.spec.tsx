@@ -2,9 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import {
   authAria,
-  authLabels,
-  authNames,
-  authPlaceholders,
+  authInputProps,
   authTestId,
   authTexts,
   LoginPayload,
@@ -37,10 +35,10 @@ describe('LoginForm', () => {
 
     // Locate elements
     const principalInput = screen.getByPlaceholderText(
-      authPlaceholders.principal,
+      authInputProps.principal.placeholder,
     );
     const passwordInput = screen.getByPlaceholderText(
-      authPlaceholders.password,
+      authInputProps.password.placeholder,
     );
     const submitBtn = screen.getByRole('button', {
       name: authAria.submitLogin,
@@ -51,12 +49,15 @@ describe('LoginForm', () => {
     expect(principalInput).toHaveValue('');
     expect(principalInput).toHaveAttribute('type', 'text');
     expect(principalInput).toHaveAttribute('aria-invalid', 'false');
-    expect(principalInput).toHaveAttribute('name', authNames.principal);
+    expect(principalInput).toHaveAttribute(
+      'name',
+      authInputProps.principal.name,
+    );
     expect(principalInput).toHaveAttribute(
       'placeholder',
-      authPlaceholders.principal,
+      authInputProps.principal.placeholder,
     );
-    expect(screen.getByText(authLabels.principal)).toBeVisible();
+    expect(screen.getByText(authInputProps.principal.label)).toBeVisible();
 
     // Assert password input defaults
     expect(passwordInput).toHaveValue('');
@@ -65,12 +66,12 @@ describe('LoginForm', () => {
       'aria-invalid',
       'false',
     );
-    expect(passwordInput).toHaveAttribute('name', authNames.password);
+    expect(passwordInput).toHaveAttribute('name', authInputProps.password.name);
     expect(passwordInput).toHaveAttribute(
       'placeholder',
-      authPlaceholders.password,
+      authInputProps.password.placeholder,
     );
-    expect(screen.getByText(authLabels.password)).toBeVisible();
+    expect(screen.getByText(authInputProps.password.label)).toBeVisible();
 
     // Submit button
     expect(submitBtn).toBeVisible();
@@ -116,10 +117,10 @@ describe('LoginForm', () => {
 
     // Locate elements
     const principalInput = screen.getByPlaceholderText(
-      authPlaceholders.principal,
+      authInputProps.principal.placeholder,
     );
     const passwordInput = screen.getByPlaceholderText(
-      authPlaceholders.password,
+      authInputProps.password.placeholder,
     );
 
     // Assertions
@@ -145,10 +146,10 @@ describe('LoginForm', () => {
 
     // Locate elements
     const principalInput = screen.getByPlaceholderText(
-      authPlaceholders.principal,
+      authInputProps.principal.placeholder,
     );
     const passwordInput = screen.getByPlaceholderText(
-      authPlaceholders.password,
+      authInputProps.password.placeholder,
     );
     const submitBtn = screen.getByRole('button', {
       name: authAria.submitLogin,
@@ -186,7 +187,7 @@ describe('LoginForm', () => {
     // Locate element
     const signupLink = screen.getByTestId(authTestId.loginFooterLink);
 
-    // Click submit button
+    // Click signup link
     await user.click(signupLink);
 
     // Assert

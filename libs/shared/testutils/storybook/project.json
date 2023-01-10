@@ -1,0 +1,18 @@
+{
+  "name": "shared-testutils-storybook",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/testutils/storybook/src",
+  "projectType": "library",
+  "tags": ["type:util"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/testutils/storybook/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  }
+}

@@ -2,25 +2,23 @@ import { FC } from 'react';
 import type { Control } from 'react-hook-form';
 
 import {
-  Anchor,
-  Box,
   Button,
   Center,
   Group,
   LoadingOverlay,
+  Paper,
   Stack,
   Text,
+  Title,
 } from '@mantine/core';
 
 import {
   authAria,
-  authLabels,
-  authPlaceholders,
+  authInputProps,
   authTestId,
   authTexts,
   LoginPayload,
 } from '@lihim/auth/core';
-import { authNames } from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
@@ -39,52 +37,55 @@ export const LoginForm: FC<Props> = ({
   showSignup,
   control,
 }) => (
-  <Box sx={{ minWidth: 320, position: 'relative' }} py={10}>
+  <Paper
+    withBorder
+    sx={{ minWidth: 320, position: 'relative' }}
+    py={20}
+    px={35}
+    radius="lg"
+  >
     <LoadingOverlay
       visible={isLoading}
       data-testid={authTestId.loginLoadingOverlay}
     />
     <form onSubmit={onSubmit}>
       <Center>
-        <Stack spacing="xl" sx={{ width: '28ch' }}>
+        <Stack sx={{ width: '32ch' }} spacing={20}>
+          <Title order={1}>Login</Title>
           <ValidatedInput
             control={control}
             error={hasError}
-            inputProps={{
-              name: authNames.principal,
-              label: authLabels.principal,
-              placeholder: authPlaceholders.principal,
-            }}
+            inputProps={authInputProps.principal}
           />
           <ValidatedInput
             isPassword
             control={control}
             error={hasError}
-            inputProps={{
-              name: authNames.password,
-              label: authLabels.password,
-              placeholder: authPlaceholders.password,
-            }}
+            inputProps={authInputProps.password}
           />
-          <Button type="submit" size="sm" aria-label={authAria.submitLogin}>
-            {authTexts.login}
-          </Button>
-          <Group align="center" position="center" spacing={6}>
-            <Text color="dimmed" size="sm">
-              {authTexts.loginFooter}
-            </Text>
-            <Anchor
-              component="button"
-              underline={false}
-              size={15}
+          <Group position="apart">
+            <Text
+              color="dimmed"
+              size="sm"
+              sx={(theme) => ({
+                '&:hover': { color: theme.colors.blue[4], cursor: 'pointer' },
+              })}
               data-testid={authTestId.loginFooterLink}
               onClick={showSignup}
             >
-              {authTexts.signup}
-            </Anchor>
+              {authTexts.loginFooter}
+            </Text>
+            <Button
+              type="submit"
+              size="sm"
+              aria-label={authAria.submitLogin}
+              radius="md"
+            >
+              {authTexts.login}
+            </Button>
           </Group>
         </Stack>
       </Center>
     </form>
-  </Box>
+  </Paper>
 );

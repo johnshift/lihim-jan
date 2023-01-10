@@ -1,20 +1,18 @@
 /* eslint-disable testing-library/no-node-access */
-
 import { useForm } from 'react-hook-form';
 
 import { expect } from '@storybook/jest';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { userEvent, waitFor, within } from '@storybook/testing-library';
+import { within } from '@storybook/testing-library';
 
 import {
   authAria,
-  authLabels,
-  authNames,
-  authPlaceholders,
+  authInputProps,
   authTestId,
   authTexts,
 } from '@lihim/auth/core';
 import { LoginForm } from '@lihim/auth/ui';
+import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {
   component: LoginForm,
@@ -46,40 +44,23 @@ Default.play = async ({ canvasElement }) => {
 
   // Locate elements
   const principalInput = canvas.getByPlaceholderText(
-    authPlaceholders.principal,
+    authInputProps.principal.placeholder,
   );
-  const passwordInput = canvas.getByPlaceholderText(authPlaceholders.password);
+  const passwordInput = canvas.getByPlaceholderText(
+    authInputProps.password.placeholder,
+  );
   const submitBtn = canvas.getByRole('button', { name: authAria.submitLogin });
   const signupLink = canvas.getByTestId(authTestId.loginFooterLink);
 
-  // Assert principal input defaults
-  expect(principalInput).toHaveValue('');
-  expect(principalInput).toHaveAttribute('type', 'text');
-  expect(principalInput).toHaveAttribute('aria-invalid', 'false');
-  expect(principalInput).toHaveAttribute('name', authNames.principal);
-  expect(principalInput).toHaveAttribute(
-    'placeholder',
-    authPlaceholders.principal,
-  );
-  expect(canvas.getByText(authLabels.principal)).toBeVisible();
-
-  // Assert password input defaults
-  expect(passwordInput).toHaveValue('');
-  expect(passwordInput).toHaveAttribute('type', 'password');
-  expect(passwordInput.parentElement).toHaveAttribute('aria-invalid', 'false');
-  expect(passwordInput).toHaveAttribute('name', authNames.password);
-  expect(passwordInput).toHaveAttribute(
-    'placeholder',
-    authPlaceholders.password,
-  );
-  expect(canvas.getByText(authLabels.password)).toBeVisible();
-
-  // Submit button
+  // Assert input defaults
+  checkInputDefaults(principalInput, authInputProps.principal);
+  checkInputDefaults(passwordInput, {
+    ...authInputProps.password,
+    type: 'password',
+  });
   expect(submitBtn).toBeVisible();
-
-  // Footer
-  expect(canvas.getByText(authTexts.loginFooter)).toBeVisible();
   expect(signupLink).toBeVisible();
+  expect(canvas.getByText(authTexts.loginFooter)).toBeVisible();
 };
 
 export const Loading = Template.bind({});
@@ -98,9 +79,11 @@ HasError.args = {
 HasError.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const principalInput = canvas.getByPlaceholderText(
-    authPlaceholders.principal,
+    authInputProps.principal.placeholder,
   );
-  const passwordInput = canvas.getByPlaceholderText(authPlaceholders.password);
+  const passwordInput = canvas.getByPlaceholderText(
+    authInputProps.password.placeholder,
+  );
   expect(principalInput).toHaveAttribute('aria-invalid', 'true');
   expect(passwordInput.parentElement).toHaveAttribute('aria-invalid', 'true');
 };
