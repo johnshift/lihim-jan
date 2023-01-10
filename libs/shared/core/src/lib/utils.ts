@@ -4,7 +4,13 @@
 
 import { z } from 'zod';
 
-import { ErrSuffix, errSuffix } from './misc';
+import {
+  ERR_SUFFIX_INVALID,
+  ERR_SUFFIX_LONG,
+  ERR_SUFFIX_REQUIRED,
+  ERR_SUFFIX_SHORT,
+  ErrSuffix,
+} from './constants';
 
 /**
  * Describes the `subject` with the provided `suffix`.
@@ -25,8 +31,8 @@ export const errPhrase = (subject: string, suffix: ErrSuffix) =>
 export const zodString = (subject: string, min: number, max: number) =>
   z
     .string({
-      required_error: errPhrase(subject, errSuffix.required),
-      invalid_type_error: errPhrase(subject, errSuffix.invalid),
+      required_error: errPhrase(subject, ERR_SUFFIX_REQUIRED),
+      invalid_type_error: errPhrase(subject, ERR_SUFFIX_INVALID),
     })
-    .min(min, errPhrase(subject, errSuffix.short))
-    .max(max, errPhrase(subject, errSuffix.long));
+    .min(min, errPhrase(subject, ERR_SUFFIX_SHORT))
+    .max(max, errPhrase(subject, ERR_SUFFIX_LONG));
