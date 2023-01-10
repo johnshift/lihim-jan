@@ -26,7 +26,9 @@ export const ValidatedInput = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <Controller
-      defaultValue={inputProps.defaultValue}
+      defaultValue={
+        inputProps.defaultValue ?? ('' as FieldPathValue<T, FieldPath<T>>)
+      }
       name={inputProps.name}
       control={control}
       render={({ field }) =>
