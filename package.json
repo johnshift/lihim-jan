@@ -43,6 +43,7 @@
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-nx-scopes": "^17.2.0",
     "@faker-js/faker": "^7.6.0",
+    "@next/bundle-analyzer": "^13.1.1",
     "@nrwl/cypress": "15.4.2",
     "@nrwl/eslint-plugin-nx": "15.4.2",
     "@nrwl/jest": "15.4.2",
