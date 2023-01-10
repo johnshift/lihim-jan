@@ -58,13 +58,9 @@ Default.play = async ({ canvasElement }) => {
     ...authInputProps.password,
     type: 'password',
   });
-
-  // Submit button
   expect(submitBtn).toBeVisible();
-
-  // Footer
-  expect(canvas.getByText(authTexts.loginFooter)).toBeVisible();
   expect(signupLink).toBeVisible();
+  expect(canvas.getByText(authTexts.loginFooter)).toBeVisible();
 };
 
 export const Loading = Template.bind({});
