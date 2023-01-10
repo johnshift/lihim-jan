@@ -1,5 +1,6 @@
 export { mockLoginResponse } from './lib/login.msw';
 export { fakeLoginPayload } from './lib/login-payload.faker';
+export { mockLogoutResponse } from './lib/logout.msw';
 export { fakeSession } from './lib/session.faker';
 export { mockSessionResponse } from './lib/session.msw';
 export { mockSignupResponse } from './lib/signup.msw';
