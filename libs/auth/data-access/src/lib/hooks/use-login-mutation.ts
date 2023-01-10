@@ -11,7 +11,11 @@ import {
   LoginPayloadSchema,
   LoginResponseSchema,
 } from '@lihim/auth/core';
-import { GenericResponse, httpErrors, TVoidFn } from '@lihim/shared/core';
+import {
+  ERR_INVALID_REQUEST,
+  GenericResponse,
+  TVoidFn,
+} from '@lihim/shared/core';
 import { METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
@@ -49,7 +53,7 @@ export const useLoginMutation = (closeModal: TVoidFn) => {
         // Display error message
         // If failed to parse zod-schema, incorrect signin
         const errMsg =
-          error.message === httpErrors.invalidRequest
+          error.message === ERR_INVALID_REQUEST
             ? authErrMsg.loginIncorrect
             : error.message;
         notifyError(authErrMsg.loginFailed, errMsg);

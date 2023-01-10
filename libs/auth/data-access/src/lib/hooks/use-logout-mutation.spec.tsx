@@ -5,7 +5,7 @@ import { setupServer } from 'msw/node';
 
 import { authErrMsg, authMsg } from '@lihim/auth/core';
 import { mockLogoutResponse } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL } from '@lihim/shared/core';
 import {
   act,
   renderHook,
@@ -37,7 +37,7 @@ describe('useLogoutMutation', () => {
     );
 
     // Mock error response
-    const mockErrorMessage = httpErrors.internal;
+    const mockErrorMessage = ERR_INTERNAL;
     const body = {
       message: mockErrorMessage,
     };
@@ -102,7 +102,7 @@ describe('useLogoutMutation', () => {
 
     // Assert error message
     await waitFor(() => {
-      expect(result.current.error?.message).toBe(httpErrors.internal);
+      expect(result.current.error?.message).toBe(ERR_INTERNAL);
     });
 
     // Assert notification
@@ -119,7 +119,7 @@ describe('useLogoutMutation', () => {
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         title: authErrMsg.logoutFailed,
-        message: httpErrors.internal,
+        message: ERR_INTERNAL,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),

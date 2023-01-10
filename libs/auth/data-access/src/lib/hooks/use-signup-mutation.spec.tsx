@@ -12,7 +12,7 @@ import {
   fakeSignupPayload,
   mockSignupResponse,
 } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL } from '@lihim/shared/core';
 import {
   act,
   renderHook,
@@ -119,7 +119,7 @@ describe('useSignupMutation', () => {
 
     // Assert error message
     await waitFor(() => {
-      expect(result.current.error?.message).toBe(httpErrors.internal);
+      expect(result.current.error?.message).toBe(ERR_INTERNAL);
     });
 
     // Assert router
@@ -129,7 +129,7 @@ describe('useSignupMutation', () => {
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         title: authErrMsg.signupFailed,
-        message: httpErrors.internal,
+        message: ERR_INTERNAL,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),

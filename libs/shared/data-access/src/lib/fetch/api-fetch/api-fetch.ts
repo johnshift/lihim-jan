@@ -1,9 +1,11 @@
 import {
+  ERR_INVALID_REQUEST,
+  ERR_INVALID_RESPONSE,
   GenericResponse,
   GenericResponseSchema,
   Undefined,
 } from '@lihim/shared/core';
-import { httpErrors, UndefinedSchema } from '@lihim/shared/core';
+import { UndefinedSchema } from '@lihim/shared/core';
 import { parseObject } from '@lihim/shared/utils';
 
 import { FetchError } from './constants';
@@ -12,10 +14,10 @@ import { getUrlBody } from './get-url-body';
 import type { ApiFetchOptions, FetchFn } from './types';
 
 const invalidRequestError = new FetchError({
-  message: httpErrors.invalidRequest,
+  message: ERR_INVALID_REQUEST,
 });
 const invalidResponseError = new FetchError({
-  message: httpErrors.invalidResponse,
+  message: ERR_INVALID_RESPONSE,
 });
 
 export const apiFetch =

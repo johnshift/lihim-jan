@@ -1,7 +1,7 @@
 import { setupServer } from 'msw/node';
 
 import { fakeSession, mockSessionResponse } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL } from '@lihim/shared/core';
 import {
   renderHook,
   TestWrapper,
@@ -20,7 +20,7 @@ describe('useSessionQuery', () => {
   test('internal server error', async () => {
     // Mock internal error response
     const body = {
-      message: httpErrors.internal,
+      message: ERR_INTERNAL,
     };
     mswServer.use(mockSessionResponse(500, body));
 

@@ -9,7 +9,7 @@ import {
   fakeSession,
   mockLoginResponse,
 } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL, ERR_INVALID_REQUEST } from '@lihim/shared/core';
 import {
   act,
   renderHook,
@@ -41,7 +41,7 @@ describe('use-signin-mutation', () => {
     const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
 
     // Mock error response
-    const mockErrorMessage = httpErrors.invalidRequest;
+    const mockErrorMessage = ERR_INVALID_REQUEST;
     const body = {
       message: mockErrorMessage,
     };
@@ -138,7 +138,7 @@ describe('use-signin-mutation', () => {
 
     // Assert error message
     await waitFor(() => {
-      expect(result.current.error?.message).toBe(httpErrors.internal);
+      expect(result.current.error?.message).toBe(ERR_INTERNAL);
     });
 
     // Assert closeModal was not called
