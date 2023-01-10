@@ -5,7 +5,8 @@ import {
 } from '@mantine/notifications';
 import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
-import crypto from 'node:crypto';
+// eslint-disable-next-line unicorn/prefer-node-protocol
+import crypto from 'crypto';
 
 import { texts } from '@lihim/shared/core';
 
