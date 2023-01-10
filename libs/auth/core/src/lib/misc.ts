@@ -19,6 +19,7 @@ export const regex = {
 
 export const urls = {
   session: '/api/auth/session',
+  login: '/api/auth/login',
 } as const;
 
 export const texts = {
@@ -39,6 +40,16 @@ export const testid = {
   loginLoadingOverlay: 'login-loading-overlay',
   signupFooterLink: 'signup-footer-link',
   signupLoadingOverlay: 'signup-loading-overlay',
+} as const;
+
+export const msg = {
+  loginOk: 'Login successful',
+  loginOkInfo: 'You are now logged in',
+} as const;
+
+export const errmsg = {
+  loginFailed: 'Login Failed',
+  loginIncorrect: 'Incorrect username/email or password',
 } as const;
 
 export const inputProps = {
