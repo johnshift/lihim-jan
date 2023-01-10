@@ -15,3 +15,11 @@ export type { Session } from './lib/schemas/session-schema';
 export { SessionSchema } from './lib/schemas/session-schema';
 export type { SignupPayload } from './lib/schemas/signup-payload-schema';
 export { SignupPayloadSchema } from './lib/schemas/signup-payload-schema';
+export type {
+  SignupErrorResponse,
+  SignupResponse,
+} from './lib/schemas/signup-response-schema';
+export {
+  SignupErrorResponseSchema,
+  SignupResponseSchema,
+} from './lib/schemas/signup-response-schema';

@@ -1,9 +1,10 @@
 import { z } from 'zod';
 
+import { GenericResponseSchema } from '@lihim/shared/core';
+
 import { SessionSchema } from './session-schema';
 
-export const LoginResponseSchema = z.object({
-  message: z.string(),
+export const LoginResponseSchema = GenericResponseSchema.extend({
   session: SessionSchema,
 });
 
