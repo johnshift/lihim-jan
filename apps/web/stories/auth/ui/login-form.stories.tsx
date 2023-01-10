@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { expect } from '@storybook/jest';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { userEvent, waitFor, within } from '@storybook/testing-library';
+import { within } from '@storybook/testing-library';
 
 import {
   authAria,
