@@ -5,8 +5,7 @@ import {
 } from '@mantine/notifications';
 import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
-// eslint-disable-next-line unicorn/prefer-node-protocol
-import crypto from 'crypto';
+import { uid } from 'uid';
 
 import { texts } from '@lihim/shared/core';
 
@@ -24,7 +23,7 @@ const options = {
 };
 
 export const useNotify = () => {
-  const id = crypto.randomUUID();
+  const id = uid();
 
   // Loading notification
   const notifyLoading = (message: string) => {
