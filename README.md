@@ -10,7 +10,7 @@
  <a href="https://github.com/johnshift/lihim/actions/workflows/dev.yml">
   <img src="https://github.com/johnshift/lihim/actions/workflows/dev.yml/badge.svg" />
  </a>
- <a href="https://github.com/johnshift/lihim/actions/workflows/prod.yml">
-  <img src="https://github.com/johnshift/lihim/actions/workflows/prod.yml/badge.svg" />
+ <a href="https://github.com/johnshift/lihim/actions/workflows/production.yml">
+  <img src="https://github.com/johnshift/lihim/actions/workflows/production.yml/badge.svg" />
  </a>
 </p>
