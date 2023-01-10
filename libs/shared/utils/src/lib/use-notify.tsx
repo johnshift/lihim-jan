@@ -9,6 +9,19 @@ import crypto from 'node:crypto';
 
 import { texts } from '@lihim/shared/core';
 
+const options = {
+  success: {
+    color: 'green',
+    icon: <BsCheckCircle />,
+    autoClose: 4000,
+  },
+  error: {
+    color: 'red',
+    icon: <BsExclamationCircle />,
+    autoClose: 9000,
+  },
+};
+
 export const useNotify = () => {
   const id = crypto.randomUUID();
 
@@ -26,28 +39,23 @@ export const useNotify = () => {
     });
   };
 
-  // Success notification
-  const notifySuccess = (title: string, message: string) => {
+  const notify = (title: string, message: string, isSuccess = true) => {
     updateNotification({
       id,
       title,
       message,
-      color: 'green',
-      icon: <BsCheckCircle />,
-      autoClose: 4000,
+      ...(isSuccess ? options.success : options.error),
     });
+  };
+
+  // Success notification
+  const notifySuccess = (title: string, message: string) => {
+    notify(title, message);
   };
 
   // Error notification
   const notifyError = (title: string, message: string) => {
-    updateNotification({
-      id,
-      title,
-      message,
-      color: 'red',
-      icon: <BsExclamationCircle />,
-      autoClose: 9000,
-    });
+    notify(title, message, false);
   };
 
   return {
