@@ -14,13 +14,11 @@ import {
 
 import {
   authAria,
-  authLabels,
-  authPlaceholders,
+  authInputProps,
   authTestId,
   authTexts,
   LoginPayload,
 } from '@lihim/auth/core';
-import { authNames } from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
@@ -50,21 +48,13 @@ export const LoginForm: FC<Props> = ({
           <ValidatedInput
             control={control}
             error={hasError}
-            inputProps={{
-              name: authNames.principal,
-              label: authLabels.principal,
-              placeholder: authPlaceholders.principal,
-            }}
+            inputProps={authInputProps.principal}
           />
           <ValidatedInput
             isPassword
             control={control}
             error={hasError}
-            inputProps={{
-              name: authNames.password,
-              label: authLabels.password,
-              placeholder: authPlaceholders.password,
-            }}
+            inputProps={authInputProps.password}
           />
           <Button type="submit" size="sm" aria-label={authAria.submitLogin}>
             {authTexts.login}
