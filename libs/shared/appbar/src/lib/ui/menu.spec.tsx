@@ -2,7 +2,7 @@ import { authTexts } from '@lihim/auth/core';
 import { TEXT_LOADING } from '@lihim/shared/core';
 import { render, screen, user } from '@lihim/shared/testutils/ui';
 
-import { aria, testid } from '../constants';
+import { ARIA_HEADER_MENU, TESTID_HEADER_LOADER } from '../constants';
 
 import { Menu } from './menu';
 
@@ -30,7 +30,7 @@ describe('Menu', () => {
 
     // Assert opened (burger shows X with `close` aria label)
     const button = await screen.findByRole('button', {
-      name: aria.headerMenu,
+      name: ARIA_HEADER_MENU,
     });
     await user.click(button);
     expect(onClose).toHaveBeenCalledTimes(1);
@@ -59,7 +59,7 @@ describe('Menu', () => {
 
     // Assert closed (burger shows menu with `open` aria label)
     const button = await screen.findByRole('button', {
-      name: aria.headerMenu,
+      name: ARIA_HEADER_MENU,
     });
 
     // Assert toggle
@@ -89,7 +89,7 @@ describe('Menu', () => {
     );
 
     // Assert isLoading
-    await screen.findByTestId(testid.headerLoader);
+    await screen.findByTestId(TESTID_HEADER_LOADER);
     expect(screen.getByRole('menuitem', { name: TEXT_LOADING })).toBeDisabled();
   });
 

@@ -6,7 +6,12 @@ import { HiLogin } from 'react-icons/hi';
 import { authTexts } from '@lihim/auth/core';
 import { TEXT_LOADING } from '@lihim/shared/core';
 
-import { aria, testid } from '../constants';
+import {
+  ARIA_AUTH_ICON,
+  ARIA_HEADER_MENU,
+  TESTID_AUTH_MENUITEM,
+  TESTID_HEADER_LOADER,
+} from '../constants';
 
 type Props = {
   isOpen: boolean;
@@ -23,7 +28,7 @@ export const Menu = (props: Props) => (
     shadow="md"
     opened={props.isOpen}
     position="bottom-end"
-    aria-label={aria.headerMenu}
+    aria-label={ARIA_HEADER_MENU}
     onOpen={props.onOpen}
     onClose={props.onClose}
   >
@@ -36,13 +41,13 @@ export const Menu = (props: Props) => (
       <BaseMenu.Item
         icon={
           props.isLoading ? (
-            <Loader size="xs" data-testid={testid.headerLoader} />
+            <Loader size="xs" data-testid={TESTID_HEADER_LOADER} />
           ) : (
-            <HiLogin title={aria.authIcon} />
+            <HiLogin title={ARIA_AUTH_ICON} />
           )
         }
         disabled={props.isLoading}
-        data-testid={testid.authMenuItem}
+        data-testid={TESTID_AUTH_MENUITEM}
         onClick={props.authFn}
       >
         {props.isLoading
