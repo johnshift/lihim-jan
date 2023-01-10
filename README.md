@@ -7,4 +7,10 @@
  <a href="https://codeclimate.com/github/johnshift/lihim/test_coverage">
   <img src="https://api.codeclimate.com/v1/badges/18b6c05d72553d9ea17f/test_coverage" />
  </a>
+ <a href="https://github.com/johnshift/lihim/actions/workflows/dev.yml">
+  <img src="https://github.com/johnshift/lihim/actions/workflows/dev.yml/badge.svg" />
+ </a>
+ <a href="https://github.com/johnshift/lihim/actions/workflows/prod.yml">
+  <img src="https://github.com/johnshift/lihim/actions/workflows/prod.yml/badge.svg" />
+ </a>
 </p>
