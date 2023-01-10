@@ -1,5 +1,6 @@
 import type { FieldPath, FieldPathValue, FieldValues } from 'react-hook-form';
-import { Control, Controller } from 'react-hook-form';
+import type { Control } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { PasswordInput, TextInput } from '@mantine/core';
 import { BiHide, BiShow } from 'react-icons/bi';
@@ -25,7 +26,9 @@ export const ValidatedInput = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <Controller
-      defaultValue={inputProps.defaultValue}
+      defaultValue={
+        inputProps.defaultValue ?? ('' as FieldPathValue<T, FieldPath<T>>)
+      }
       name={inputProps.name}
       control={control}
       render={({ field }) =>

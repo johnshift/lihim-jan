@@ -7,20 +7,21 @@ import { ValidatedInput } from './validated-input';
 
 describe('ValidatedInput', () => {
   // Test constants
-  const {
-    result: {
-      current: { control },
-    },
-  } = renderHook(() => useForm());
   const testInputProps = {
     name: 'test-name',
     label: 'test-label',
     placeholder: 'test-placeholder',
-    defaultValue: 'test-default-value',
   };
   const error = 'test-error';
 
   test('text-input defaults', () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
     // Render component
     render(<ValidatedInput control={control} inputProps={testInputProps} />);
 
@@ -32,11 +33,49 @@ describe('ValidatedInput', () => {
     // Assertions
     expect(inputElement).toHaveAttribute('type', 'text');
     expect(inputElement).toHaveAttribute('aria-invalid', 'false');
-    expect(inputElement).toHaveValue(testInputProps.defaultValue);
+    expect(inputElement).toHaveAttribute('name', testInputProps.name);
+    expect(inputElement).toHaveAttribute(
+      'placeholder',
+      testInputProps.placeholder,
+    );
+    expect(inputElement).toHaveValue('');
     expect(screen.getByText(testInputProps.label)).toBeInTheDocument();
   });
 
+  test('text-input default-value', () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
+    // Render component
+    const defaultValue = 'test-default-value';
+    render(
+      <ValidatedInput
+        control={control}
+        inputProps={{ ...testInputProps, defaultValue }}
+      />,
+    );
+
+    // Locate input element
+    const inputElement = screen.getByPlaceholderText(
+      testInputProps.placeholder,
+    );
+
+    // Assertions
+    expect(inputElement).toHaveValue(defaultValue);
+  });
+
   test('password-input defaults', () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
     // Render component
     render(
       <ValidatedInput
@@ -54,11 +93,50 @@ describe('ValidatedInput', () => {
     // Assertions
     expect(inputElement).toHaveAttribute('type', 'password');
     expect(inputElement.parentElement).toHaveAttribute('aria-invalid', 'false');
-    expect(inputElement).toHaveValue(testInputProps.defaultValue);
+    expect(inputElement).toHaveAttribute('name', testInputProps.name);
+    expect(inputElement).toHaveAttribute(
+      'placeholder',
+      testInputProps.placeholder,
+    );
+    expect(inputElement).toHaveValue('');
     expect(screen.getByText(testInputProps.label)).toBeInTheDocument();
   });
 
+  test('password-input default-value', () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
+    // Render component
+    const defaultValue = 'test-default-value';
+    render(
+      <ValidatedInput
+        isPassword
+        control={control}
+        inputProps={{ ...testInputProps, defaultValue }}
+      />,
+    );
+
+    // Locate input element
+    const inputElement = screen.getByPlaceholderText(
+      testInputProps.placeholder,
+    );
+
+    // Assertions
+    expect(inputElement).toHaveValue(defaultValue);
+  });
+
   test('text-input error', () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
     // Render component
     render(
       <ValidatedInput
@@ -78,7 +156,14 @@ describe('ValidatedInput', () => {
     expect(screen.getByText(error)).toBeVisible();
   });
 
-  test('password-input defaults', () => {
+  test('password-input error', () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
     // Render component
     render(
       <ValidatedInput
@@ -100,6 +185,13 @@ describe('ValidatedInput', () => {
   });
 
   test('toggle password visibility', async () => {
+    // Test setup
+    const {
+      result: {
+        current: { control },
+      },
+    } = renderHook(() => useForm());
+
     // Render component
     render(
       <ValidatedInput

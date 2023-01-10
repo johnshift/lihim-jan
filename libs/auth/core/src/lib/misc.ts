@@ -23,5 +23,31 @@ export const urls = {
 
 export const texts = {
   login: 'Login',
+  loginFooter: "Dont't have an account?",
+  signup: 'Sign Up',
   logout: 'Logout',
+} as const;
+
+export const names = {
+  principal: 'principal',
+  password: 'password',
+} as const;
+
+export const labels = {
+  principal: 'Username / Email',
+  password: 'Password',
+} as const;
+
+export const placeholders = {
+  principal: 'hello@lihim.app',
+  password: 'super-secure-password',
+} as const;
+
+export const aria = {
+  submitLogin: 'Submit login',
+} as const;
+
+export const testid = {
+  loginFooterLink: 'login-footer-link',
+  loginLoadingOverlay: 'login-loading-overlay',
 } as const;

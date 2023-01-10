@@ -60,3 +60,5 @@ exclude_patterns:
   # exclude testutils
   - '**/testutils'
   - '**/jest.setup.ts'
+  # exclude stories (prefer explicit stories over duplication)
+  - '**/*.stories.tsx'
