@@ -13,13 +13,14 @@ export const lengths = {
 } as const;
 
 export const regex = {
-  name: /^[A-Z][a-z]*$/,
+  name: /^[A-Za-z]*$/,
   username: /^[A-Za-z][\dA-Za-z-]*$/,
 } as const;
 
 export const urls = {
   session: '/api/auth/session',
   login: '/api/auth/login',
+  signup: '/api/auth/signup',
 } as const;
 
 export const texts = {
@@ -45,11 +46,13 @@ export const testid = {
 export const msg = {
   loginOk: 'Login successful',
   loginOkInfo: 'You are now logged in',
+  signupOk: 'Signup successful',
 } as const;
 
 export const errmsg = {
   loginFailed: 'Login Failed',
   loginIncorrect: 'Incorrect username/email or password',
+  signupFailed: 'Signup Failed',
 } as const;
 
 export const inputProps = {
