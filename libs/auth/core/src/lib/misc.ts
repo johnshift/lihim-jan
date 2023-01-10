@@ -21,6 +21,7 @@ export const urls = {
   session: '/api/auth/session',
   login: '/api/auth/login',
   signup: '/api/auth/signup',
+  logout: '/api/auth/logout',
 } as const;
 
 export const texts = {
@@ -47,12 +48,16 @@ export const msg = {
   loginOk: 'Login successful',
   loginOkInfo: 'You are now logged in',
   signupOk: 'Signup successful',
+  logoutLoading: 'You are being logged out',
+  logoutDone: 'You have been logged out',
+  logoutOk: 'Logout successful',
 } as const;
 
 export const errmsg = {
   loginFailed: 'Login Failed',
   loginIncorrect: 'Incorrect username/email or password',
   signupFailed: 'Signup Failed',
+  logoutFailed: 'Logout Failed',
 } as const;
 
 export const inputProps = {
