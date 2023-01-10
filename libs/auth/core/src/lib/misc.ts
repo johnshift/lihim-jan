@@ -37,6 +37,7 @@ export const aria = {
 export const testid = {
   loginFooterLink: 'login-footer-link',
   loginLoadingOverlay: 'login-loading-overlay',
+  signupFooterLink: 'signup-footer-link',
   signupLoadingOverlay: 'signup-loading-overlay',
 } as const;
 
@@ -44,7 +45,7 @@ export const inputProps = {
   principal: {
     name: 'principal',
     label: 'Username / Email',
-    placeholder: 'hello@lihim.app',
+    placeholder: 'jopay@kmusta.kna',
   },
   firstname: {
     name: 'firstname',

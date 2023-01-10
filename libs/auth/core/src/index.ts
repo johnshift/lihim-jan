@@ -1,8 +1,6 @@
 export {
   aria as authAria,
-  labels as authLabels,
-  names as authNames,
-  placeholders as authPlaceholders,
+  inputProps as authInputProps,
   testid as authTestId,
   texts as authTexts,
   urls as authUrls,
@@ -11,3 +9,5 @@ export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';
 export type { Session } from './lib/schemas/session-schema';
 export { SessionSchema } from './lib/schemas/session-schema';
+export type { SignupPayload } from './lib/schemas/signup-payload-schema';
+export { SignupPayloadSchema } from './lib/schemas/signup-payload-schema';
