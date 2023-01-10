@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@lihim/auth/ui": ["libs/auth/ui/src/index.ts"],
       "@lihim/auth/core": ["libs/auth/core/src/index.ts"],
       "@lihim/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@lihim/auth/testutils": ["libs/auth/testutils/src/index.ts"],
+      "@lihim/auth/ui": ["libs/auth/ui/src/index.ts"],
       "@lihim/shared/appbar": ["libs/shared/appbar/src/index.ts"],
       "@lihim/shared/core": ["libs/shared/core/src/index.ts"],
       "@lihim/shared/data-access": ["libs/shared/data-access/src/index.ts"],
@@ -29,6 +29,9 @@
       ],
       "@lihim/shared/testutils/feature": [
         "libs/shared/testutils/feature/src/index.ts"
+      ],
+      "@lihim/shared/testutils/storybook": [
+        "libs/shared/testutils/storybook/src/index.ts"
       ],
       "@lihim/shared/testutils/ui": ["libs/shared/testutils/ui/src/index.ts"],
       "@lihim/shared/ui": ["libs/shared/ui/src/index.ts"],
