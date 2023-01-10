@@ -32,6 +32,11 @@ describe('ValidatedInput', () => {
     // Assertions
     expect(inputElement).toHaveAttribute('type', 'text');
     expect(inputElement).toHaveAttribute('aria-invalid', 'false');
+    expect(inputElement).toHaveAttribute('name', testInputProps.name);
+    expect(inputElement).toHaveAttribute(
+      'placeholder',
+      testInputProps.placeholder,
+    );
     expect(inputElement).toHaveValue(testInputProps.defaultValue);
     expect(screen.getByText(testInputProps.label)).toBeInTheDocument();
   });
@@ -54,6 +59,11 @@ describe('ValidatedInput', () => {
     // Assertions
     expect(inputElement).toHaveAttribute('type', 'password');
     expect(inputElement.parentElement).toHaveAttribute('aria-invalid', 'false');
+    expect(inputElement).toHaveAttribute('name', testInputProps.name);
+    expect(inputElement).toHaveAttribute(
+      'placeholder',
+      testInputProps.placeholder,
+    );
     expect(inputElement).toHaveValue(testInputProps.defaultValue);
     expect(screen.getByText(testInputProps.label)).toBeInTheDocument();
   });
@@ -78,7 +88,7 @@ describe('ValidatedInput', () => {
     expect(screen.getByText(error)).toBeVisible();
   });
 
-  test('password-input defaults', () => {
+  test('password-input error', () => {
     // Render component
     render(
       <ValidatedInput
