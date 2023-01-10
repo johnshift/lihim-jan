@@ -7,7 +7,7 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { uid } from 'uid';
 
-import { texts } from '@lihim/shared/core';
+import { TEXT_LOADING } from '@lihim/shared/core';
 
 const options = {
   success: {
@@ -31,7 +31,7 @@ export const useNotify = () => {
     showNotification({
       id,
       color: 'blue',
-      title: texts.loading,
+      title: TEXT_LOADING,
       message,
       loading: true,
       autoClose: false,

@@ -4,7 +4,7 @@ import { Burger, Loader, Menu as BaseMenu } from '@mantine/core';
 import { HiLogin } from 'react-icons/hi';
 
 import { authTexts } from '@lihim/auth/core';
-import { texts } from '@lihim/shared/core';
+import { TEXT_LOADING } from '@lihim/shared/core';
 
 import { aria, testid } from '../constants';
 
@@ -46,7 +46,7 @@ export const Menu = (props: Props) => (
         onClick={props.authFn}
       >
         {props.isLoading
-          ? texts.loading
+          ? TEXT_LOADING
           : props.isLoggedIn
           ? authTexts.logout
           : authTexts.login}

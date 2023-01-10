@@ -1,7 +1,7 @@
 import { setupServer } from 'msw/node';
 
 import { mockSessionResponse } from '@lihim/auth/testutils';
-import { texts } from '@lihim/shared/core';
+import { TEXT_BRAND } from '@lihim/shared/core';
 import { render, screen, user, within } from '@lihim/shared/testutils/feature';
 
 import { Appbar } from './appbar';
@@ -23,7 +23,7 @@ describe('Appbar', () => {
     render(<Appbar />);
 
     // Assert brand defaults
-    const brand = screen.getByText(texts.brand);
+    const brand = screen.getByText(TEXT_BRAND);
     expect(brand).toBeVisible();
     expect(brand.closest('a')).toHaveAttribute('href', '/');
 

@@ -1,5 +1,5 @@
 import { authTexts } from '@lihim/auth/core';
-import { texts } from '@lihim/shared/core';
+import { TEXT_LOADING } from '@lihim/shared/core';
 import { render, screen, user } from '@lihim/shared/testutils/ui';
 
 import { aria, testid } from '../constants';
@@ -90,9 +90,7 @@ describe('Menu', () => {
 
     // Assert isLoading
     await screen.findByTestId(testid.headerLoader);
-    expect(
-      screen.getByRole('menuitem', { name: texts.loading }),
-    ).toBeDisabled();
+    expect(screen.getByRole('menuitem', { name: TEXT_LOADING })).toBeDisabled();
   });
 
   test('loggedin', async () => {

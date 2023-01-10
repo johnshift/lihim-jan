@@ -1,4 +1,4 @@
-import { texts } from '@lihim/shared/core';
+import { TEXT_BRAND } from '@lihim/shared/core';
 import { render, screen } from '@lihim/shared/testutils/ui';
 
 import { Brand } from './brand';
@@ -8,7 +8,7 @@ test('appbar brand', () => {
   render(<Brand />);
 
   // Get brand component
-  const brand = screen.getByText(texts.brand);
+  const brand = screen.getByText(TEXT_BRAND);
 
   // Assert brand is visible
   expect(brand).toBeInTheDocument();

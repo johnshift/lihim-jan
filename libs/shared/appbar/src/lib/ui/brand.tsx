@@ -2,7 +2,7 @@ import NextLink from 'next/link';
 
 import { Anchor } from '@mantine/core';
 
-import { texts } from '@lihim/shared/core';
+import { TEXT_BRAND } from '@lihim/shared/core';
 
 export const Brand = () => (
   <Anchor
@@ -13,6 +13,6 @@ export const Brand = () => (
     variant="text"
     underline={false}
   >
-    {texts.brand}
+    {TEXT_BRAND}
   </Anchor>
 );

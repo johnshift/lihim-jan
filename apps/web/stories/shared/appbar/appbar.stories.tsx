@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
 import { Appbar, appbarAria } from '@lihim/shared/appbar';
-import { texts } from '@lihim/shared/core';
+import { TEXT_BRAND } from '@lihim/shared/core';
 
 type Props = ComponentProps<typeof Appbar>;
 
@@ -26,7 +26,7 @@ export const Default: StoryObj<Props> = {
     const canvas = within(canvasElement);
 
     // Assert brand defaults
-    const brand = canvas.getByText(texts.brand);
+    const brand = canvas.getByText(TEXT_BRAND);
     expect(brand).toBeVisible();
     expect(brand.closest('a')).toHaveAttribute('href', '/');
 

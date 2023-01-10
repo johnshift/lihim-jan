@@ -1,6 +1,10 @@
 import { useForm } from 'react-hook-form';
 
-import { aria, testid } from '@lihim/shared/core';
+import {
+  ARIA_HIDE_PASSWORD_ICON,
+  ARIA_SHOW_PASSWORD_ICON,
+  TESTID_PASSWORD_VISIBILITY,
+} from '@lihim/shared/core';
 import { render, renderHook, screen, user } from '@lihim/shared/testutils/ui';
 
 import { ValidatedInput } from './validated-input';
@@ -205,16 +209,16 @@ describe('ValidatedInput', () => {
     const inputElement = screen.getByPlaceholderText(
       testInputProps.placeholder,
     );
-    const toggleVisibility = screen.getByTestId(testid.passwordVisibility);
+    const toggleVisibility = screen.getByTestId(TESTID_PASSWORD_VISIBILITY);
 
     // Toggle to visible text then assert
     await user.click(toggleVisibility);
     expect(inputElement).toHaveAttribute('type', 'text');
-    await screen.findByText(aria.hidePasswordIcon);
+    await screen.findByText(ARIA_HIDE_PASSWORD_ICON);
 
     // Toggle to hidden then assert
     await user.click(toggleVisibility);
     expect(inputElement).toHaveAttribute('type', 'password');
-    await screen.findByText(aria.showPasswordIcon);
+    await screen.findByText(ARIA_SHOW_PASSWORD_ICON);
   });
 });
