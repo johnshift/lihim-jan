@@ -34,6 +34,7 @@
     "react-icons": "^4.7.1",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.3.0",
+    "uid": "^2.0.1",
     "zod": "^3.20.2"
   },
   "devDependencies": {
