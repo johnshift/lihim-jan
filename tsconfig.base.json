@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@auth/ui": ["libs/auth/ui/src/index.ts"],
+      "@lihim/auth/ui": ["libs/auth/ui/src/index.ts"],
       "@lihim/auth/core": ["libs/auth/core/src/index.ts"],
       "@lihim/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@lihim/auth/testutils": ["libs/auth/testutils/src/index.ts"],
