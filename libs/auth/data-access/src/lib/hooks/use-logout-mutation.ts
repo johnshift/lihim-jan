@@ -34,11 +34,11 @@ export const useLogoutMutation = () => {
       });
 
       // Display success message
-      notifySuccess(MSG_LOGOUT_OK, MSG_LOGOUT_DONE);
+      notifySuccess(MSG_LOGOUT_OK, MSG_LOGOUT_DONE, true);
     },
     onError(error) {
       // Display error message
-      notifyError(ERR_LOGOUT_FAILED, error.message);
+      notifyError(ERR_LOGOUT_FAILED, error.message, true);
     },
   });
 };

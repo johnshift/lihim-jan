@@ -12,7 +12,54 @@ jest.mock('@mantine/notifications', () => ({
 }));
 
 describe('useNotify', () => {
-  test('ok', async () => {
+  test('show notification', async () => {
+    // Render hook
+    const { result } = renderHook(() => useNotify(), {
+      wrapper: mantineNotifications.NotificationsProvider,
+    });
+
+    // Exec fn
+    const { id, notifySuccess, notifyError } = result.current;
+
+    // Assert returned values
+    expect(id).toBeTruthy();
+    expect(notifySuccess).toBeTruthy();
+    expect(notifyError).toBeTruthy();
+
+    // Assert success notification
+    const successTitle = 'success-title';
+    const successMsg = 'success-msg';
+    const successSpy = jest.spyOn(mantineNotifications, 'showNotification');
+    await act(() => result.current.notifySuccess(successTitle, successMsg));
+    await waitFor(() => {
+      expect(successSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          title: successTitle,
+          message: successMsg,
+          color: 'green',
+          icon: <BsCheckCircle />,
+        }),
+      );
+    });
+
+    // Assert error notification
+    const errorTitle = 'error-title';
+    const errorMsg = 'error-msg';
+    const errorSpy = jest.spyOn(mantineNotifications, 'showNotification');
+    await act(() => result.current.notifyError(errorTitle, errorMsg));
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          title: errorTitle,
+          message: errorMsg,
+          color: 'red',
+          icon: <BsExclamationCircle />,
+        }),
+      );
+    });
+  });
+
+  test('update notification using loading', async () => {
     // Render hook
     const { result } = renderHook(() => useNotify(), {
       wrapper: mantineNotifications.NotificationsProvider,
@@ -49,11 +96,13 @@ describe('useNotify', () => {
     });
     expect(cleanNotifSpy).toHaveBeenCalledTimes(1);
 
-    // Assert success notification
+    // Assert success notification update
     const successTitle = 'success-title';
     const successMsg = 'success-msg';
     const successSpy = jest.spyOn(mantineNotifications, 'updateNotification');
-    await act(() => result.current.notifySuccess(successTitle, successMsg));
+    await act(() =>
+      result.current.notifySuccess(successTitle, successMsg, true),
+    );
     await waitFor(() => {
       expect(successSpy).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -70,7 +119,7 @@ describe('useNotify', () => {
     const errorTitle = 'error-title';
     const errorMsg = 'error-msg';
     const errorSpy = jest.spyOn(mantineNotifications, 'updateNotification');
-    await act(() => result.current.notifyError(errorTitle, errorMsg));
+    await act(() => result.current.notifyError(errorTitle, errorMsg, true));
     await waitFor(() => {
       expect(errorSpy).toHaveBeenCalledWith(
         expect.objectContaining({
