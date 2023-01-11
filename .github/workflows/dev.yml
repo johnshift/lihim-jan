@@ -219,13 +219,12 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install --frozen-lockfile
-      - name: Build storybook
-        run: pnpm nx build-storybook web
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          storybookBuildDir: dist/storybook/web
+          onlyChanged: true
+          externals: 'public/**'
 
   dev-deploy:
     name: Dev Deploy
