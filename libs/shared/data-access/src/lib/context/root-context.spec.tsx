@@ -1,8 +1,14 @@
-import { render, screen, waitFor } from '@testing-library/react';
-
 import { setupServer } from 'msw/node';
 
+import { AuthModalState } from '@lihim/auth/core';
 import { fakeSession, mockSessionResponse } from '@lihim/auth/testutils';
+import {
+  render,
+  renderHook,
+  screen,
+  user,
+  waitFor,
+} from '@lihim/shared/testutils/data-access';
 import { TestWrapper } from '@lihim/shared/testutils/data-access';
 
 import { useRootContext } from '../hooks/use-root-context';
@@ -17,44 +23,101 @@ beforeEach(() => mswServer.resetHandlers());
 afterEach(() => mswServer.resetHandlers());
 
 describe('rootContext', () => {
-  test('default values', async () => {
+  test('use-session-context', async () => {
+    // Render hook
+    const { result } = renderHook(() => useRootContext(), {
+      wrapper: TestWrapper,
+    });
+
+    // Destructure current values
+    const { session, isLoading, authModalState, setAuthModalState } =
+      result.current;
+
+    // Assert default values
+    expect(session).toStrictEqual({ isAnon: true });
+    expect(isLoading).toBe(false);
+    expect(authModalState).toBe(AuthModalState.Closed);
+    expect(setAuthModalState).toBeDefined();
+    expect(setAuthModalState(AuthModalState.Closed)).toBeNull();
+  });
+
+  test('auth modal controls', async () => {
     // Mock session response
-    const body = fakeSession();
-    mswServer.use(mockSessionResponse(200, body));
+    const mockSession = fakeSession();
+    mswServer.use(mockSessionResponse(200, mockSession));
 
-    // Test values
-    const dataTestId = 'data-testid';
-    const loadingTestId = 'loading-testid';
+    // Arrange
+    const testIdModalState = 'auth-modal-state';
+    const testIdCloseModal = 'close-modal';
+    const testIdShowSignin = 'show-signin';
+    const testIdShowSignup = 'show-signup';
 
-    // TestComponent
+    // Test component
     const TestComponent = () => {
-      const { session, isLoading } = useRootContext();
+      const { authModalState, setAuthModalState } = useRootContext();
 
       return (
         <>
-          <p data-testid={dataTestId}>{JSON.stringify(session)}</p>
-          <p data-testid={loadingTestId}>{isLoading.toString()}</p>
+          <p data-testid={testIdModalState}>{authModalState}</p>
+          <button
+            data-testid={testIdCloseModal}
+            type="button"
+            onClick={() => setAuthModalState(AuthModalState.Closed)}
+          >
+            close modal
+          </button>
+          <button
+            data-testid={testIdShowSignin}
+            type="button"
+            onClick={() => setAuthModalState(AuthModalState.Login)}
+          >
+            show signin
+          </button>
+          <button
+            data-testid={testIdShowSignup}
+            type="button"
+            onClick={() => setAuthModalState(AuthModalState.Signup)}
+          >
+            show signup
+          </button>
         </>
       );
     };
 
     // Render component
     render(
-      <TestWrapper>
-        <RootProvider>
-          <TestComponent />
-        </RootProvider>
-      </TestWrapper>,
+      <RootProvider>
+        <TestComponent />
+      </RootProvider>,
     );
 
-    // Wait loading
+    // Assert default state
+    expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
+      AuthModalState.Closed.toString(),
+    );
+
+    // Assert show signin
+    await user.click(screen.getByTestId(testIdShowSignin));
     await waitFor(() => {
-      expect(screen.getByTestId(loadingTestId)).toHaveTextContent('false');
+      expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
+        AuthModalState.Login.toString(),
+      );
     });
 
-    // Assert data
-    expect(screen.getByTestId(dataTestId)).toHaveTextContent(
-      JSON.stringify(body),
-    );
+    // Assert show signup
+    await user.click(screen.getByTestId(testIdShowSignup));
+    await waitFor(() => {
+      expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
+        AuthModalState.Signup.toString(),
+      );
+    });
+
+    // Assert close modal
+    await user.click(screen.getByTestId(testIdCloseModal));
+    await waitFor(() => {
+      expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
+        AuthModalState.Closed.toString(),
+      );
+    });
   });
 });
