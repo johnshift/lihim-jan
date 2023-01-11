@@ -10,7 +10,7 @@ import type {
 import {
   API_URL_SIGNUP,
   authErrMsg,
-  authMsg,
+  MSG_SIGNUP_OK,
   SignupErrorResponseSchema,
   SignupPayloadSchema,
   SignupResponseSchema,
@@ -52,7 +52,7 @@ export const useSignupMutation = (closeModal: TVoidFn) => {
         await router.push('/');
 
         // Display success message
-        notifySuccess(authMsg.signupOk, data.message);
+        notifySuccess(MSG_SIGNUP_OK, data.message);
       },
       onError(error) {
         // Display error message

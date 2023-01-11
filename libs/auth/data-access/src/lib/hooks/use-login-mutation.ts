@@ -4,9 +4,9 @@ import type { LoginPayload, LoginResponse } from '@lihim/auth/core';
 import {
   API_URL_LOGIN,
   authErrMsg,
-  authMsg,
   LoginPayloadSchema,
   LoginResponseSchema,
+  MSG_LOGIN_OK,
 } from '@lihim/auth/core';
 import type { GenericResponse, TVoidFn } from '@lihim/shared/core';
 import { ERR_INVALID_REQUEST, METHOD_POST } from '@lihim/shared/core';
@@ -40,7 +40,7 @@ export const useLoginMutation = (closeModal: TVoidFn) => {
         closeModal();
 
         // Display success message
-        notifySuccess(authMsg.loginOk, data.message);
+        notifySuccess(MSG_LOGIN_OK, data.message);
       },
       onError(error) {
         // Display error message

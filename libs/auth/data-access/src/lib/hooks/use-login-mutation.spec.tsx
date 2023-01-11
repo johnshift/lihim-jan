@@ -3,7 +3,7 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authErrMsg, authMsg } from '@lihim/auth/core';
+import { authErrMsg, MSG_LOGIN_OK } from '@lihim/auth/core';
 import {
   fakeLoginPayload,
   fakeSession,
@@ -162,7 +162,7 @@ describe('use-signin-mutation', () => {
     // Mock success response
     const mockSession = fakeSession();
     const body = {
-      message: authMsg.loginOk,
+      message: MSG_LOGIN_OK,
       session: mockSession,
     };
     mswServer.use(mockLoginResponse({ body }));
@@ -195,7 +195,7 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authMsg.loginOk,
+        title: MSG_LOGIN_OK,
         message: body.message,
         color: 'green',
         icon: <BsCheckCircle />,
@@ -210,7 +210,7 @@ describe('use-signin-mutation', () => {
     // Mock success response
     const mockSession = fakeSession();
     const body = {
-      message: authMsg.loginOk,
+      message: MSG_LOGIN_OK,
       session: mockSession,
     };
     mswServer.use(mockLoginResponse({ body }));
@@ -243,7 +243,7 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authMsg.loginOk,
+        title: MSG_LOGIN_OK,
         message: body.message,
         color: 'green',
         icon: <BsCheckCircle />,

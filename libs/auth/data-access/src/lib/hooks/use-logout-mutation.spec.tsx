@@ -3,7 +3,12 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authErrMsg, authMsg } from '@lihim/auth/core';
+import {
+  authErrMsg,
+  MSG_LOGOUT_DONE,
+  MSG_LOGOUT_LOADING,
+  MSG_LOGOUT_OK,
+} from '@lihim/auth/core';
 import { mockLogoutResponse } from '@lihim/auth/testutils';
 import { ERR_INTERNAL } from '@lihim/shared/core';
 import {
@@ -63,7 +68,7 @@ describe('useLogoutMutation', () => {
       expect.objectContaining({
         title: 'Loading',
         loading: true,
-        message: authMsg.logoutLoading,
+        message: MSG_LOGOUT_LOADING,
         autoClose: false,
         disallowClose: true,
         color: 'blue',
@@ -110,7 +115,7 @@ describe('useLogoutMutation', () => {
       expect.objectContaining({
         title: 'Loading',
         loading: true,
-        message: authMsg.logoutLoading,
+        message: MSG_LOGOUT_LOADING,
         autoClose: false,
         disallowClose: true,
         color: 'blue',
@@ -161,7 +166,7 @@ describe('useLogoutMutation', () => {
       expect.objectContaining({
         title: 'Loading',
         loading: true,
-        message: authMsg.logoutLoading,
+        message: MSG_LOGOUT_LOADING,
         autoClose: false,
         disallowClose: true,
         color: 'blue',
@@ -170,8 +175,8 @@ describe('useLogoutMutation', () => {
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         color: 'green',
-        title: authMsg.logoutOk,
-        message: authMsg.logoutDone,
+        title: MSG_LOGOUT_OK,
+        message: MSG_LOGOUT_DONE,
         icon: <BsCheckCircle />,
         autoClose: 4000,
       }),

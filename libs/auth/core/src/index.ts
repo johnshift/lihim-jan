@@ -5,6 +5,12 @@ export {
   API_URL_SIGNUP,
   ARIA_SUBMIT_LOGIN,
   ARIA_SUBMIT_SIGNUP,
+  MSG_LOGIN_OK,
+  MSG_LOGIN_OK_INFO,
+  MSG_LOGOUT_DONE,
+  MSG_LOGOUT_LOADING,
+  MSG_LOGOUT_OK,
+  MSG_SIGNUP_OK,
   TESTID_LOGIN_LINK,
   TESTID_LOGIN_LOADING,
   TESTID_SIGNUP_LINK,
@@ -15,11 +21,7 @@ export {
   TEXT_SIGNUP,
   TEXT_SIGNUP_FOOTER,
 } from './lib/constants';
-export {
-  errmsg as authErrMsg,
-  inputProps as authInputProps,
-  msg as authMsg,
-} from './lib/misc';
+export { errmsg as authErrMsg, inputProps as authInputProps } from './lib/misc';
 export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';
 export type { LoginResponse } from './lib/schemas/login-response-schema';

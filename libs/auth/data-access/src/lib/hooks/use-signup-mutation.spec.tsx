@@ -5,7 +5,7 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authMsg, SignupErrorResponse } from '@lihim/auth/core';
+import { MSG_SIGNUP_OK, SignupErrorResponse } from '@lihim/auth/core';
 import { authErrMsg } from '@lihim/auth/core';
 import {
   fakeSession,
@@ -148,7 +148,7 @@ describe('useSignupMutation', () => {
     // Mock success response
     const mockSession = fakeSession();
     const body = {
-      message: authMsg.signupOk,
+      message: MSG_SIGNUP_OK,
       session: mockSession,
     };
     mswServer.use(mockSignupResponse({ body }));
@@ -173,7 +173,7 @@ describe('useSignupMutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authMsg.signupOk,
+        title: MSG_SIGNUP_OK,
         message: body.message,
         color: 'green',
         icon: <BsCheckCircle />,
