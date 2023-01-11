@@ -3,7 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { LoginPayload, LoginResponse } from '@lihim/auth/core';
 import {
   API_URL_LOGIN,
-  authErrMsg,
+  ERR_LOGIN_FAILED,
+  ERR_LOGIN_INCORRECT,
   LoginPayloadSchema,
   LoginResponseSchema,
   MSG_LOGIN_OK,
@@ -47,9 +48,9 @@ export const useLoginMutation = (closeModal: TVoidFn) => {
         // If failed to parse zod-schema, incorrect signin
         const errMsg =
           error.message === ERR_INVALID_REQUEST
-            ? authErrMsg.loginIncorrect
+            ? ERR_LOGIN_INCORRECT
             : error.message;
-        notifyError(authErrMsg.loginFailed, errMsg);
+        notifyError(ERR_LOGIN_FAILED, errMsg);
       },
     },
   );

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
   API_URL_LOGOUT,
-  authErrMsg,
+  ERR_LOGOUT_FAILED,
   MSG_LOGOUT_DONE,
   MSG_LOGOUT_LOADING,
   MSG_LOGOUT_OK,
@@ -38,7 +38,7 @@ export const useLogoutMutation = () => {
     },
     onError(error) {
       // Display error message
-      notifyError(authErrMsg.logoutFailed, error.message);
+      notifyError(ERR_LOGOUT_FAILED, error.message);
     },
   });
 };

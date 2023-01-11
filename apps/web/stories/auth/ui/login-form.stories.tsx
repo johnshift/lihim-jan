@@ -7,12 +7,13 @@ import { within } from '@storybook/testing-library';
 
 import {
   ARIA_SUBMIT_LOGIN,
-  authInputProps,
+  PLACEHOLDER_PASSWORD,
+  PLACEHOLDER_PRINCIPAL,
   TESTID_LOGIN_LOADING,
   TESTID_SIGNUP_LINK,
   TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
-import { LoginForm } from '@lihim/auth/ui';
+import { LoginForm, loginInputs } from '@lihim/auth/ui';
 import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {
@@ -44,19 +45,15 @@ Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // Locate elements
-  const principalInput = canvas.getByPlaceholderText(
-    authInputProps.principal.placeholder,
-  );
-  const passwordInput = canvas.getByPlaceholderText(
-    authInputProps.password.placeholder,
-  );
+  const principalInput = canvas.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+  const passwordInput = canvas.getByPlaceholderText(PLACEHOLDER_PASSWORD);
   const submitBtn = canvas.getByRole('button', { name: ARIA_SUBMIT_LOGIN });
   const signupLink = canvas.getByTestId(TESTID_SIGNUP_LINK);
 
   // Assert input defaults
-  checkInputDefaults(principalInput, authInputProps.principal);
+  checkInputDefaults(principalInput, loginInputs[0]);
   checkInputDefaults(passwordInput, {
-    ...authInputProps.password,
+    ...loginInputs[1],
     type: 'password',
   });
   expect(submitBtn).toBeVisible();
@@ -79,12 +76,8 @@ HasError.args = {
 };
 HasError.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const principalInput = canvas.getByPlaceholderText(
-    authInputProps.principal.placeholder,
-  );
-  const passwordInput = canvas.getByPlaceholderText(
-    authInputProps.password.placeholder,
-  );
+  const principalInput = canvas.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+  const passwordInput = canvas.getByPlaceholderText(PLACEHOLDER_PASSWORD);
   expect(principalInput).toHaveAttribute('aria-invalid', 'true');
   expect(passwordInput.parentElement).toHaveAttribute('aria-invalid', 'true');
 };

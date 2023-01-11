@@ -3,7 +3,11 @@ import { useForm } from 'react-hook-form';
 import type { SignupPayload } from '@lihim/auth/core';
 import {
   ARIA_SUBMIT_SIGNUP,
-  authInputProps,
+  PLACEHOLDER_EMAIL,
+  PLACEHOLDER_FIRSTNAME,
+  PLACEHOLDER_LASTNAME,
+  PLACEHOLDER_PASSWORD,
+  PLACEHOLDER_USERNAME,
   TESTID_LOGIN_LINK,
   TESTID_SIGNUP_LOADING,
   TEXT_SIGNUP_FOOTER,
@@ -16,6 +20,7 @@ import {
   waitFor,
 } from '@lihim/shared/testutils/ui';
 
+import { credentialInputs, nameInputs } from './constants';
 import { SignupForm } from './signup-form';
 
 type CheckOptions = {
@@ -57,33 +62,23 @@ describe('SignupForm', () => {
     );
 
     // Locate elements
-    const firstnameInput = screen.getByPlaceholderText(
-      authInputProps.firstname.placeholder,
-    );
-    const lastnameInput = screen.getByPlaceholderText(
-      authInputProps.lastname.placeholder,
-    );
-    const usernameInput = screen.getByPlaceholderText(
-      authInputProps.username.placeholder,
-    );
-    const emailInput = screen.getByPlaceholderText(
-      authInputProps.email.placeholder,
-    );
-    const passwordInput = screen.getByPlaceholderText(
-      authInputProps.password.placeholder,
-    );
+    const firstnameInput = screen.getByPlaceholderText(PLACEHOLDER_FIRSTNAME);
+    const lastnameInput = screen.getByPlaceholderText(PLACEHOLDER_LASTNAME);
+    const usernameInput = screen.getByPlaceholderText(PLACEHOLDER_USERNAME);
+    const emailInput = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
+    const passwordInput = screen.getByPlaceholderText(PLACEHOLDER_PASSWORD);
     const submitBtn = screen.getByRole('button', {
       name: ARIA_SUBMIT_SIGNUP,
     });
     const loginLink = screen.getByTestId(TESTID_LOGIN_LINK);
 
     // Assertions
-    checkInputDefaults(firstnameInput, authInputProps.firstname);
-    checkInputDefaults(lastnameInput, authInputProps.lastname);
-    checkInputDefaults(usernameInput, authInputProps.username);
-    checkInputDefaults(emailInput, authInputProps.email);
+    checkInputDefaults(firstnameInput, nameInputs[0]);
+    checkInputDefaults(lastnameInput, nameInputs[1]);
+    checkInputDefaults(usernameInput, credentialInputs[0]);
+    checkInputDefaults(emailInput, credentialInputs[1]);
     checkInputDefaults(passwordInput, {
-      ...authInputProps.password,
+      ...credentialInputs[2],
       type: 'password',
     });
     expect(submitBtn).toBeVisible();
@@ -130,21 +125,11 @@ describe('SignupForm', () => {
     );
 
     // Locate elements
-    const firstnameInput = screen.getByPlaceholderText(
-      authInputProps.firstname.placeholder,
-    );
-    const lastnameInput = screen.getByPlaceholderText(
-      authInputProps.lastname.placeholder,
-    );
-    const usernameInput = screen.getByPlaceholderText(
-      authInputProps.username.placeholder,
-    );
-    const emailInput = screen.getByPlaceholderText(
-      authInputProps.email.placeholder,
-    );
-    const passwordInput = screen.getByPlaceholderText(
-      authInputProps.password.placeholder,
-    );
+    const firstnameInput = screen.getByPlaceholderText(PLACEHOLDER_FIRSTNAME);
+    const lastnameInput = screen.getByPlaceholderText(PLACEHOLDER_LASTNAME);
+    const usernameInput = screen.getByPlaceholderText(PLACEHOLDER_USERNAME);
+    const emailInput = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
+    const passwordInput = screen.getByPlaceholderText(PLACEHOLDER_PASSWORD);
 
     // Assertions
     expect(firstnameInput).toHaveAttribute('aria-invalid', 'true');
@@ -170,21 +155,11 @@ describe('SignupForm', () => {
     );
 
     // Locate elements
-    const firstnameInput = screen.getByPlaceholderText(
-      authInputProps.firstname.placeholder,
-    );
-    const lastnameInput = screen.getByPlaceholderText(
-      authInputProps.lastname.placeholder,
-    );
-    const usernameInput = screen.getByPlaceholderText(
-      authInputProps.username.placeholder,
-    );
-    const emailInput = screen.getByPlaceholderText(
-      authInputProps.email.placeholder,
-    );
-    const passwordInput = screen.getByPlaceholderText(
-      authInputProps.password.placeholder,
-    );
+    const firstnameInput = screen.getByPlaceholderText(PLACEHOLDER_FIRSTNAME);
+    const lastnameInput = screen.getByPlaceholderText(PLACEHOLDER_LASTNAME);
+    const usernameInput = screen.getByPlaceholderText(PLACEHOLDER_USERNAME);
+    const emailInput = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
+    const passwordInput = screen.getByPlaceholderText(PLACEHOLDER_PASSWORD);
     const submitBtn = screen.getByRole('button', {
       name: ARIA_SUBMIT_SIGNUP,
     });

@@ -3,7 +3,11 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authErrMsg, MSG_LOGIN_OK } from '@lihim/auth/core';
+import {
+  ERR_LOGIN_FAILED,
+  ERR_LOGIN_INCORRECT,
+  MSG_LOGIN_OK,
+} from '@lihim/auth/core';
 import {
   fakeLoginPayload,
   fakeSession,
@@ -71,8 +75,8 @@ describe('use-signin-mutation', () => {
       expect.objectContaining({
         color: 'red',
         icon: <BsExclamationCircle />,
-        title: authErrMsg.loginFailed,
-        message: authErrMsg.loginIncorrect,
+        title: ERR_LOGIN_FAILED,
+        message: ERR_LOGIN_INCORRECT,
       }),
     );
   });
@@ -82,7 +86,7 @@ describe('use-signin-mutation', () => {
     const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
 
     // Mock error response
-    const mockErrorMessage = authErrMsg.loginIncorrect;
+    const mockErrorMessage = ERR_LOGIN_INCORRECT;
     const body = {
       message: mockErrorMessage,
     };
@@ -110,8 +114,8 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.loginFailed,
-        message: authErrMsg.loginIncorrect,
+        title: ERR_LOGIN_FAILED,
+        message: ERR_LOGIN_INCORRECT,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),
@@ -147,8 +151,8 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.loginFailed,
-        message: authErrMsg.loginIncorrect,
+        title: ERR_LOGIN_FAILED,
+        message: ERR_LOGIN_INCORRECT,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),

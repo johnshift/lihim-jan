@@ -1,10 +1,3 @@
-export const errmsg = {
-  loginFailed: 'Login Failed',
-  loginIncorrect: 'Incorrect username/email or password',
-  signupFailed: 'Signup Failed',
-  logoutFailed: 'Logout Failed',
-} as const;
-
 export const inputProps = {
   principal: {
     name: 'principal',

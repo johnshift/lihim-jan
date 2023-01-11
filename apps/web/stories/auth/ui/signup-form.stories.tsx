@@ -7,12 +7,17 @@ import { within } from '@storybook/testing-library';
 
 import {
   ARIA_SUBMIT_SIGNUP,
-  authInputProps,
+  PLACEHOLDER_EMAIL,
+  PLACEHOLDER_FIRSTNAME,
+  PLACEHOLDER_LASTNAME,
+  PLACEHOLDER_PASSWORD,
+  PLACEHOLDER_USERNAME,
   TESTID_LOGIN_LINK,
   TESTID_SIGNUP_LOADING,
   TEXT_SIGNUP_FOOTER,
 } from '@lihim/auth/core';
 import { SignupForm } from '@lihim/auth/ui';
+import { credentialInputs, nameInputs } from '@lihim/auth/ui';
 import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {
@@ -50,31 +55,21 @@ Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // Locate elements
-  const firstnameInput = canvas.getByPlaceholderText(
-    authInputProps.firstname.placeholder,
-  );
-  const lastnameInput = canvas.getByPlaceholderText(
-    authInputProps.lastname.placeholder,
-  );
-  const usernameInput = canvas.getByPlaceholderText(
-    authInputProps.username.placeholder,
-  );
-  const emailInput = canvas.getByPlaceholderText(
-    authInputProps.email.placeholder,
-  );
-  const passwordInput = canvas.getByPlaceholderText(
-    authInputProps.password.placeholder,
-  );
+  const firstnameInput = canvas.getByPlaceholderText(PLACEHOLDER_FIRSTNAME);
+  const lastnameInput = canvas.getByPlaceholderText(PLACEHOLDER_LASTNAME);
+  const usernameInput = canvas.getByPlaceholderText(PLACEHOLDER_USERNAME);
+  const emailInput = canvas.getByPlaceholderText(PLACEHOLDER_EMAIL);
+  const passwordInput = canvas.getByPlaceholderText(PLACEHOLDER_PASSWORD);
   const submitBtn = canvas.getByRole('button', { name: ARIA_SUBMIT_SIGNUP });
   const loginLink = canvas.getByTestId(TESTID_LOGIN_LINK);
 
   // Assertions
-  checkInputDefaults(firstnameInput, authInputProps.firstname);
-  checkInputDefaults(lastnameInput, authInputProps.lastname);
-  checkInputDefaults(usernameInput, authInputProps.username);
-  checkInputDefaults(emailInput, authInputProps.email);
+  checkInputDefaults(firstnameInput, nameInputs[0]);
+  checkInputDefaults(lastnameInput, nameInputs[1]);
+  checkInputDefaults(usernameInput, credentialInputs[0]);
+  checkInputDefaults(emailInput, credentialInputs[1]);
   checkInputDefaults(passwordInput, {
-    ...authInputProps.password,
+    ...credentialInputs[2],
     type: 'password',
   });
   expect(submitBtn).toBeVisible();
@@ -103,21 +98,11 @@ Errors.args = {
 };
 Errors.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const firstnameInput = canvas.getByPlaceholderText(
-    authInputProps.firstname.placeholder,
-  );
-  const lastnameInput = canvas.getByPlaceholderText(
-    authInputProps.lastname.placeholder,
-  );
-  const usernameInput = canvas.getByPlaceholderText(
-    authInputProps.username.placeholder,
-  );
-  const emailInput = canvas.getByPlaceholderText(
-    authInputProps.email.placeholder,
-  );
-  const passwordInput = canvas.getByPlaceholderText(
-    authInputProps.password.placeholder,
-  );
+  const firstnameInput = canvas.getByPlaceholderText(PLACEHOLDER_FIRSTNAME);
+  const lastnameInput = canvas.getByPlaceholderText(PLACEHOLDER_LASTNAME);
+  const usernameInput = canvas.getByPlaceholderText(PLACEHOLDER_USERNAME);
+  const emailInput = canvas.getByPlaceholderText(PLACEHOLDER_EMAIL);
+  const passwordInput = canvas.getByPlaceholderText(PLACEHOLDER_PASSWORD);
   expect(firstnameInput).toHaveAttribute('aria-invalid', 'true');
   expect(lastnameInput).toHaveAttribute('aria-invalid', 'true');
   expect(usernameInput).toHaveAttribute('aria-invalid', 'true');

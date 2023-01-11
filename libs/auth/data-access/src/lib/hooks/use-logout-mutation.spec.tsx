@@ -4,7 +4,7 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 import { setupServer } from 'msw/node';
 
 import {
-  authErrMsg,
+  ERR_LOGOUT_FAILED,
   MSG_LOGOUT_DONE,
   MSG_LOGOUT_LOADING,
   MSG_LOGOUT_OK,
@@ -76,7 +76,7 @@ describe('useLogoutMutation', () => {
     );
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.logoutFailed,
+        title: ERR_LOGOUT_FAILED,
         message: mockErrorMessage,
         color: 'red',
         icon: <BsExclamationCircle />,
@@ -123,7 +123,7 @@ describe('useLogoutMutation', () => {
     );
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.logoutFailed,
+        title: ERR_LOGOUT_FAILED,
         message: ERR_INTERNAL,
         color: 'red',
         icon: <BsExclamationCircle />,

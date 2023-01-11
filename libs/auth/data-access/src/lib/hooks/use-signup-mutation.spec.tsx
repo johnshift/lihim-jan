@@ -5,8 +5,8 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { MSG_SIGNUP_OK, SignupErrorResponse } from '@lihim/auth/core';
-import { authErrMsg } from '@lihim/auth/core';
+import type { SignupErrorResponse } from '@lihim/auth/core';
+import { ERR_SIGNUP_FAILED, MSG_SIGNUP_OK } from '@lihim/auth/core';
 import {
   fakeSession,
   fakeSignupPayload,
@@ -54,7 +54,7 @@ describe('useSignupMutation', () => {
     jest.spyOn(nextRouter, 'useRouter').mockReturnValue({ push } as any);
 
     // Mock error response
-    const mockErrorMessage = authErrMsg.signupFailed;
+    const mockErrorMessage = ERR_SIGNUP_FAILED;
     const body: SignupErrorResponse = {
       message: mockErrorMessage,
       field: 'username' as const,
@@ -83,7 +83,7 @@ describe('useSignupMutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.signupFailed,
+        title: ERR_SIGNUP_FAILED,
         message: body.message,
         color: 'red',
         icon: <BsExclamationCircle />,
@@ -128,7 +128,7 @@ describe('useSignupMutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.signupFailed,
+        title: ERR_SIGNUP_FAILED,
         message: ERR_INTERNAL,
         color: 'red',
         icon: <BsExclamationCircle />,

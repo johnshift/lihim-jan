@@ -9,7 +9,7 @@ import type {
 } from '@lihim/auth/core';
 import {
   API_URL_SIGNUP,
-  authErrMsg,
+  ERR_SIGNUP_FAILED,
   MSG_SIGNUP_OK,
   SignupErrorResponseSchema,
   SignupPayloadSchema,
@@ -56,7 +56,7 @@ export const useSignupMutation = (closeModal: TVoidFn) => {
       },
       onError(error) {
         // Display error message
-        notifyError(authErrMsg.signupFailed, error.message);
+        notifyError(ERR_SIGNUP_FAILED, error.message);
       },
     },
   );
