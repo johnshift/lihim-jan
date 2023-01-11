@@ -47,8 +47,8 @@ Default.play = async ({ canvasElement }) => {
   const signupLink = canvas.getByTestId(TESTID_SIGNUP_LINK);
 
   // Assert input defaults
-  checkInputDefaults(principalInput, loginInputs[0]);
-  checkInputDefaults(passwordInput, {
+  await checkInputDefaults(principalInput, loginInputs[0]);
+  await checkInputDefaults(passwordInput, {
     ...loginInputs[1],
     type: 'password',
   });
