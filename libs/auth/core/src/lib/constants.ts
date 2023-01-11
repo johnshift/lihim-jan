@@ -12,3 +12,7 @@ export const MIN_LENGTH_PRINCIPAL = 4;
 export const MAX_LENGTH_PRINCIPAL = 32;
 export const MIN_LENGTH_PASSWORD = 6;
 export const MAX_LENGTH_PASSWORD = 64;
+
+// Regex
+export const RGX_NAME = /^[A-Za-z]*$/;
+export const RGX_USERNAME = /^[A-Za-z][\dA-Za-z-]*$/;

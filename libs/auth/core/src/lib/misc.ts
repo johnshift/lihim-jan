@@ -1,8 +1,3 @@
-export const regex = {
-  name: /^[A-Za-z]*$/,
-  username: /^[A-Za-z][\dA-Za-z-]*$/,
-} as const;
-
 export const urls = {
   session: '/api/auth/session',
   login: '/api/auth/login',
