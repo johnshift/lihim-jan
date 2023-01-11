@@ -7,5 +7,6 @@ export const rootMain: StorybookConfig = {
     '@storybook/addon-interactions',
     'storybook-dark-mode',
     '@storybook/addon-a11y',
+    'msw-storybook-addon',
   ],
 };
