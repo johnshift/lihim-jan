@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/testutils/storybook/src",
   "projectType": "library",
-  "tags": ["type:util"],
+  "tags": ["type:feature"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
