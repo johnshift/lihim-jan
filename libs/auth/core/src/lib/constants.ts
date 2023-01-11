@@ -22,3 +22,10 @@ export const API_URL_SESSION = '/api/auth/session';
 export const API_URL_LOGIN = '/api/auth/login';
 export const API_URL_LOGOUT = '/api/auth/logout';
 export const API_URL_SIGNUP = '/api/auth/signup';
+
+// String literals
+export const TEXT_LOGIN = 'Login';
+export const TEXT_LOGIN_FOOTER = "Don't have an account?";
+export const TEXT_SIGNUP = 'Signup';
+export const TEXT_SIGNUP_FOOTER = 'Already have an account?';
+export const TEXT_LOGOUT = 'Logout';

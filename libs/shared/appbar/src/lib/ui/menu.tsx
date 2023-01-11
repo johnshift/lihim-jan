@@ -1,9 +1,8 @@
-import { DispatchWithoutAction } from 'react';
-
 import { Burger, Loader, Menu as BaseMenu } from '@mantine/core';
 import { HiLogin } from 'react-icons/hi';
 
-import { authTexts } from '@lihim/auth/core';
+import { TEXT_LOGIN, TEXT_LOGOUT } from '@lihim/auth/core';
+import type { TVoidFn } from '@lihim/shared/core';
 import { TEXT_LOADING } from '@lihim/shared/core';
 
 import {
@@ -17,9 +16,9 @@ type Props = {
   isOpen: boolean;
   isLoading: boolean;
   isLoggedIn: boolean;
-  onOpen: DispatchWithoutAction;
-  onClose: DispatchWithoutAction;
-  authFn: DispatchWithoutAction;
+  onOpen: TVoidFn;
+  onClose: TVoidFn;
+  authFn: TVoidFn;
 };
 
 export const Menu = (props: Props) => (
@@ -53,8 +52,8 @@ export const Menu = (props: Props) => (
         {props.isLoading
           ? TEXT_LOADING
           : props.isLoggedIn
-          ? authTexts.logout
-          : authTexts.login}
+          ? TEXT_LOGOUT
+          : TEXT_LOGIN}
       </BaseMenu.Item>
     </BaseMenu.Dropdown>
   </BaseMenu>

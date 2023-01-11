@@ -4,8 +4,8 @@ import {
   authAria,
   authInputProps,
   authTestId,
-  authTexts,
   LoginPayload,
+  TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
 import {
   render,
@@ -77,7 +77,7 @@ describe('LoginForm', () => {
     expect(submitBtn).toBeVisible();
 
     // Footer
-    expect(screen.getByText(authTexts.loginFooter)).toBeVisible();
+    expect(screen.getByText(TEXT_LOGIN_FOOTER)).toBeVisible();
     expect(signupLink).toBeVisible();
   });
 

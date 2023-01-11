@@ -2,8 +2,15 @@ import { FC } from 'react';
 
 import { Button, Group, Text } from '@mantine/core';
 
-import { authAria, authTestId, authTexts } from '@lihim/auth/core';
-import { TVoidFn } from '@lihim/shared/core';
+import {
+  authAria,
+  authTestId,
+  TEXT_LOGIN,
+  TEXT_LOGIN_FOOTER,
+  TEXT_SIGNUP,
+  TEXT_SIGNUP_FOOTER,
+} from '@lihim/auth/core';
+import type { TVoidFn } from '@lihim/shared/core';
 
 type Props = {
   isSignup?: boolean;
@@ -23,7 +30,7 @@ export const FormFooter: FC<Props> = ({ isSignup = false, onClick }) => (
       }
       onClick={onClick}
     >
-      {isSignup ? authTexts.signupFooter : authTexts.loginFooter}
+      {isSignup ? TEXT_SIGNUP_FOOTER : TEXT_LOGIN_FOOTER}
     </Text>
     <Button
       type="submit"
@@ -31,7 +38,7 @@ export const FormFooter: FC<Props> = ({ isSignup = false, onClick }) => (
       aria-label={isSignup ? authAria.submitSignup : authAria.submitLogin}
       radius="md"
     >
-      {isSignup ? authTexts.signup : authTexts.login}
+      {isSignup ? TEXT_SIGNUP : TEXT_LOGIN}
     </Button>
   </Group>
 );

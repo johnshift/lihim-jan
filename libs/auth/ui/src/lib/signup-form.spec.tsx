@@ -1,12 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import {
-  authAria,
-  authInputProps,
-  authTestId,
-  authTexts,
-  SignupPayload,
-} from '@lihim/auth/core';
+import { SignupPayload, TEXT_SIGNUP_FOOTER } from '@lihim/auth/core';
+import { authAria, authInputProps, authTestId } from '@lihim/auth/core';
 import {
   render,
   renderHook,
@@ -87,7 +82,7 @@ describe('SignupForm', () => {
     });
     expect(submitBtn).toBeVisible();
     expect(loginLink).toBeVisible();
-    expect(screen.getByText(authTexts.signupFooter)).toBeVisible();
+    expect(screen.getByText(TEXT_SIGNUP_FOOTER)).toBeVisible();
   });
 
   test('isLoading', async () => {

@@ -1,4 +1,4 @@
-import { authTexts } from '@lihim/auth/core';
+import { TEXT_LOGIN, TEXT_LOGOUT } from '@lihim/auth/core';
 import { TEXT_LOADING } from '@lihim/shared/core';
 import { render, screen, user } from '@lihim/shared/testutils/ui';
 
@@ -115,7 +115,7 @@ describe('Menu', () => {
     );
 
     // Assert loggedin
-    await user.click(await screen.findByText(authTexts.logout));
+    await user.click(await screen.findByText(TEXT_LOGOUT));
     expect(authFn).toHaveBeenCalledTimes(1);
   });
 
@@ -141,7 +141,7 @@ describe('Menu', () => {
     );
 
     // Assert loggedin
-    await user.click(await screen.findByText(authTexts.login));
+    await user.click(await screen.findByText(TEXT_LOGIN));
     expect(authFn).toHaveBeenCalledTimes(1);
   });
 });

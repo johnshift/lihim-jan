@@ -2,14 +2,14 @@
 import { useForm } from 'react-hook-form';
 
 import { expect } from '@storybook/jest';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 
 import {
   authAria,
   authInputProps,
   authTestId,
-  authTexts,
+  TEXT_SIGNUP_FOOTER,
 } from '@lihim/auth/core';
 import { SignupForm } from '@lihim/auth/ui';
 import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
@@ -78,7 +78,7 @@ Default.play = async ({ canvasElement }) => {
   });
   expect(submitBtn).toBeVisible();
   expect(loginLink).toBeVisible();
-  expect(canvas.getByText(authTexts.signupFooter)).toBeVisible();
+  expect(canvas.getByText(TEXT_SIGNUP_FOOTER)).toBeVisible();
 };
 
 export const Loading = Template.bind({});

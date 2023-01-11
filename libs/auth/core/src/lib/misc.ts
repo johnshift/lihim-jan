@@ -1,11 +1,3 @@
-export const texts = {
-  login: 'Login',
-  loginFooter: "Dont't have an account?",
-  signup: 'Sign Up',
-  signupFooter: 'Already have an account?',
-  logout: 'Logout',
-} as const;
-
 export const aria = {
   submitLogin: 'Submit login',
   submitSignup: 'Submit signup',

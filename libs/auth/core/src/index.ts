@@ -3,6 +3,11 @@ export {
   API_URL_LOGOUT,
   API_URL_SESSION,
   API_URL_SIGNUP,
+  TEXT_LOGIN,
+  TEXT_LOGIN_FOOTER,
+  TEXT_LOGOUT,
+  TEXT_SIGNUP,
+  TEXT_SIGNUP_FOOTER,
 } from './lib/constants';
 export {
   aria as authAria,
@@ -10,7 +15,6 @@ export {
   inputProps as authInputProps,
   msg as authMsg,
   testid as authTestId,
-  texts as authTexts,
 } from './lib/misc';
 export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';
