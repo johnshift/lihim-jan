@@ -77,11 +77,26 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install --frozen-lockfile
+      - name: Check if should build storybook
+        id: check-should-build
+        run: echo "should_build=$(node tools/scripts/should-build-storybook.js)" >> $GITHUB_OUTPUT
+      - name: Echo check results
+        run: echo "should_build = ${{ steps.check-should-build.outputs.should_build }}"
       - name: Build storybook
+        if: steps.check-should-build.outputs.should_build == 'true'
         run: pnpm nx build-storybook web
       - name: Publish to Chromatic
+        if: steps.check-should-build.outputs.should_build == 'true'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: dist/storybook/web
           autoAcceptChanges: true # (checks happen in PR, main branch means already accepted)
+      - name: Skip Chromatic
+        if: steps.check-should-build.outputs.should_build != 'true'
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: dist/storybook/web
+          autoAcceptChanges: true
+          skip: true
