@@ -13,7 +13,8 @@
     "test:all": "npx nx run-many --target=test --all --codeCoverage",
     "push": "git push origin $(git rev-parse --abbrev-ref HEAD)",
     "pull": "node tools/scripts/pull-remote.js",
-    "chromatic": "chromatic --exit-zero-on-changes",
+    "build-storybook": "build-storybook --webpack-stats-json -c apps/web/.storybook",
+    "chromatic": "chromatic --only-changed --externals \"public/**\" ",
     "nx": "npx nx"
   },
   "dependencies": {

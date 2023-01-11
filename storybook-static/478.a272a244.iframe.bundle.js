@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklihim=self.webpackChunklihim||[]).push([[478],{"./node_modules/.pnpm/react-dom@18.2.0_react@18.2.0/node_modules/react-dom/client.js":(e,o,t)=>{var d,a=t("./node_modules/.pnpm/react-dom@18.2.0_react@18.2.0/node_modules/react-dom/index.js");o.createRoot=a.createRoot,o.hydrateRoot=a.hydrateRoot}}]);
