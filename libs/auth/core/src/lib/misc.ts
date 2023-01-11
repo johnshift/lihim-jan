@@ -77,3 +77,10 @@ export const loginInputs: LoginInputProps[] = [
     placeholder: PLACEHOLDER_PASSWORD,
   },
 ];
+
+export const AuthModalState = {
+  Closed: 0,
+  Login: 1,
+  Logout: 2,
+  Signup: 3,
+} as const;
