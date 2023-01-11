@@ -6,7 +6,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 
 import {
-  authAria,
+  ARIA_SUBMIT_LOGIN,
   authInputProps,
   authTestId,
   TEXT_LOGIN_FOOTER,
@@ -49,7 +49,7 @@ Default.play = async ({ canvasElement }) => {
   const passwordInput = canvas.getByPlaceholderText(
     authInputProps.password.placeholder,
   );
-  const submitBtn = canvas.getByRole('button', { name: authAria.submitLogin });
+  const submitBtn = canvas.getByRole('button', { name: ARIA_SUBMIT_LOGIN });
   const signupLink = canvas.getByTestId(authTestId.loginFooterLink);
 
   // Assert input defaults

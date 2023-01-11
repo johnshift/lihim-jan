@@ -3,6 +3,8 @@ export {
   API_URL_LOGOUT,
   API_URL_SESSION,
   API_URL_SIGNUP,
+  ARIA_SUBMIT_LOGIN,
+  ARIA_SUBMIT_SIGNUP,
   TEXT_LOGIN,
   TEXT_LOGIN_FOOTER,
   TEXT_LOGOUT,
@@ -10,7 +12,6 @@ export {
   TEXT_SIGNUP_FOOTER,
 } from './lib/constants';
 export {
-  aria as authAria,
   errmsg as authErrMsg,
   inputProps as authInputProps,
   msg as authMsg,

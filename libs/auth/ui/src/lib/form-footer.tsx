@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { Button, Group, Text } from '@mantine/core';
 
 import {
-  authAria,
+  ARIA_SUBMIT_LOGIN,
+  ARIA_SUBMIT_SIGNUP,
   authTestId,
   TEXT_LOGIN,
   TEXT_LOGIN_FOOTER,
@@ -35,7 +36,7 @@ export const FormFooter: FC<Props> = ({ isSignup = false, onClick }) => (
     <Button
       type="submit"
       size="sm"
-      aria-label={isSignup ? authAria.submitSignup : authAria.submitLogin}
+      aria-label={isSignup ? ARIA_SUBMIT_SIGNUP : ARIA_SUBMIT_LOGIN}
       radius="md"
     >
       {isSignup ? TEXT_SIGNUP : TEXT_LOGIN}

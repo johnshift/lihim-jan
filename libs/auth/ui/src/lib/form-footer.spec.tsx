@@ -1,5 +1,6 @@
 import {
-  authAria,
+  ARIA_SUBMIT_LOGIN,
+  ARIA_SUBMIT_SIGNUP,
   authTestId,
   TEXT_LOGIN,
   TEXT_LOGIN_FOOTER,
@@ -18,7 +19,7 @@ describe('FormFooter', () => {
     // Locate elements
     const link = screen.getByTestId(authTestId.loginFooterLink);
     const text = screen.getByText(TEXT_LOGIN_FOOTER);
-    const btn = screen.getByRole('button', { name: authAria.submitLogin });
+    const btn = screen.getByRole('button', { name: ARIA_SUBMIT_LOGIN });
 
     // Assertions
     expect(link).toBeVisible();
@@ -34,7 +35,7 @@ describe('FormFooter', () => {
     // Locate elements
     const link = screen.getByTestId(authTestId.signupFooterLink);
     const text = screen.getByText(TEXT_SIGNUP_FOOTER);
-    const btn = screen.getByRole('button', { name: authAria.submitSignup });
+    const btn = screen.getByRole('button', { name: ARIA_SUBMIT_SIGNUP });
 
     // Assertions
     expect(link).toBeVisible();

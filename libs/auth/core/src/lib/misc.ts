@@ -1,8 +1,3 @@
-export const aria = {
-  submitLogin: 'Submit login',
-  submitSignup: 'Submit signup',
-} as const;
-
 export const testid = {
   loginFooterLink: 'login-footer-link',
   loginLoadingOverlay: 'login-loading-overlay',

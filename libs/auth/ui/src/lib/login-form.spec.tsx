@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 
+import type { LoginPayload } from '@lihim/auth/core';
 import {
-  authAria,
+  ARIA_SUBMIT_LOGIN,
   authInputProps,
   authTestId,
-  LoginPayload,
   TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
 import {
@@ -41,7 +41,7 @@ describe('LoginForm', () => {
       authInputProps.password.placeholder,
     );
     const submitBtn = screen.getByRole('button', {
-      name: authAria.submitLogin,
+      name: ARIA_SUBMIT_LOGIN,
     });
     const signupLink = screen.getByTestId(authTestId.loginFooterLink);
 
@@ -152,7 +152,7 @@ describe('LoginForm', () => {
       authInputProps.password.placeholder,
     );
     const submitBtn = screen.getByRole('button', {
-      name: authAria.submitLogin,
+      name: ARIA_SUBMIT_LOGIN,
     });
 
     // Type info (all fields are required)

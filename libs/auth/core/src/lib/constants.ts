@@ -29,3 +29,7 @@ export const TEXT_LOGIN_FOOTER = "Don't have an account?";
 export const TEXT_SIGNUP = 'Signup';
 export const TEXT_SIGNUP_FOOTER = 'Already have an account?';
 export const TEXT_LOGOUT = 'Logout';
+
+// Attributes
+export const ARIA_SUBMIT_LOGIN = 'Submit login';
+export const ARIA_SUBMIT_SIGNUP = 'Submit signup';
