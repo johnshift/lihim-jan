@@ -17,7 +17,6 @@ const exec = spawn('npx', [
   '--select',
   'tasks.target.project',
   TASK_NAME === 'e2e' && '--exclude=web-e2e',
-  TASK_NAME === 'build-storybook' && '--exclude=web',
 ]);
 
 exec.stdout.on('data', (data) => {
