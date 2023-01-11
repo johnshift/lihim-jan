@@ -8,11 +8,11 @@ import {
   errPhrase,
 } from '@lihim/shared/core';
 
-import { subjects } from '../misc';
+import { LABEL_EMAIL } from '../constants';
 
 export const EmailSchema = z
   .string({
-    required_error: errPhrase(subjects.email, ERR_SUFFIX_REQUIRED),
-    invalid_type_error: errPhrase(subjects.email, ERR_SUFFIX_INVALID),
+    required_error: errPhrase(LABEL_EMAIL, ERR_SUFFIX_REQUIRED),
+    invalid_type_error: errPhrase(LABEL_EMAIL, ERR_SUFFIX_INVALID),
   })
-  .email(errPhrase(subjects.email, ERR_SUFFIX_INVALID));
+  .email(errPhrase(LABEL_EMAIL, ERR_SUFFIX_INVALID));

@@ -1,11 +1,3 @@
-export const subjects = {
-  firstname: 'Firstname',
-  lastname: 'Lastname',
-  username: 'Username',
-  email: 'Email',
-  password: 'Password',
-} as const;
-
 export const lengths = {
   name: { min: 2, max: 32 },
   principal: { min: 4, max: 32 },
