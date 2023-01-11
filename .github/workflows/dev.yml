@@ -221,9 +221,13 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check if should build storybook
         id: check-should-build
-        run: echo "should_build=$(node tools/scripts/should-build-storybook.js)" >> $GITHUB_OUTPUT
+        run: echo "should_build=$(node tools/scripts/should-build-storybook.js)" >> $GITHUB_ENV
       - name: Echo check results
-        run: echo "should_build = ${{ steps.check-should-build.outputs.should_build }}"
+        env:
+          SHOULD_BUILD: ${{ env.should_build }}
+        run: |
+          echo "should_build = ${{ env.should_build }}"
+          echo "SHOULD_BUILD = ${{ env.SHOULD_BUILD }}"
       - name: Build storybook
         if: steps.check-should-build.outputs.should_build == 'true'
         run: pnpm nx build-storybook web
