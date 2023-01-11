@@ -39,7 +39,7 @@ export const MantineProvider: FC<Props> = (props) => {
           ...theme,
         }}
       >
-        <NotificationsProvider position="bottom-center" containerWidth={280}>
+        <NotificationsProvider position="bottom-center" containerWidth={340}>
           {props.children}
         </NotificationsProvider>
       </BaseMantineProvider>
