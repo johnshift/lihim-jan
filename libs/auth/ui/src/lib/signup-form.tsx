@@ -4,7 +4,7 @@ import type { Control } from 'react-hook-form';
 import { Group, Stack, Title } from '@mantine/core';
 
 import type { SignupPayload } from '@lihim/auth/core';
-import { authInputProps, authTestId } from '@lihim/auth/core';
+import { authInputProps, TESTID_SIGNUP_LOADING } from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
@@ -55,7 +55,7 @@ export const SignupForm: FC<Props> = ({
 }) => (
   <FormWrapper
     isLoading={isLoading}
-    loadingTestId={authTestId.signupLoadingOverlay}
+    loadingTestId={TESTID_SIGNUP_LOADING}
     onSubmit={onSubmit}
   >
     <Stack sx={{ width: '36ch' }} spacing={20}>

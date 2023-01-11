@@ -1,10 +1,3 @@
-export const testid = {
-  loginFooterLink: 'login-footer-link',
-  loginLoadingOverlay: 'login-loading-overlay',
-  signupFooterLink: 'signup-footer-link',
-  signupLoadingOverlay: 'signup-loading-overlay',
-} as const;
-
 export const msg = {
   loginOk: 'Login successful',
   loginOkInfo: 'You are now logged in',

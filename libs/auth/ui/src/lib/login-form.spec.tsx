@@ -4,7 +4,8 @@ import type { LoginPayload } from '@lihim/auth/core';
 import {
   ARIA_SUBMIT_LOGIN,
   authInputProps,
-  authTestId,
+  TESTID_LOGIN_LOADING,
+  TESTID_SIGNUP_LINK,
   TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
 import {
@@ -43,7 +44,7 @@ describe('LoginForm', () => {
     const submitBtn = screen.getByRole('button', {
       name: ARIA_SUBMIT_LOGIN,
     });
-    const signupLink = screen.getByTestId(authTestId.loginFooterLink);
+    const signupLink = screen.getByTestId(TESTID_SIGNUP_LINK);
 
     // Assert principal input defaults
     expect(principalInput).toHaveValue('');
@@ -97,7 +98,7 @@ describe('LoginForm', () => {
     );
 
     // Assertions
-    expect(screen.getByTestId(authTestId.loginLoadingOverlay)).toBeVisible();
+    expect(screen.getByTestId(TESTID_LOGIN_LOADING)).toBeVisible();
   });
 
   test('hasError', async () => {
@@ -185,7 +186,7 @@ describe('LoginForm', () => {
     );
 
     // Locate element
-    const signupLink = screen.getByTestId(authTestId.loginFooterLink);
+    const signupLink = screen.getByTestId(TESTID_SIGNUP_LINK);
 
     // Click signup link
     await user.click(signupLink);

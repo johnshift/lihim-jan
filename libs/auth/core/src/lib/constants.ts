@@ -33,3 +33,7 @@ export const TEXT_LOGOUT = 'Logout';
 // Attributes
 export const ARIA_SUBMIT_LOGIN = 'Submit login';
 export const ARIA_SUBMIT_SIGNUP = 'Submit signup';
+export const TESTID_LOGIN_LINK = 'login-link';
+export const TESTID_LOGIN_LOADING = 'login-loading';
+export const TESTID_SIGNUP_LINK = 'signup-link';
+export const TESTID_SIGNUP_LOADING = 'signup-loading';

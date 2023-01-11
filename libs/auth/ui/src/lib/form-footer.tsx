@@ -5,7 +5,8 @@ import { Button, Group, Text } from '@mantine/core';
 import {
   ARIA_SUBMIT_LOGIN,
   ARIA_SUBMIT_SIGNUP,
-  authTestId,
+  TESTID_LOGIN_LINK,
+  TESTID_SIGNUP_LINK,
   TEXT_LOGIN,
   TEXT_LOGIN_FOOTER,
   TEXT_SIGNUP,
@@ -26,9 +27,7 @@ export const FormFooter: FC<Props> = ({ isSignup = false, onClick }) => (
       sx={(theme) => ({
         '&:hover': { color: theme.colors.blue[4], cursor: 'pointer' },
       })}
-      data-testid={
-        isSignup ? authTestId.signupFooterLink : authTestId.loginFooterLink
-      }
+      data-testid={isSignup ? TESTID_LOGIN_LINK : TESTID_SIGNUP_LINK}
       onClick={onClick}
     >
       {isSignup ? TEXT_SIGNUP_FOOTER : TEXT_LOGIN_FOOTER}

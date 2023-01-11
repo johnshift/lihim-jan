@@ -5,6 +5,10 @@ export {
   API_URL_SIGNUP,
   ARIA_SUBMIT_LOGIN,
   ARIA_SUBMIT_SIGNUP,
+  TESTID_LOGIN_LINK,
+  TESTID_LOGIN_LOADING,
+  TESTID_SIGNUP_LINK,
+  TESTID_SIGNUP_LOADING,
   TEXT_LOGIN,
   TEXT_LOGIN_FOOTER,
   TEXT_LOGOUT,
@@ -15,7 +19,6 @@ export {
   errmsg as authErrMsg,
   inputProps as authInputProps,
   msg as authMsg,
-  testid as authTestId,
 } from './lib/misc';
 export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';

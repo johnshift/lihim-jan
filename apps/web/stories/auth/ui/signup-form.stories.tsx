@@ -8,7 +8,8 @@ import { within } from '@storybook/testing-library';
 import {
   ARIA_SUBMIT_SIGNUP,
   authInputProps,
-  authTestId,
+  TESTID_LOGIN_LINK,
+  TESTID_SIGNUP_LOADING,
   TEXT_SIGNUP_FOOTER,
 } from '@lihim/auth/core';
 import { SignupForm } from '@lihim/auth/ui';
@@ -65,7 +66,7 @@ Default.play = async ({ canvasElement }) => {
     authInputProps.password.placeholder,
   );
   const submitBtn = canvas.getByRole('button', { name: ARIA_SUBMIT_SIGNUP });
-  const loginLink = canvas.getByTestId(authTestId.signupFooterLink);
+  const loginLink = canvas.getByTestId(TESTID_LOGIN_LINK);
 
   // Assertions
   checkInputDefaults(firstnameInput, authInputProps.firstname);
@@ -87,7 +88,7 @@ Loading.args = {
 };
 Loading.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  expect(canvas.getByTestId(authTestId.signupLoadingOverlay)).toBeVisible();
+  expect(canvas.getByTestId(TESTID_SIGNUP_LOADING)).toBeVisible();
 };
 
 export const Errors = Template.bind({});

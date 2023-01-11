@@ -3,7 +3,11 @@ import type { Control } from 'react-hook-form';
 
 import { Stack, Title } from '@mantine/core';
 
-import { authInputProps, authTestId, LoginPayload } from '@lihim/auth/core';
+import {
+  authInputProps,
+  LoginPayload,
+  TESTID_LOGIN_LOADING,
+} from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
@@ -27,7 +31,7 @@ export const LoginForm: FC<Props> = ({
 }) => (
   <FormWrapper
     isLoading={isLoading}
-    loadingTestId={authTestId.loginLoadingOverlay}
+    loadingTestId={TESTID_LOGIN_LOADING}
     onSubmit={onSubmit}
   >
     <Stack sx={{ width: '32ch' }} spacing={20}>

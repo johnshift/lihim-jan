@@ -1,7 +1,8 @@
 import {
   ARIA_SUBMIT_LOGIN,
   ARIA_SUBMIT_SIGNUP,
-  authTestId,
+  TESTID_LOGIN_LINK,
+  TESTID_SIGNUP_LINK,
   TEXT_LOGIN,
   TEXT_LOGIN_FOOTER,
   TEXT_SIGNUP,
@@ -17,7 +18,7 @@ describe('FormFooter', () => {
     render(<FormFooter onClick={jest.fn()} />);
 
     // Locate elements
-    const link = screen.getByTestId(authTestId.loginFooterLink);
+    const link = screen.getByTestId(TESTID_SIGNUP_LINK);
     const text = screen.getByText(TEXT_LOGIN_FOOTER);
     const btn = screen.getByRole('button', { name: ARIA_SUBMIT_LOGIN });
 
@@ -33,7 +34,7 @@ describe('FormFooter', () => {
     render(<FormFooter isSignup onClick={jest.fn()} />);
 
     // Locate elements
-    const link = screen.getByTestId(authTestId.signupFooterLink);
+    const link = screen.getByTestId(TESTID_LOGIN_LINK);
     const text = screen.getByText(TEXT_SIGNUP_FOOTER);
     const btn = screen.getByRole('button', { name: ARIA_SUBMIT_SIGNUP });
 
@@ -50,7 +51,7 @@ describe('FormFooter', () => {
     render(<FormFooter onClick={onClick} />);
 
     // Locate element
-    const link = screen.getByTestId(authTestId.loginFooterLink);
+    const link = screen.getByTestId(TESTID_SIGNUP_LINK);
 
     // Click link
     await user.click(link);
