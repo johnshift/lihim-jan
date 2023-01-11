@@ -19,7 +19,10 @@ import {
   TEXT_SIGNUP_FOOTER,
 } from '@lihim/auth/core';
 import { SignupForm } from '@lihim/auth/ui';
-import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
+import {
+  checkInputDefaults,
+  UiDecorator,
+} from '@lihim/shared/testutils/storybook';
 
 export default {
   component: SignupForm,
@@ -28,6 +31,13 @@ export default {
       current: 'dark', // Enforce dark theme on initial load
     },
   },
+  decorators: [
+    (Story) => (
+      <UiDecorator>
+        <Story />
+      </UiDecorator>
+    ),
+  ],
 } as ComponentMeta<typeof SignupForm>;
 
 const Template: ComponentStory<typeof SignupForm> = (args) => {

@@ -13,6 +13,7 @@ import {
   ARIA_SHOW_PASSWORD_ICON,
   TESTID_PASSWORD_VISIBILITY,
 } from '@lihim/shared/core';
+import { UiDecorator } from '@lihim/shared/testutils/storybook';
 import { ValidatedInput } from '@lihim/shared/ui';
 
 export default {
@@ -22,6 +23,13 @@ export default {
       current: 'dark', // Enforce dark theme on initial load
     },
   },
+  decorators: [
+    (Story) => (
+      <UiDecorator>
+        <Story />
+      </UiDecorator>
+    ),
+  ],
 } as ComponentMeta<typeof ValidatedInput>;
 
 const inputProps = {

@@ -8,6 +8,7 @@ import { within } from '@storybook/testing-library';
 
 import { TESTID_SIGNUP_SKELETON } from '@lihim/auth/core';
 import { SignupForm, SignupFormSkeleton } from '@lihim/auth/ui';
+import { UiDecorator } from '@lihim/shared/testutils/storybook';
 
 export default {
   component: SignupFormSkeleton,
@@ -16,6 +17,13 @@ export default {
       current: 'dark', // Enforce dark theme on initial load
     },
   },
+  decorators: [
+    (Story) => (
+      <UiDecorator>
+        <Story />
+      </UiDecorator>
+    ),
+  ],
 } as ComponentMeta<typeof SignupFormSkeleton>;
 
 const Template: ComponentStory<typeof SignupFormSkeleton> = () => {

@@ -13,6 +13,7 @@ import {
   ARIA_TOGGLE_THEME,
 } from '@lihim/shared/appbar';
 import { TEXT_BRAND } from '@lihim/shared/core';
+import { UiDecorator } from '@lihim/shared/testutils/storybook';
 
 type Props = ComponentProps<typeof Appbar>;
 
@@ -23,6 +24,13 @@ export default {
       current: 'dark', // Enforce dark theme on initial load
     },
   },
+  decorators: [
+    (Story) => (
+      <UiDecorator>
+        <Story />
+      </UiDecorator>
+    ),
+  ],
 } as Meta<Props>;
 
 export const Default: StoryObj<Props> = {

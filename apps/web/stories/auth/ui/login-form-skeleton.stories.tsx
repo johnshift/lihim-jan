@@ -9,6 +9,7 @@ import { within } from '@storybook/testing-library';
 import { TESTID_LOGIN_SKELETON } from '@lihim/auth/core';
 import { LoginFormSkeleton } from '@lihim/auth/ui';
 import { LoginForm } from '@lihim/auth/ui';
+import { UiDecorator } from '@lihim/shared/testutils/storybook';
 
 export default {
   component: LoginFormSkeleton,
@@ -17,6 +18,13 @@ export default {
       current: 'dark', // Enforce dark theme on initial load
     },
   },
+  decorators: [
+    (Story) => (
+      <UiDecorator>
+        <Story />
+      </UiDecorator>
+    ),
+  ],
 } as ComponentMeta<typeof LoginFormSkeleton>;
 
 const Template: ComponentStory<typeof LoginFormSkeleton> = () => {

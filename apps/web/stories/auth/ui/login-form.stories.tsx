@@ -15,7 +15,10 @@ import {
   TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
 import { LoginForm } from '@lihim/auth/ui';
-import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
+import {
+  checkInputDefaults,
+  UiDecorator,
+} from '@lihim/shared/testutils/storybook';
 
 export default {
   component: LoginForm,
@@ -24,6 +27,13 @@ export default {
       current: 'dark', // Enforce dark theme on initial load
     },
   },
+  decorators: [
+    (Story) => (
+      <UiDecorator>
+        <Story />
+      </UiDecorator>
+    ),
+  ],
 } as ComponentMeta<typeof LoginForm>;
 
 const Template: ComponentStory<typeof LoginForm> = (args) => {
