@@ -62,3 +62,5 @@ exclude_patterns:
   - '**/jest.setup.ts'
   # exclude stories (prefer explicit stories over duplication)
   - '**/*.stories.tsx'
+  # exclude generated mockServiceWorker file
+  - '**/mockServiceWorker.js'
