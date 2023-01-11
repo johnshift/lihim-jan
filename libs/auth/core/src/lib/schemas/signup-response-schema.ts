@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { GenericResponseSchema } from '@lihim/shared/core';
+import { GenericResponseSchema, UndefinedSchema } from '@lihim/shared/core';
 
 import { SessionSchema } from './session-schema';
 
@@ -17,6 +17,7 @@ export const SignupErrorResponseSchema = GenericResponseSchema.extend({
     z.literal('username'),
     z.literal('email'),
     z.literal('password'),
+    UndefinedSchema,
   ]),
 });
 
