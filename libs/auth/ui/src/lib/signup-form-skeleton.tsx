@@ -2,6 +2,7 @@ import { Center, Group, Skeleton, Stack, Title } from '@mantine/core';
 
 import { TESTID_SIGNUP_SKELETON } from '@lihim/auth/core';
 
+import { FormFooterSkeleton } from './form-footer-skeleton';
 import { FormPaper } from './form-wrapper';
 
 export const SignupFormSkeleton = () => (
@@ -16,10 +17,7 @@ export const SignupFormSkeleton = () => (
         <Skeleton height={45} radius="md" />
         <Skeleton height={45} radius="md" />
         <Skeleton height={45} radius="md" />
-        <Group position="apart">
-          <Skeleton height={23} width={145} />
-          <Skeleton height={35} width={80} radius="md" />
-        </Group>
+        <FormFooterSkeleton />
       </Stack>
     </Center>
   </FormPaper>
