@@ -50,6 +50,8 @@ export const TESTID_LOGIN_LINK = 'login-link';
 export const TESTID_LOGIN_LOADING = 'login-loading';
 export const TESTID_SIGNUP_LINK = 'signup-link';
 export const TESTID_SIGNUP_LOADING = 'signup-loading';
+export const TESTID_LOGIN_SKELETON = 'login-skeleton';
+export const TESTID_SIGNUP_SKELETON = 'signup-skeleton';
 
 // Messages
 export const MSG_LOGIN_OK = 'Login successful';

@@ -7,13 +7,14 @@ import { within } from '@storybook/testing-library';
 
 import {
   ARIA_SUBMIT_LOGIN,
+  loginInputs,
   PLACEHOLDER_PASSWORD,
   PLACEHOLDER_PRINCIPAL,
   TESTID_LOGIN_LOADING,
   TESTID_SIGNUP_LINK,
   TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
-import { LoginForm, loginInputs } from '@lihim/auth/ui';
+import { LoginForm } from '@lihim/auth/ui';
 import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {

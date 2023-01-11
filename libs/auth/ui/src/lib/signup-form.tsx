@@ -3,12 +3,11 @@ import type { Control } from 'react-hook-form';
 
 import { Group, Stack, Title } from '@mantine/core';
 
-import type { SignupPayload } from '@lihim/auth/core';
+import { credentialInputs, nameInputs, SignupPayload } from '@lihim/auth/core';
 import { NAME_PASSWORD, TESTID_SIGNUP_LOADING } from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
-import { credentialInputs, nameInputs } from './constants';
 import { FormFooter } from './form-footer';
 import { FormWrapper } from './form-wrapper';
 

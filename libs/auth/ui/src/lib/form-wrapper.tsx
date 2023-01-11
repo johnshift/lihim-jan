@@ -11,12 +11,7 @@ type Props = {
   loadingTestId: string;
 };
 
-export const FormWrapper: FC<Props> = ({
-  children,
-  isLoading,
-  onSubmit,
-  loadingTestId,
-}) => (
+export const FormPaper: FC<{ children: ReactNode }> = ({ children }) => (
   <Paper
     withBorder
     sx={{ minWidth: 320, position: 'relative' }}
@@ -24,9 +19,20 @@ export const FormWrapper: FC<Props> = ({
     px={40}
     radius="lg"
   >
+    {children}
+  </Paper>
+);
+
+export const FormWrapper: FC<Props> = ({
+  children,
+  isLoading,
+  onSubmit,
+  loadingTestId,
+}) => (
+  <FormPaper>
     <LoadingOverlay visible={isLoading} data-testid={loadingTestId} />
     <form onSubmit={onSubmit}>
       <Center>{children}</Center>
     </form>
-  </Paper>
+  </FormPaper>
 );
