@@ -13,6 +13,7 @@ import {
   TEXT_SIGNUP_FOOTER,
 } from '@lihim/auth/core';
 import {
+  checkInputDefaults,
   render,
   renderHook,
   screen,
@@ -22,31 +23,8 @@ import {
 
 import { SignupForm } from './signup-form';
 
-type CheckOptions = {
-  name: string;
-  placeholder: string;
-  label: string;
-  value?: string;
-  invalid?: string;
-  type?: string;
-};
-
-export const checkInputDefaults = (
-  input: HTMLElement,
-  options: CheckOptions,
-) => {
-  expect(input).toHaveValue(options.value ?? '');
-  expect(input).toHaveAttribute('type', options.type ?? 'text');
-  expect(
-    options.name === 'password' ? input.parentElement : input,
-  ).toHaveAttribute('aria-invalid', options.invalid ?? 'false');
-  expect(input).toHaveAttribute('name', options.name);
-  expect(input).toHaveAttribute('placeholder', options.placeholder);
-  expect(screen.getByText(options.label)).toBeVisible();
-};
-
 describe('SignupForm', () => {
-  test('defaults', () => {
+  test('defaults', async () => {
     // Setup
     const { result } = renderHook(() => useForm<SignupPayload>());
 
@@ -72,11 +50,11 @@ describe('SignupForm', () => {
     const loginLink = screen.getByTestId(TESTID_LOGIN_LINK);
 
     // Assertions
-    checkInputDefaults(firstnameInput, nameInputs[0]);
-    checkInputDefaults(lastnameInput, nameInputs[1]);
-    checkInputDefaults(usernameInput, credentialInputs[0]);
-    checkInputDefaults(emailInput, credentialInputs[1]);
-    checkInputDefaults(passwordInput, {
+    await checkInputDefaults(firstnameInput, nameInputs[0]);
+    await checkInputDefaults(lastnameInput, nameInputs[1]);
+    await checkInputDefaults(usernameInput, credentialInputs[0]);
+    await checkInputDefaults(emailInput, credentialInputs[1]);
+    await checkInputDefaults(passwordInput, {
       ...credentialInputs[2],
       type: 'password',
     });
