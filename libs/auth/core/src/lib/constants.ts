@@ -16,3 +16,9 @@ export const MAX_LENGTH_PASSWORD = 64;
 // Regex
 export const RGX_NAME = /^[A-Za-z]*$/;
 export const RGX_USERNAME = /^[A-Za-z][\dA-Za-z-]*$/;
+
+// Urls
+export const API_URL_SESSION = '/api/auth/session';
+export const API_URL_LOGIN = '/api/auth/login';
+export const API_URL_LOGOUT = '/api/auth/logout';
+export const API_URL_SIGNUP = '/api/auth/signup';

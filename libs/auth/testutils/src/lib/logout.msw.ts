@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { authUrls } from '@lihim/auth/core';
+import { API_URL_LOGOUT } from '@lihim/auth/core';
 import type { GenericResponse } from '@lihim/shared/core';
 
 type Options = {
@@ -11,7 +11,7 @@ type Options = {
 };
 
 export const mockLogoutResponse = (options: Options) =>
-  rest.post(authUrls.logout, (_req, res, ctx) =>
+  rest.post(API_URL_LOGOUT, (_req, res, ctx) =>
     options.networkError
       ? res.networkError('err-network')
       : res(

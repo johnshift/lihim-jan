@@ -1,27 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import type { LoginPayload, LoginResponse } from '@lihim/auth/core';
 import {
+  API_URL_LOGIN,
   authErrMsg,
   authMsg,
-  LoginPayload,
-  LoginResponse,
-} from '@lihim/auth/core';
-import {
-  authUrls,
   LoginPayloadSchema,
   LoginResponseSchema,
 } from '@lihim/auth/core';
-import {
-  ERR_INVALID_REQUEST,
-  GenericResponse,
-  TVoidFn,
-} from '@lihim/shared/core';
-import { METHOD_POST } from '@lihim/shared/core';
+import type { GenericResponse, TVoidFn } from '@lihim/shared/core';
+import { ERR_INVALID_REQUEST, METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
 const loginMutation = apiFetch<LoginResponse, GenericResponse, LoginPayload>(
-  authUrls.login,
+  API_URL_LOGIN,
   {
     method: METHOD_POST,
     responseSchema: LoginResponseSchema,

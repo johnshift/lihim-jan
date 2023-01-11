@@ -1,15 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { authErrMsg, authMsg, authUrls } from '@lihim/auth/core';
-import {
-  GenericResponse,
-  GenericResponseSchema,
-  METHOD_POST,
-} from '@lihim/shared/core';
+import { API_URL_LOGOUT, authErrMsg, authMsg } from '@lihim/auth/core';
+import type { GenericResponse } from '@lihim/shared/core';
+import { GenericResponseSchema, METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
-const logoutMutation = apiFetch<GenericResponse>(authUrls.logout, {
+const logoutMutation = apiFetch<GenericResponse>(API_URL_LOGOUT, {
   method: METHOD_POST,
   responseSchema: GenericResponseSchema,
 });

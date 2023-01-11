@@ -1,10 +1,3 @@
-export const urls = {
-  session: '/api/auth/session',
-  login: '/api/auth/login',
-  signup: '/api/auth/signup',
-  logout: '/api/auth/logout',
-} as const;
-
 export const texts = {
   login: 'Login',
   loginFooter: "Dont't have an account?",

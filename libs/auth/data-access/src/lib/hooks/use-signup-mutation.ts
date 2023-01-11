@@ -2,18 +2,21 @@ import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import type {
+  SignupErrorResponse,
+  SignupPayload,
+  SignupResponse,
+} from '@lihim/auth/core';
 import {
+  API_URL_SIGNUP,
   authErrMsg,
   authMsg,
-  authUrls,
-  SignupErrorResponse,
   SignupErrorResponseSchema,
-  SignupPayload,
   SignupPayloadSchema,
-  SignupResponse,
   SignupResponseSchema,
 } from '@lihim/auth/core';
-import { METHOD_POST, TVoidFn } from '@lihim/shared/core';
+import type { TVoidFn } from '@lihim/shared/core';
+import { METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
@@ -21,7 +24,7 @@ const signupMutation = apiFetch<
   SignupResponse,
   SignupErrorResponse,
   SignupPayload
->(authUrls.signup, {
+>(API_URL_SIGNUP, {
   method: METHOD_POST,
   responseSchema: SignupResponseSchema,
   errorSchema: SignupErrorResponseSchema,

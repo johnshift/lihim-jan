@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 import type { SignupErrorResponse, SignupResponse } from '@lihim/auth/core';
-import { authUrls } from '@lihim/auth/core';
+import { API_URL_SIGNUP } from '@lihim/auth/core';
 import type { GenericResponse } from '@lihim/shared/core';
 
 type Options = {
@@ -12,7 +12,7 @@ type Options = {
 };
 
 export const mockSignupResponse = (options: Options) =>
-  rest.post(authUrls.signup, (_req, res, ctx) =>
+  rest.post(API_URL_SIGNUP, (_req, res, ctx) =>
     options.networkError
       ? res.networkError('err-network')
       : res(

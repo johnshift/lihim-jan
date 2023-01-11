@@ -1,11 +1,16 @@
 export {
+  API_URL_LOGIN,
+  API_URL_LOGOUT,
+  API_URL_SESSION,
+  API_URL_SIGNUP,
+} from './lib/constants';
+export {
   aria as authAria,
   errmsg as authErrMsg,
   inputProps as authInputProps,
   msg as authMsg,
   testid as authTestId,
   texts as authTexts,
-  urls as authUrls,
 } from './lib/misc';
 export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';
