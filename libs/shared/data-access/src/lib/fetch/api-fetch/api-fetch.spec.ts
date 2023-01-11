@@ -3,9 +3,12 @@ import { setupServer } from 'msw/node';
 import { z } from 'zod';
 
 import {
+  ERR_INTERNAL,
+  ERR_INVALID_REQUEST,
+  ERR_INVALID_RESPONSE,
+  ERR_OFFLINE,
   GenericResponse,
   GenericResponseSchema,
-  httpErrors,
   METHOD_GET,
   METHOD_POST,
   Undefined,
@@ -39,7 +42,7 @@ describe('api-fetch', () => {
     });
 
     // Assert
-    await expect(fetchSomething()).rejects.toThrow(httpErrors.offline);
+    await expect(fetchSomething()).rejects.toThrow(ERR_OFFLINE);
   });
 
   test('non-json response', async () => {
@@ -57,7 +60,7 @@ describe('api-fetch', () => {
     });
 
     // Assert
-    await expect(fetchSomething()).rejects.toThrow(httpErrors.internal);
+    await expect(fetchSomething()).rejects.toThrow(ERR_INTERNAL);
   });
 
   test('get w/o params', async () => {
@@ -206,7 +209,7 @@ describe('api-fetch', () => {
     try {
       await fetchSomething(mockPayloadParam);
     } catch (error) {
-      expect(error).toStrictEqual({ message: httpErrors.invalidRequest });
+      expect(error).toStrictEqual({ message: ERR_INVALID_REQUEST });
     }
   });
 
@@ -237,7 +240,7 @@ describe('api-fetch', () => {
     try {
       await fetchSomething();
     } catch (error) {
-      expect(error).toStrictEqual({ message: httpErrors.invalidResponse });
+      expect(error).toStrictEqual({ message: ERR_INVALID_RESPONSE });
     }
   });
 
@@ -351,7 +354,7 @@ describe('api-fetch', () => {
 
     // Assert
     await expect(fetchSomething(mockPayloadParam)).rejects.toThrow(
-      httpErrors.internal,
+      ERR_INTERNAL,
     );
   });
 });

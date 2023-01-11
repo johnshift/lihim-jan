@@ -3,9 +3,14 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authErrMsg, authMsg } from '@lihim/auth/core';
+import {
+  ERR_LOGOUT_FAILED,
+  MSG_LOGOUT_DONE,
+  MSG_LOGOUT_LOADING,
+  MSG_LOGOUT_OK,
+} from '@lihim/auth/core';
 import { mockLogoutResponse } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL } from '@lihim/shared/core';
 import {
   act,
   renderHook,
@@ -37,7 +42,7 @@ describe('useLogoutMutation', () => {
     );
 
     // Mock error response
-    const mockErrorMessage = httpErrors.internal;
+    const mockErrorMessage = ERR_INTERNAL;
     const body = {
       message: mockErrorMessage,
     };
@@ -63,7 +68,7 @@ describe('useLogoutMutation', () => {
       expect.objectContaining({
         title: 'Loading',
         loading: true,
-        message: authMsg.logoutLoading,
+        message: MSG_LOGOUT_LOADING,
         autoClose: false,
         disallowClose: true,
         color: 'blue',
@@ -71,7 +76,7 @@ describe('useLogoutMutation', () => {
     );
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.logoutFailed,
+        title: ERR_LOGOUT_FAILED,
         message: mockErrorMessage,
         color: 'red',
         icon: <BsExclamationCircle />,
@@ -102,7 +107,7 @@ describe('useLogoutMutation', () => {
 
     // Assert error message
     await waitFor(() => {
-      expect(result.current.error?.message).toBe(httpErrors.internal);
+      expect(result.current.error?.message).toBe(ERR_INTERNAL);
     });
 
     // Assert notification
@@ -110,7 +115,7 @@ describe('useLogoutMutation', () => {
       expect.objectContaining({
         title: 'Loading',
         loading: true,
-        message: authMsg.logoutLoading,
+        message: MSG_LOGOUT_LOADING,
         autoClose: false,
         disallowClose: true,
         color: 'blue',
@@ -118,8 +123,8 @@ describe('useLogoutMutation', () => {
     );
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.logoutFailed,
-        message: httpErrors.internal,
+        title: ERR_LOGOUT_FAILED,
+        message: ERR_INTERNAL,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),
@@ -161,7 +166,7 @@ describe('useLogoutMutation', () => {
       expect.objectContaining({
         title: 'Loading',
         loading: true,
-        message: authMsg.logoutLoading,
+        message: MSG_LOGOUT_LOADING,
         autoClose: false,
         disallowClose: true,
         color: 'blue',
@@ -170,8 +175,8 @@ describe('useLogoutMutation', () => {
     expect(updateNotifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         color: 'green',
-        title: authMsg.logoutOk,
-        message: authMsg.logoutDone,
+        title: MSG_LOGOUT_OK,
+        message: MSG_LOGOUT_DONE,
         icon: <BsCheckCircle />,
         autoClose: 4000,
       }),

@@ -3,13 +3,17 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authErrMsg, authMsg } from '@lihim/auth/core';
+import {
+  ERR_LOGIN_FAILED,
+  ERR_LOGIN_INCORRECT,
+  MSG_LOGIN_OK,
+} from '@lihim/auth/core';
 import {
   fakeLoginPayload,
   fakeSession,
   mockLoginResponse,
 } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL, ERR_INVALID_REQUEST } from '@lihim/shared/core';
 import {
   act,
   renderHook,
@@ -41,7 +45,7 @@ describe('use-signin-mutation', () => {
     const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
 
     // Mock error response
-    const mockErrorMessage = httpErrors.invalidRequest;
+    const mockErrorMessage = ERR_INVALID_REQUEST;
     const body = {
       message: mockErrorMessage,
     };
@@ -71,8 +75,8 @@ describe('use-signin-mutation', () => {
       expect.objectContaining({
         color: 'red',
         icon: <BsExclamationCircle />,
-        title: authErrMsg.loginFailed,
-        message: authErrMsg.loginIncorrect,
+        title: ERR_LOGIN_FAILED,
+        message: ERR_LOGIN_INCORRECT,
       }),
     );
   });
@@ -82,7 +86,7 @@ describe('use-signin-mutation', () => {
     const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
 
     // Mock error response
-    const mockErrorMessage = authErrMsg.loginIncorrect;
+    const mockErrorMessage = ERR_LOGIN_INCORRECT;
     const body = {
       message: mockErrorMessage,
     };
@@ -110,8 +114,8 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.loginFailed,
-        message: authErrMsg.loginIncorrect,
+        title: ERR_LOGIN_FAILED,
+        message: ERR_LOGIN_INCORRECT,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),
@@ -138,7 +142,7 @@ describe('use-signin-mutation', () => {
 
     // Assert error message
     await waitFor(() => {
-      expect(result.current.error?.message).toBe(httpErrors.internal);
+      expect(result.current.error?.message).toBe(ERR_INTERNAL);
     });
 
     // Assert closeModal was not called
@@ -147,8 +151,8 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.loginFailed,
-        message: authErrMsg.loginIncorrect,
+        title: ERR_LOGIN_FAILED,
+        message: ERR_LOGIN_INCORRECT,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),
@@ -162,7 +166,7 @@ describe('use-signin-mutation', () => {
     // Mock success response
     const mockSession = fakeSession();
     const body = {
-      message: authMsg.loginOk,
+      message: MSG_LOGIN_OK,
       session: mockSession,
     };
     mswServer.use(mockLoginResponse({ body }));
@@ -195,7 +199,7 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authMsg.loginOk,
+        title: MSG_LOGIN_OK,
         message: body.message,
         color: 'green',
         icon: <BsCheckCircle />,
@@ -210,7 +214,7 @@ describe('use-signin-mutation', () => {
     // Mock success response
     const mockSession = fakeSession();
     const body = {
-      message: authMsg.loginOk,
+      message: MSG_LOGIN_OK,
       session: mockSession,
     };
     mswServer.use(mockLoginResponse({ body }));
@@ -243,7 +247,7 @@ describe('use-signin-mutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authMsg.loginOk,
+        title: MSG_LOGIN_OK,
         message: body.message,
         color: 'green',
         icon: <BsCheckCircle />,

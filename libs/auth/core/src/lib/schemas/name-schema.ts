@@ -1,15 +1,21 @@
 import { z } from 'zod';
 
-import { errPhrase, errSuffix, zodString } from '@lihim/shared/core';
+import { ERR_SUFFIX_INVALID, errPhrase, zodString } from '@lihim/shared/core';
 
-import { lengths, regex, subjects } from '../misc';
+import {
+  LABEL_FIRSTNAME,
+  LABEL_LASTNAME,
+  MAX_LENGTH_NAME,
+  MIN_LENGTH_NAME,
+  RGX_NAME,
+} from '../constants';
 
 const genNameSchema = (subject: string) =>
-  zodString(subject, lengths.name.min, lengths.name.max) //
-    .regex(regex.name, errPhrase(subject, errSuffix.invalid));
+  zodString(subject, MIN_LENGTH_NAME, MAX_LENGTH_NAME) //
+    .regex(RGX_NAME, errPhrase(subject, ERR_SUFFIX_INVALID));
 
-export const FirstnameSchema = genNameSchema(subjects.firstname);
+export const FirstnameSchema = genNameSchema(LABEL_FIRSTNAME);
 export type Firstname = z.infer<typeof FirstnameSchema>;
 
-export const LastnameSchema = genNameSchema(subjects.lastname);
+export const LastnameSchema = genNameSchema(LABEL_LASTNAME);
 export type Lastname = z.infer<typeof LastnameSchema>;

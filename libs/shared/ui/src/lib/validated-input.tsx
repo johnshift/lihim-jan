@@ -5,7 +5,11 @@ import { Controller } from 'react-hook-form';
 import { PasswordInput, Sx, TextInput } from '@mantine/core';
 import { BiHide, BiShow } from 'react-icons/bi';
 
-import { aria, testid } from '@lihim/shared/core';
+import {
+  ARIA_HIDE_PASSWORD_ICON,
+  ARIA_SHOW_PASSWORD_ICON,
+  TESTID_PASSWORD_VISIBILITY,
+} from '@lihim/shared/core';
 
 type InputProps<T extends FieldValues> = {
   name: string;
@@ -41,11 +45,11 @@ export const ValidatedInput = <T extends FieldValues>(props: Props<T>) => {
             error={error}
             sx={sx}
             visibilityToggleIcon={({ reveal, size }) => (
-              <div data-testid={testid.passwordVisibility}>
+              <div data-testid={TESTID_PASSWORD_VISIBILITY}>
                 {reveal ? (
-                  <BiHide size={size} title={aria.hidePasswordIcon} />
+                  <BiHide size={size} title={ARIA_HIDE_PASSWORD_ICON} />
                 ) : (
-                  <BiShow size={size} title={aria.showPasswordIcon} />
+                  <BiShow size={size} title={ARIA_SHOW_PASSWORD_ICON} />
                 )}
               </div>
             )}

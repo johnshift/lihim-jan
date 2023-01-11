@@ -2,18 +2,21 @@ import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import {
-  authErrMsg,
-  authMsg,
-  authUrls,
+import type {
   SignupErrorResponse,
-  SignupErrorResponseSchema,
   SignupPayload,
-  SignupPayloadSchema,
   SignupResponse,
+} from '@lihim/auth/core';
+import {
+  API_URL_SIGNUP,
+  ERR_SIGNUP_FAILED,
+  MSG_SIGNUP_OK,
+  SignupErrorResponseSchema,
+  SignupPayloadSchema,
   SignupResponseSchema,
 } from '@lihim/auth/core';
-import { METHOD_POST, TVoidFn } from '@lihim/shared/core';
+import type { TVoidFn } from '@lihim/shared/core';
+import { METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
@@ -21,7 +24,7 @@ const signupMutation = apiFetch<
   SignupResponse,
   SignupErrorResponse,
   SignupPayload
->(authUrls.signup, {
+>(API_URL_SIGNUP, {
   method: METHOD_POST,
   responseSchema: SignupResponseSchema,
   errorSchema: SignupErrorResponseSchema,
@@ -49,11 +52,11 @@ export const useSignupMutation = (closeModal: TVoidFn) => {
         await router.push('/');
 
         // Display success message
-        notifySuccess(authMsg.signupOk, data.message);
+        notifySuccess(MSG_SIGNUP_OK, data.message);
       },
       onError(error) {
         // Display error message
-        notifyError(authErrMsg.signupFailed, error.message);
+        notifyError(ERR_SIGNUP_FAILED, error.message);
       },
     },
   );

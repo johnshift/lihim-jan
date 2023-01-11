@@ -1,9 +1,13 @@
 import { zodString } from '@lihim/shared/core';
 
-import { lengths, subjects } from '../misc';
+import {
+  LABEL_PASSWORD,
+  MAX_LENGTH_PASSWORD,
+  MIN_LENGTH_PASSWORD,
+} from '../constants';
 
 export const PasswordSchema = zodString(
-  subjects.password,
-  lengths.password.min,
-  lengths.password.max,
+  LABEL_PASSWORD,
+  MIN_LENGTH_PASSWORD,
+  MAX_LENGTH_PASSWORD,
 );

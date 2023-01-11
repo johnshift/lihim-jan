@@ -1,9 +1,14 @@
-import { errPhrase, errSuffix, zodString } from '@lihim/shared/core';
+import { ERR_SUFFIX_INVALID, errPhrase, zodString } from '@lihim/shared/core';
 
-import { lengths, regex, subjects } from '../misc';
+import {
+  LABEL_USERNAME,
+  MAX_LENGTH_PRINCIPAL,
+  MIN_LENGTH_PRINCIPAL,
+  RGX_USERNAME,
+} from '../constants';
 
 export const UsernameSchema = zodString(
-  subjects.username,
-  lengths.principal.min,
-  lengths.principal.max,
-).regex(regex.username, errPhrase(subjects.username, errSuffix.invalid));
+  LABEL_USERNAME,
+  MIN_LENGTH_PRINCIPAL,
+  MAX_LENGTH_PRINCIPAL,
+).regex(RGX_USERNAME, errPhrase(LABEL_USERNAME, ERR_SUFFIX_INVALID));

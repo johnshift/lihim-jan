@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL, ERR_OFFLINE } from '@lihim/shared/core';
 
 import { FetchError } from './constants';
 import { getParsedError } from './get-parsed-error';
@@ -15,7 +15,7 @@ describe('getParsedError', () => {
     jest.spyOn(navigator, 'onLine', 'get').mockReturnValueOnce(false);
 
     const { message } = getParsedError(testError) as Error;
-    expect(message).toBe(httpErrors.offline);
+    expect(message).toBe(ERR_OFFLINE);
   });
 
   test('fetch-error w/o error-schema', () => {
@@ -43,18 +43,18 @@ describe('getParsedError', () => {
 
     // Act
     const { message } = getParsedError(error, errorSchema);
-    expect(message).toStrictEqual(httpErrors.internal);
+    expect(message).toStrictEqual(ERR_INTERNAL);
   });
 
   test('error with message', () => {
     const error = new Error(testErrorMsg);
     const { message } = getParsedError(error) as Error;
-    expect(message).toBe(httpErrors.internal);
+    expect(message).toBe(ERR_INTERNAL);
   });
 
   test('error defaults to internal-error', () => {
     const error = { data: 42 };
     const { message } = getParsedError(error) as Error;
-    expect(message).toBe(httpErrors.internal);
+    expect(message).toBe(ERR_INTERNAL);
   });
 });

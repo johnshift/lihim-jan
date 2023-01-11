@@ -3,7 +3,7 @@ import { DispatchWithoutAction } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { HiMoon, HiOutlineSun } from 'react-icons/hi';
 
-import { aria } from '../constants';
+import { ARIA_MOON_ICON, ARIA_SUN_ICON, ARIA_TOGGLE_THEME } from '../constants';
 
 type Props = {
   isDark: boolean;
@@ -13,13 +13,13 @@ type Props = {
 export const ThemeToggle = ({ isDark, toggleTheme }: Props) => (
   <ActionIcon
     mr={3}
-    aria-label={aria.toggleTheme}
+    aria-label={ARIA_TOGGLE_THEME}
     onClick={() => toggleTheme()}
   >
     {isDark ? (
-      <HiOutlineSun title={aria.sunIcon} size={28} role="img" />
+      <HiOutlineSun title={ARIA_SUN_ICON} size={28} role="img" />
     ) : (
-      <HiMoon title={aria.moonIcon} size={28} role="img" />
+      <HiMoon title={ARIA_MOON_ICON} size={28} role="img" />
     )}
   </ActionIcon>
 );

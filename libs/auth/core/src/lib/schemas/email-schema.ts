@@ -2,13 +2,17 @@
 
 import { z } from 'zod';
 
-import { errPhrase, errSuffix } from '@lihim/shared/core';
+import {
+  ERR_SUFFIX_INVALID,
+  ERR_SUFFIX_REQUIRED,
+  errPhrase,
+} from '@lihim/shared/core';
 
-import { subjects } from '../misc';
+import { LABEL_EMAIL } from '../constants';
 
 export const EmailSchema = z
   .string({
-    required_error: errPhrase(subjects.email, errSuffix.required),
-    invalid_type_error: errPhrase(subjects.email, errSuffix.invalid),
+    required_error: errPhrase(LABEL_EMAIL, ERR_SUFFIX_REQUIRED),
+    invalid_type_error: errPhrase(LABEL_EMAIL, ERR_SUFFIX_INVALID),
   })
-  .email(errPhrase(subjects.email, errSuffix.invalid));
+  .email(errPhrase(LABEL_EMAIL, ERR_SUFFIX_INVALID));

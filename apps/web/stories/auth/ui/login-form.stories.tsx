@@ -2,16 +2,18 @@
 import { useForm } from 'react-hook-form';
 
 import { expect } from '@storybook/jest';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 
 import {
-  authAria,
-  authInputProps,
-  authTestId,
-  authTexts,
+  ARIA_SUBMIT_LOGIN,
+  PLACEHOLDER_PASSWORD,
+  PLACEHOLDER_PRINCIPAL,
+  TESTID_LOGIN_LOADING,
+  TESTID_SIGNUP_LINK,
+  TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
-import { LoginForm } from '@lihim/auth/ui';
+import { LoginForm, loginInputs } from '@lihim/auth/ui';
 import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {
@@ -43,24 +45,20 @@ Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   // Locate elements
-  const principalInput = canvas.getByPlaceholderText(
-    authInputProps.principal.placeholder,
-  );
-  const passwordInput = canvas.getByPlaceholderText(
-    authInputProps.password.placeholder,
-  );
-  const submitBtn = canvas.getByRole('button', { name: authAria.submitLogin });
-  const signupLink = canvas.getByTestId(authTestId.loginFooterLink);
+  const principalInput = canvas.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+  const passwordInput = canvas.getByPlaceholderText(PLACEHOLDER_PASSWORD);
+  const submitBtn = canvas.getByRole('button', { name: ARIA_SUBMIT_LOGIN });
+  const signupLink = canvas.getByTestId(TESTID_SIGNUP_LINK);
 
   // Assert input defaults
-  checkInputDefaults(principalInput, authInputProps.principal);
+  checkInputDefaults(principalInput, loginInputs[0]);
   checkInputDefaults(passwordInput, {
-    ...authInputProps.password,
+    ...loginInputs[1],
     type: 'password',
   });
   expect(submitBtn).toBeVisible();
   expect(signupLink).toBeVisible();
-  expect(canvas.getByText(authTexts.loginFooter)).toBeVisible();
+  expect(canvas.getByText(TEXT_LOGIN_FOOTER)).toBeVisible();
 };
 
 export const Loading = Template.bind({});
@@ -69,7 +67,7 @@ Loading.args = {
 };
 Loading.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  expect(canvas.getByTestId(authTestId.loginLoadingOverlay)).toBeVisible();
+  expect(canvas.getByTestId(TESTID_LOGIN_LOADING)).toBeVisible();
 };
 
 export const HasError = Template.bind({});
@@ -78,12 +76,8 @@ HasError.args = {
 };
 HasError.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const principalInput = canvas.getByPlaceholderText(
-    authInputProps.principal.placeholder,
-  );
-  const passwordInput = canvas.getByPlaceholderText(
-    authInputProps.password.placeholder,
-  );
+  const principalInput = canvas.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+  const passwordInput = canvas.getByPlaceholderText(PLACEHOLDER_PASSWORD);
   expect(principalInput).toHaveAttribute('aria-invalid', 'true');
   expect(passwordInput.parentElement).toHaveAttribute('aria-invalid', 'true');
 };

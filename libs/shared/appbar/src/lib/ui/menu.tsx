@@ -1,20 +1,24 @@
-import { DispatchWithoutAction } from 'react';
-
 import { Burger, Loader, Menu as BaseMenu } from '@mantine/core';
 import { HiLogin } from 'react-icons/hi';
 
-import { authTexts } from '@lihim/auth/core';
-import { texts } from '@lihim/shared/core';
+import { TEXT_LOGIN, TEXT_LOGOUT } from '@lihim/auth/core';
+import type { TVoidFn } from '@lihim/shared/core';
+import { TEXT_LOADING } from '@lihim/shared/core';
 
-import { aria, testid } from '../constants';
+import {
+  ARIA_AUTH_ICON,
+  ARIA_HEADER_MENU,
+  TESTID_AUTH_MENUITEM,
+  TESTID_HEADER_LOADER,
+} from '../constants';
 
 type Props = {
   isOpen: boolean;
   isLoading: boolean;
   isLoggedIn: boolean;
-  onOpen: DispatchWithoutAction;
-  onClose: DispatchWithoutAction;
-  authFn: DispatchWithoutAction;
+  onOpen: TVoidFn;
+  onClose: TVoidFn;
+  authFn: TVoidFn;
 };
 
 export const Menu = (props: Props) => (
@@ -23,7 +27,7 @@ export const Menu = (props: Props) => (
     shadow="md"
     opened={props.isOpen}
     position="bottom-end"
-    aria-label={aria.headerMenu}
+    aria-label={ARIA_HEADER_MENU}
     onOpen={props.onOpen}
     onClose={props.onClose}
   >
@@ -36,20 +40,20 @@ export const Menu = (props: Props) => (
       <BaseMenu.Item
         icon={
           props.isLoading ? (
-            <Loader size="xs" data-testid={testid.headerLoader} />
+            <Loader size="xs" data-testid={TESTID_HEADER_LOADER} />
           ) : (
-            <HiLogin title={aria.authIcon} />
+            <HiLogin title={ARIA_AUTH_ICON} />
           )
         }
         disabled={props.isLoading}
-        data-testid={testid.authMenuItem}
+        data-testid={TESTID_AUTH_MENUITEM}
         onClick={props.authFn}
       >
         {props.isLoading
-          ? texts.loading
+          ? TEXT_LOADING
           : props.isLoggedIn
-          ? authTexts.logout
-          : authTexts.login}
+          ? TEXT_LOGOUT
+          : TEXT_LOGIN}
       </BaseMenu.Item>
     </BaseMenu.Dropdown>
   </BaseMenu>

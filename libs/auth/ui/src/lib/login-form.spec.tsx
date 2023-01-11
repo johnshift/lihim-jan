@@ -1,11 +1,17 @@
 import { useForm } from 'react-hook-form';
 
+import type { LoginPayload } from '@lihim/auth/core';
 import {
-  authAria,
-  authInputProps,
-  authTestId,
-  authTexts,
-  LoginPayload,
+  ARIA_SUBMIT_LOGIN,
+  LABEL_PASSWORD,
+  LABEL_PRINCIPAL,
+  NAME_PASSWORD,
+  NAME_PRINCIPAL,
+  PLACEHOLDER_PASSWORD,
+  PLACEHOLDER_PRINCIPAL,
+  TESTID_LOGIN_LOADING,
+  TESTID_SIGNUP_LINK,
+  TEXT_LOGIN_FOOTER,
 } from '@lihim/auth/core';
 import {
   render,
@@ -34,30 +40,23 @@ describe('LoginForm', () => {
     );
 
     // Locate elements
-    const principalInput = screen.getByPlaceholderText(
-      authInputProps.principal.placeholder,
-    );
-    const passwordInput = screen.getByPlaceholderText(
-      authInputProps.password.placeholder,
-    );
+    const principalInput = screen.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+    const passwordInput = screen.getByPlaceholderText(PLACEHOLDER_PASSWORD);
     const submitBtn = screen.getByRole('button', {
-      name: authAria.submitLogin,
+      name: ARIA_SUBMIT_LOGIN,
     });
-    const signupLink = screen.getByTestId(authTestId.loginFooterLink);
+    const signupLink = screen.getByTestId(TESTID_SIGNUP_LINK);
 
     // Assert principal input defaults
     expect(principalInput).toHaveValue('');
     expect(principalInput).toHaveAttribute('type', 'text');
     expect(principalInput).toHaveAttribute('aria-invalid', 'false');
-    expect(principalInput).toHaveAttribute(
-      'name',
-      authInputProps.principal.name,
-    );
+    expect(principalInput).toHaveAttribute('name', NAME_PRINCIPAL);
     expect(principalInput).toHaveAttribute(
       'placeholder',
-      authInputProps.principal.placeholder,
+      PLACEHOLDER_PRINCIPAL,
     );
-    expect(screen.getByText(authInputProps.principal.label)).toBeVisible();
+    expect(screen.getByText(LABEL_PRINCIPAL)).toBeVisible();
 
     // Assert password input defaults
     expect(passwordInput).toHaveValue('');
@@ -66,18 +65,15 @@ describe('LoginForm', () => {
       'aria-invalid',
       'false',
     );
-    expect(passwordInput).toHaveAttribute('name', authInputProps.password.name);
-    expect(passwordInput).toHaveAttribute(
-      'placeholder',
-      authInputProps.password.placeholder,
-    );
-    expect(screen.getByText(authInputProps.password.label)).toBeVisible();
+    expect(passwordInput).toHaveAttribute('name', NAME_PASSWORD);
+    expect(passwordInput).toHaveAttribute('placeholder', PLACEHOLDER_PASSWORD);
+    expect(screen.getByText(LABEL_PASSWORD)).toBeVisible();
 
     // Submit button
     expect(submitBtn).toBeVisible();
 
     // Footer
-    expect(screen.getByText(authTexts.loginFooter)).toBeVisible();
+    expect(screen.getByText(TEXT_LOGIN_FOOTER)).toBeVisible();
     expect(signupLink).toBeVisible();
   });
 
@@ -97,7 +93,7 @@ describe('LoginForm', () => {
     );
 
     // Assertions
-    expect(screen.getByTestId(authTestId.loginLoadingOverlay)).toBeVisible();
+    expect(screen.getByTestId(TESTID_LOGIN_LOADING)).toBeVisible();
   });
 
   test('hasError', async () => {
@@ -116,12 +112,8 @@ describe('LoginForm', () => {
     );
 
     // Locate elements
-    const principalInput = screen.getByPlaceholderText(
-      authInputProps.principal.placeholder,
-    );
-    const passwordInput = screen.getByPlaceholderText(
-      authInputProps.password.placeholder,
-    );
+    const principalInput = screen.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+    const passwordInput = screen.getByPlaceholderText(PLACEHOLDER_PASSWORD);
 
     // Assertions
     expect(principalInput).toHaveAttribute('aria-invalid', 'true');
@@ -145,14 +137,10 @@ describe('LoginForm', () => {
     );
 
     // Locate elements
-    const principalInput = screen.getByPlaceholderText(
-      authInputProps.principal.placeholder,
-    );
-    const passwordInput = screen.getByPlaceholderText(
-      authInputProps.password.placeholder,
-    );
+    const principalInput = screen.getByPlaceholderText(PLACEHOLDER_PRINCIPAL);
+    const passwordInput = screen.getByPlaceholderText(PLACEHOLDER_PASSWORD);
     const submitBtn = screen.getByRole('button', {
-      name: authAria.submitLogin,
+      name: ARIA_SUBMIT_LOGIN,
     });
 
     // Type info (all fields are required)
@@ -185,7 +173,7 @@ describe('LoginForm', () => {
     );
 
     // Locate element
-    const signupLink = screen.getByTestId(authTestId.loginFooterLink);
+    const signupLink = screen.getByTestId(TESTID_SIGNUP_LINK);
 
     // Click signup link
     await user.click(signupLink);

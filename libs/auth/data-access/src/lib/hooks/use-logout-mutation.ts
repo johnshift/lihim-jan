@@ -1,15 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { authErrMsg, authMsg, authUrls } from '@lihim/auth/core';
 import {
-  GenericResponse,
-  GenericResponseSchema,
-  METHOD_POST,
-} from '@lihim/shared/core';
+  API_URL_LOGOUT,
+  ERR_LOGOUT_FAILED,
+  MSG_LOGOUT_DONE,
+  MSG_LOGOUT_LOADING,
+  MSG_LOGOUT_OK,
+} from '@lihim/auth/core';
+import type { GenericResponse } from '@lihim/shared/core';
+import { GenericResponseSchema, METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
-const logoutMutation = apiFetch<GenericResponse>(authUrls.logout, {
+const logoutMutation = apiFetch<GenericResponse>(API_URL_LOGOUT, {
   method: METHOD_POST,
   responseSchema: GenericResponseSchema,
 });
@@ -22,7 +25,7 @@ export const useLogoutMutation = () => {
   return useMutation<GenericResponse, GenericResponse>(() => logoutMutation(), {
     onMutate() {
       // Show loading notification
-      notifyLoading(authMsg.logoutLoading);
+      notifyLoading(MSG_LOGOUT_LOADING);
     },
     onSuccess() {
       // Update session query data
@@ -31,11 +34,11 @@ export const useLogoutMutation = () => {
       });
 
       // Display success message
-      notifySuccess(authMsg.logoutOk, authMsg.logoutDone);
+      notifySuccess(MSG_LOGOUT_OK, MSG_LOGOUT_DONE);
     },
     onError(error) {
       // Display error message
-      notifyError(authErrMsg.logoutFailed, error.message);
+      notifyError(ERR_LOGOUT_FAILED, error.message);
     },
   });
 };

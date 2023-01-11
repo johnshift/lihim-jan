@@ -8,7 +8,11 @@ import { expect } from '@storybook/jest';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
-import { aria, testid } from '@lihim/shared/core';
+import {
+  ARIA_HIDE_PASSWORD_ICON,
+  ARIA_SHOW_PASSWORD_ICON,
+  TESTID_PASSWORD_VISIBILITY,
+} from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
 export default {
@@ -142,15 +146,15 @@ TogglePassword.play = async ({ canvasElement }) => {
   const inputElement = canvas.getByPlaceholderText(
     inputProps.password.placeholder,
   );
-  const toggleVisibility = canvas.getByTestId(testid.passwordVisibility);
+  const toggleVisibility = canvas.getByTestId(TESTID_PASSWORD_VISIBILITY);
 
   // Toggle to visible text then assert
   await userEvent.click(toggleVisibility);
   expect(inputElement).toHaveAttribute('type', 'text');
-  await canvas.findByText(aria.hidePasswordIcon);
+  await canvas.findByText(ARIA_HIDE_PASSWORD_ICON);
 
   // Toggle to hidden then assert
   await userEvent.click(toggleVisibility);
   expect(inputElement).toHaveAttribute('type', 'password');
-  await canvas.findByText(aria.showPasswordIcon);
+  await canvas.findByText(ARIA_SHOW_PASSWORD_ICON);
 };

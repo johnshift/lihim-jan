@@ -1,4 +1,13 @@
-import { authAria, authTestId, authTexts } from '@lihim/auth/core';
+import {
+  ARIA_SUBMIT_LOGIN,
+  ARIA_SUBMIT_SIGNUP,
+  TESTID_LOGIN_LINK,
+  TESTID_SIGNUP_LINK,
+  TEXT_LOGIN,
+  TEXT_LOGIN_FOOTER,
+  TEXT_SIGNUP,
+  TEXT_SIGNUP_FOOTER,
+} from '@lihim/auth/core';
 import { render, screen, user } from '@lihim/shared/testutils/ui';
 
 import { FormFooter } from './form-footer';
@@ -9,15 +18,15 @@ describe('FormFooter', () => {
     render(<FormFooter onClick={jest.fn()} />);
 
     // Locate elements
-    const link = screen.getByTestId(authTestId.loginFooterLink);
-    const text = screen.getByText(authTexts.loginFooter);
-    const btn = screen.getByRole('button', { name: authAria.submitLogin });
+    const link = screen.getByTestId(TESTID_SIGNUP_LINK);
+    const text = screen.getByText(TEXT_LOGIN_FOOTER);
+    const btn = screen.getByRole('button', { name: ARIA_SUBMIT_LOGIN });
 
     // Assertions
     expect(link).toBeVisible();
     expect(text).toBeVisible();
     expect(btn).toBeVisible();
-    expect(btn).toHaveTextContent(authTexts.login);
+    expect(btn).toHaveTextContent(TEXT_LOGIN);
   });
 
   test('isSignup = true', async () => {
@@ -25,15 +34,15 @@ describe('FormFooter', () => {
     render(<FormFooter isSignup onClick={jest.fn()} />);
 
     // Locate elements
-    const link = screen.getByTestId(authTestId.signupFooterLink);
-    const text = screen.getByText(authTexts.signupFooter);
-    const btn = screen.getByRole('button', { name: authAria.submitSignup });
+    const link = screen.getByTestId(TESTID_LOGIN_LINK);
+    const text = screen.getByText(TEXT_SIGNUP_FOOTER);
+    const btn = screen.getByRole('button', { name: ARIA_SUBMIT_SIGNUP });
 
     // Assertions
     expect(link).toBeVisible();
     expect(text).toBeVisible();
     expect(btn).toBeVisible();
-    expect(btn).toHaveTextContent(authTexts.signup);
+    expect(btn).toHaveTextContent(TEXT_SIGNUP);
   });
 
   test('onClick called', async () => {
@@ -42,7 +51,7 @@ describe('FormFooter', () => {
     render(<FormFooter onClick={onClick} />);
 
     // Locate element
-    const link = screen.getByTestId(authTestId.loginFooterLink);
+    const link = screen.getByTestId(TESTID_SIGNUP_LINK);
 
     // Click link
     await user.click(link);

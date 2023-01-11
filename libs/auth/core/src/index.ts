@@ -1,12 +1,4 @@
-export {
-  aria as authAria,
-  errmsg as authErrMsg,
-  inputProps as authInputProps,
-  msg as authMsg,
-  testid as authTestId,
-  texts as authTexts,
-  urls as authUrls,
-} from './lib/misc';
+export * from './lib/constants';
 export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';
 export type { LoginResponse } from './lib/schemas/login-response-schema';

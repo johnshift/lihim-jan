@@ -3,10 +3,12 @@ import type { Control } from 'react-hook-form';
 
 import { Stack, Title } from '@mantine/core';
 
-import { authInputProps, authTestId, LoginPayload } from '@lihim/auth/core';
+import type { LoginPayload } from '@lihim/auth/core';
+import { NAME_PASSWORD, TESTID_LOGIN_LOADING } from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
+import { loginInputs } from './constants';
 import { FormFooter } from './form-footer';
 import { FormWrapper } from './form-wrapper';
 
@@ -27,22 +29,22 @@ export const LoginForm: FC<Props> = ({
 }) => (
   <FormWrapper
     isLoading={isLoading}
-    loadingTestId={authTestId.loginLoadingOverlay}
+    loadingTestId={TESTID_LOGIN_LOADING}
     onSubmit={onSubmit}
   >
     <Stack sx={{ width: '32ch' }} spacing={20}>
       <Title order={1}>Login</Title>
-      <ValidatedInput
-        control={control}
-        error={hasError}
-        inputProps={authInputProps.principal}
-      />
-      <ValidatedInput
-        isPassword
-        control={control}
-        error={hasError}
-        inputProps={authInputProps.password}
-      />
+
+      {loginInputs.map((inputProps) => (
+        <ValidatedInput
+          key={inputProps.name}
+          control={control}
+          error={hasError}
+          inputProps={{ ...inputProps }}
+          isPassword={inputProps.name === NAME_PASSWORD}
+        />
+      ))}
+
       <FormFooter onClick={showSignup} />
     </Stack>
   </FormWrapper>

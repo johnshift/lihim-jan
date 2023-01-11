@@ -1,23 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import type { LoginPayload, LoginResponse } from '@lihim/auth/core';
 import {
-  authErrMsg,
-  authMsg,
-  LoginPayload,
-  LoginResponse,
-} from '@lihim/auth/core';
-import {
-  authUrls,
+  API_URL_LOGIN,
+  ERR_LOGIN_FAILED,
+  ERR_LOGIN_INCORRECT,
   LoginPayloadSchema,
   LoginResponseSchema,
+  MSG_LOGIN_OK,
 } from '@lihim/auth/core';
-import { GenericResponse, httpErrors, TVoidFn } from '@lihim/shared/core';
-import { METHOD_POST } from '@lihim/shared/core';
+import type { GenericResponse, TVoidFn } from '@lihim/shared/core';
+import { ERR_INVALID_REQUEST, METHOD_POST } from '@lihim/shared/core';
 import { apiFetch } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
 const loginMutation = apiFetch<LoginResponse, GenericResponse, LoginPayload>(
-  authUrls.login,
+  API_URL_LOGIN,
   {
     method: METHOD_POST,
     responseSchema: LoginResponseSchema,
@@ -43,16 +41,16 @@ export const useLoginMutation = (closeModal: TVoidFn) => {
         closeModal();
 
         // Display success message
-        notifySuccess(authMsg.loginOk, data.message);
+        notifySuccess(MSG_LOGIN_OK, data.message);
       },
       onError(error) {
         // Display error message
         // If failed to parse zod-schema, incorrect signin
         const errMsg =
-          error.message === httpErrors.invalidRequest
-            ? authErrMsg.loginIncorrect
+          error.message === ERR_INVALID_REQUEST
+            ? ERR_LOGIN_INCORRECT
             : error.message;
-        notifyError(authErrMsg.loginFailed, errMsg);
+        notifyError(ERR_LOGIN_FAILED, errMsg);
       },
     },
   );

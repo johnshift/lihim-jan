@@ -5,14 +5,14 @@ import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 
 import { setupServer } from 'msw/node';
 
-import { authMsg, SignupErrorResponse } from '@lihim/auth/core';
-import { authErrMsg } from '@lihim/auth/core';
+import type { SignupErrorResponse } from '@lihim/auth/core';
+import { ERR_SIGNUP_FAILED, MSG_SIGNUP_OK } from '@lihim/auth/core';
 import {
   fakeSession,
   fakeSignupPayload,
   mockSignupResponse,
 } from '@lihim/auth/testutils';
-import { httpErrors } from '@lihim/shared/core';
+import { ERR_INTERNAL } from '@lihim/shared/core';
 import {
   act,
   renderHook,
@@ -54,7 +54,7 @@ describe('useSignupMutation', () => {
     jest.spyOn(nextRouter, 'useRouter').mockReturnValue({ push } as any);
 
     // Mock error response
-    const mockErrorMessage = authErrMsg.signupFailed;
+    const mockErrorMessage = ERR_SIGNUP_FAILED;
     const body: SignupErrorResponse = {
       message: mockErrorMessage,
       field: 'username' as const,
@@ -83,7 +83,7 @@ describe('useSignupMutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.signupFailed,
+        title: ERR_SIGNUP_FAILED,
         message: body.message,
         color: 'red',
         icon: <BsExclamationCircle />,
@@ -119,7 +119,7 @@ describe('useSignupMutation', () => {
 
     // Assert error message
     await waitFor(() => {
-      expect(result.current.error?.message).toBe(httpErrors.internal);
+      expect(result.current.error?.message).toBe(ERR_INTERNAL);
     });
 
     // Assert router
@@ -128,8 +128,8 @@ describe('useSignupMutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authErrMsg.signupFailed,
-        message: httpErrors.internal,
+        title: ERR_SIGNUP_FAILED,
+        message: ERR_INTERNAL,
         color: 'red',
         icon: <BsExclamationCircle />,
       }),
@@ -148,7 +148,7 @@ describe('useSignupMutation', () => {
     // Mock success response
     const mockSession = fakeSession();
     const body = {
-      message: authMsg.signupOk,
+      message: MSG_SIGNUP_OK,
       session: mockSession,
     };
     mswServer.use(mockSignupResponse({ body }));
@@ -173,7 +173,7 @@ describe('useSignupMutation', () => {
     // Assert notification
     expect(notifSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: authMsg.signupOk,
+        title: MSG_SIGNUP_OK,
         message: body.message,
         color: 'green',
         icon: <BsCheckCircle />,

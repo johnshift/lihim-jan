@@ -1,6 +1,6 @@
 import { render, screen, user, within } from '@lihim/shared/testutils/ui';
 
-import { aria } from '../constants';
+import { ARIA_MOON_ICON, ARIA_SUN_ICON, ARIA_TOGGLE_THEME } from '../constants';
 
 import { ThemeToggle } from './theme-toggle';
 
@@ -15,9 +15,9 @@ describe('appbar theme-toggle', () => {
 
     // Assert light theme components
     const button = await screen.findByRole('button', {
-      name: aria.toggleTheme,
+      name: ARIA_TOGGLE_THEME,
     });
-    expect(within(button).getByText(aria.moonIcon)).toBeInTheDocument();
+    expect(within(button).getByText(ARIA_MOON_ICON)).toBeInTheDocument();
 
     // Assert button can be clicked
     await user.click(button);
@@ -34,9 +34,9 @@ describe('appbar theme-toggle', () => {
 
     // Assert light theme components
     const button = await screen.findByRole('button', {
-      name: aria.toggleTheme,
+      name: ARIA_TOGGLE_THEME,
     });
-    expect(within(button).getByText(aria.sunIcon)).toBeInTheDocument();
+    expect(within(button).getByText(ARIA_SUN_ICON)).toBeInTheDocument();
 
     // Assert button can be clicked
     await user.click(button);

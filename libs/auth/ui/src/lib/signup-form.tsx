@@ -4,10 +4,11 @@ import type { Control } from 'react-hook-form';
 import { Group, Stack, Title } from '@mantine/core';
 
 import type { SignupPayload } from '@lihim/auth/core';
-import { authInputProps, authTestId } from '@lihim/auth/core';
+import { NAME_PASSWORD, TESTID_SIGNUP_LOADING } from '@lihim/auth/core';
 import type { TVoidFn } from '@lihim/shared/core';
 import { ValidatedInput } from '@lihim/shared/ui';
 
+import { credentialInputs, nameInputs } from './constants';
 import { FormFooter } from './form-footer';
 import { FormWrapper } from './form-wrapper';
 
@@ -16,29 +17,8 @@ type Props = {
   control: Control<SignupPayload>;
   showLogin: TVoidFn;
   onSubmit: TVoidFn;
-  errors?: {
-    firstname: string | boolean;
-    lastname: string | boolean;
-    username: string | boolean;
-    email: string | boolean;
-    password: string | boolean;
-  };
+  errors?: Record<keyof SignupPayload, string | boolean>;
 };
-
-type NameInputProps = {
-  control: Control<SignupPayload>;
-  error: string | boolean;
-  isLastname?: boolean;
-};
-
-const NameInput: FC<NameInputProps> = ({ control, error, isLastname }) => (
-  <ValidatedInput
-    sx={{ width: '17ch' }}
-    control={control}
-    error={error}
-    inputProps={isLastname ? authInputProps.lastname : authInputProps.firstname}
-  />
-);
 
 export const SignupForm: FC<Props> = ({
   isLoading,
@@ -55,31 +35,31 @@ export const SignupForm: FC<Props> = ({
 }) => (
   <FormWrapper
     isLoading={isLoading}
-    loadingTestId={authTestId.signupLoadingOverlay}
+    loadingTestId={TESTID_SIGNUP_LOADING}
     onSubmit={onSubmit}
   >
     <Stack sx={{ width: '36ch' }} spacing={20}>
       <Title order={1}>Sign Up</Title>
       <Group>
-        <NameInput control={control} error={errors.firstname} />
-        <NameInput isLastname control={control} error={errors.lastname} />
+        {nameInputs.map((inputProps) => (
+          <ValidatedInput
+            key={inputProps.name}
+            sx={{ width: '17ch' }}
+            control={control}
+            error={errors[inputProps.name]}
+            inputProps={{ ...inputProps }}
+          />
+        ))}
       </Group>
-      <ValidatedInput
-        control={control}
-        error={errors.username}
-        inputProps={authInputProps.username}
-      />
-      <ValidatedInput
-        control={control}
-        error={errors.email}
-        inputProps={authInputProps.email}
-      />
-      <ValidatedInput
-        isPassword
-        control={control}
-        error={errors.password}
-        inputProps={authInputProps.password}
-      />
+      {credentialInputs.map((inputProps) => (
+        <ValidatedInput
+          key={inputProps.name}
+          control={control}
+          error={errors[inputProps.name]}
+          inputProps={{ ...inputProps }}
+          isPassword={inputProps.name === NAME_PASSWORD}
+        />
+      ))}
       <FormFooter isSignup onClick={showLogin} />
     </Stack>
   </FormWrapper>
