@@ -206,6 +206,10 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GA_PAT }}
+      - name: Fetch main branch (to compare against)
+        run: git branch main FETCH_HEAD
+      - name: Checkout current branch
+        run: git checkout $(git rev-parse --abbrev-ref HEAD)
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
@@ -220,21 +224,20 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
       - name: Check if should build storybook
-        id: check-should-build
-        run: echo "should_build=$(node tools/scripts/should-build-storybook.js)" >> $GITHUB_OUTPUT
+        run: echo "should_build=$(node tools/scripts/should-build-storybook.js)" >> $GITHUB_ENV
       - name: Echo check results
-        run: echo "should_build = ${{ steps.check-should-build.outputs.should_build }}"
+        run: echo "should_build = ${{ env.should_build }}"
       - name: Build storybook
-        if: steps.check-should-build.outputs.should_build == 'true'
+        if: env.should_build == 'true'
         run: pnpm nx build-storybook web
       - name: Publish to Chromatic
-        if: steps.check-should-build.outputs.should_build == 'true'
+        if: env.should_build == 'true'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: dist/storybook/web
       - name: Skip Chromatic
-        if: steps.check-should-build.outputs.should_build != 'true'
+        if: env.should_build != 'true'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
