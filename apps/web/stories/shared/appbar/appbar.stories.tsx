@@ -18,11 +18,6 @@ type Props = ComponentProps<typeof Appbar>;
 
 export default {
   component: Appbar,
-  parameters: {
-    darkMode: {
-      current: 'dark', // Enforce dark theme on initial load
-    },
-  },
 } as Meta<Props>;
 
 export const Default: StoryObj<Props> = {

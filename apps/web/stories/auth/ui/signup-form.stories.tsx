@@ -23,11 +23,6 @@ import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {
   component: SignupForm,
-  parameters: {
-    darkMode: {
-      current: 'dark', // Enforce dark theme on initial load
-    },
-  },
 } as ComponentMeta<typeof SignupForm>;
 
 const Template: ComponentStory<typeof SignupForm> = (args) => {

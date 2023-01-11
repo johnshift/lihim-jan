@@ -12,11 +12,6 @@ import { LoginForm } from '@lihim/auth/ui';
 
 export default {
   component: LoginFormSkeleton,
-  parameters: {
-    darkMode: {
-      current: 'dark', // Enforce dark theme on initial load
-    },
-  },
 } as ComponentMeta<typeof LoginFormSkeleton>;
 
 const Template: ComponentStory<typeof LoginFormSkeleton> = () => {

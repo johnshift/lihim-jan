@@ -67,6 +67,9 @@ const ThemeWrapper = (props: { children: ReactNode }) => (
 
 // Global exports
 export const parameters = {
+  darkMode: {
+    current: 'dark', // Enforce dark theme on initial load
+  },
   msw: {
     handlers: [mockSessionResponse(200, { isAnon: true })],
   },
