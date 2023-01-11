@@ -74,6 +74,7 @@ specifiers:
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
   msw: ^0.49.2
+  msw-storybook-addon: ^1.6.3
   next: ^13.1.1
   nx: 15.4.2
   prettier: ^2.8.1
@@ -180,6 +181,7 @@ devDependencies:
   jest: 28.1.1_odkjkoia5xunhxkdrka32ib6vi
   jest-environment-jsdom: 28.1.1
   msw: 0.49.2_typescript@4.8.4
+  msw-storybook-addon: 1.6.3_hqjmemrlubrdinu76juhfilxoe
   nx: 15.4.2_@swc+core@1.3.24
   prettier: 2.8.1
   react-test-renderer: 18.2.0_react@18.2.0
@@ -15672,6 +15674,19 @@ packages:
 
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+
+  /msw-storybook-addon/1.6.3_hqjmemrlubrdinu76juhfilxoe:
+    resolution: {integrity: sha512-Ps80WdRmXsmenoTwfrgKMNpQD8INUUFyUFyZOecx8QjuqSlL++UYrLaGyACXN2goOn+/VS6rb0ZapbjrasPClg==}
+    peerDependencies:
+      msw: '>=0.35.0 <1.0.0'
+    dependencies:
+      '@storybook/addons': 6.5.15_biqbaboplfbrettd7655fr4n2y
+      is-node-process: 1.0.1
+      msw: 0.49.2_typescript@4.8.4
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: true
 
   /msw/0.49.2_typescript@4.8.4:
     resolution: {integrity: sha512-70/E10f+POE2UmMw16v8PnKatpZplpkUwVRLBqiIdimpgaC3le7y2yOq9JmOrL15jpwWM5wAcPTOj0f550LI3g==}

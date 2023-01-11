@@ -34,6 +34,9 @@ const config: StorybookConfig = {
 
     return config;
   },
+
+  // Import msw public mockServiceWorker
+  staticDirs: ['../../../public'],
 };
 
 module.exports = config;
