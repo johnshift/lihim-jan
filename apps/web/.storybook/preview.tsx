@@ -6,7 +6,18 @@ import { Center } from '@mantine/core';
 
 import { useDarkMode } from 'storybook-dark-mode';
 
+import { initialize, mswDecorator } from 'msw-storybook-addon';
+
 import { MantineProvider } from '@lihim/shared/mantine';
+
+// Initialize msw
+initialize({
+  onUnhandledRequest({ method, url }) {
+    if (url.pathname.startsWith('/api')) {
+      console.error(`Unhandled ${method} request to "${url}"`);
+    }
+  },
+});
 
 // NextJS parse image fix
 const OriginalNextImage = NextImage.default;
@@ -29,4 +40,5 @@ const ThemeWrapper = (props: { children: ReactNode }) => (
 export const decorators = [
   // eslint-disable-next-line @typescript-eslint/ban-types
   (renderStory: Function) => <ThemeWrapper>{renderStory()}</ThemeWrapper>,
+  mswDecorator,
 ];
