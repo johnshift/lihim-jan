@@ -1,9 +1,3 @@
-export const lengths = {
-  name: { min: 2, max: 32 },
-  principal: { min: 4, max: 32 },
-  password: { min: 6, max: 64 },
-} as const;
-
 export const regex = {
   name: /^[A-Za-z]*$/,
   username: /^[A-Za-z][\dA-Za-z-]*$/,

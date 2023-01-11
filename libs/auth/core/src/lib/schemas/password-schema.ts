@@ -1,10 +1,13 @@
 import { zodString } from '@lihim/shared/core';
 
-import { LABEL_PASSWORD } from '../constants';
-import { lengths } from '../misc';
+import {
+  LABEL_PASSWORD,
+  MAX_LENGTH_PASSWORD,
+  MIN_LENGTH_PASSWORD,
+} from '../constants';
 
 export const PasswordSchema = zodString(
   LABEL_PASSWORD,
-  lengths.password.min,
-  lengths.password.max,
+  MIN_LENGTH_PASSWORD,
+  MAX_LENGTH_PASSWORD,
 );
