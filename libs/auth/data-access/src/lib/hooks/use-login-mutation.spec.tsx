@@ -42,7 +42,7 @@ describe('use-signin-mutation', () => {
 
   test('invalid zod-schema', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Mock error response
     const mockErrorMessage = ERR_INVALID_REQUEST;
@@ -83,7 +83,7 @@ describe('use-signin-mutation', () => {
 
   test('api error', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Mock error response
     const mockErrorMessage = ERR_LOGIN_INCORRECT;
@@ -124,7 +124,7 @@ describe('use-signin-mutation', () => {
 
   test('network error', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Mock network error response
     mswServer.use(mockLoginResponse({ networkError: true }));
@@ -161,7 +161,7 @@ describe('use-signin-mutation', () => {
 
   test('success username', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Mock success response
     const mockSession = fakeSession();
@@ -209,7 +209,7 @@ describe('use-signin-mutation', () => {
 
   test('success email', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Mock success response
     const mockSession = fakeSession();

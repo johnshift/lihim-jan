@@ -46,7 +46,7 @@ describe('useSignupMutation', () => {
 
   test('error', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Spy on next router
     const push = jest.fn();
@@ -93,7 +93,7 @@ describe('useSignupMutation', () => {
 
   test('network error', async () => {
     // Spy on mantin notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Spy on next router
     const push = jest.fn();
@@ -138,7 +138,7 @@ describe('useSignupMutation', () => {
 
   test('success', async () => {
     // Spy on mantine notifications
-    const notifSpy = jest.spyOn(mantineNotifications, 'updateNotification');
+    const notifSpy = jest.spyOn(mantineNotifications, 'showNotification');
 
     // Spy on next router
     const push = jest.fn();

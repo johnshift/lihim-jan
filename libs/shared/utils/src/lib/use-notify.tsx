@@ -39,8 +39,14 @@ export const useNotify = () => {
     });
   };
 
-  const notify = (title: string, message: string, isSuccess = true) => {
-    updateNotification({
+  const notify = (
+    title: string,
+    message: string,
+    isSuccess: boolean,
+    isUpdate: boolean,
+  ) => {
+    const fn = isUpdate ? updateNotification : showNotification;
+    fn({
       id,
       title,
       message,
@@ -49,13 +55,13 @@ export const useNotify = () => {
   };
 
   // Success notification
-  const notifySuccess = (title: string, message: string) => {
-    notify(title, message);
+  const notifySuccess = (title: string, message: string, isUpdate = false) => {
+    notify(title, message, true, isUpdate);
   };
 
   // Error notification
-  const notifyError = (title: string, message: string) => {
-    notify(title, message, false);
+  const notifyError = (title: string, message: string, isUpdate = false) => {
+    notify(title, message, false, isUpdate);
   };
 
   return {
