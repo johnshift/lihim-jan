@@ -7,6 +7,8 @@ import { within } from '@storybook/testing-library';
 
 import {
   ARIA_SUBMIT_SIGNUP,
+  credentialInputs,
+  nameInputs,
   PLACEHOLDER_EMAIL,
   PLACEHOLDER_FIRSTNAME,
   PLACEHOLDER_LASTNAME,
@@ -17,7 +19,6 @@ import {
   TEXT_SIGNUP_FOOTER,
 } from '@lihim/auth/core';
 import { SignupForm } from '@lihim/auth/ui';
-import { credentialInputs, nameInputs } from '@lihim/auth/ui';
 import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {

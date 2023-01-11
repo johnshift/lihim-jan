@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import type { SignupPayload } from '@lihim/auth/core';
+import { credentialInputs, nameInputs, SignupPayload } from '@lihim/auth/core';
 import {
   ARIA_SUBMIT_SIGNUP,
   PLACEHOLDER_EMAIL,
@@ -20,7 +20,6 @@ import {
   waitFor,
 } from '@lihim/shared/testutils/ui';
 
-import { credentialInputs, nameInputs } from './constants';
 import { SignupForm } from './signup-form';
 
 type CheckOptions = {
