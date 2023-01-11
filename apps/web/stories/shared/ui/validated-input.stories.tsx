@@ -17,11 +17,6 @@ import { ValidatedInput } from '@lihim/shared/ui';
 
 export default {
   component: ValidatedInput,
-  parameters: {
-    darkMode: {
-      current: 'dark', // Enforce dark theme on initial load
-    },
-  },
 } as ComponentMeta<typeof ValidatedInput>;
 
 const inputProps = {

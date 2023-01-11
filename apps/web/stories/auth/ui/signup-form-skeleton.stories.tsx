@@ -11,11 +11,6 @@ import { SignupForm, SignupFormSkeleton } from '@lihim/auth/ui';
 
 export default {
   component: SignupFormSkeleton,
-  parameters: {
-    darkMode: {
-      current: 'dark', // Enforce dark theme on initial load
-    },
-  },
 } as ComponentMeta<typeof SignupFormSkeleton>;
 
 const Template: ComponentStory<typeof SignupFormSkeleton> = () => {

@@ -23,11 +23,6 @@ import { checkInputDefaults } from '@lihim/shared/testutils/storybook';
 
 export default {
   component: SignupForm,
-  parameters: {
-    darkMode: {
-      current: 'dark', // Enforce dark theme on initial load
-    },
-  },
 } as ComponentMeta<typeof SignupForm>;
 
 const Template: ComponentStory<typeof SignupForm> = (args) => {
@@ -65,11 +60,11 @@ Default.play = async ({ canvasElement }) => {
   const loginLink = canvas.getByTestId(TESTID_LOGIN_LINK);
 
   // Assertions
-  checkInputDefaults(firstnameInput, nameInputs[0]);
-  checkInputDefaults(lastnameInput, nameInputs[1]);
-  checkInputDefaults(usernameInput, credentialInputs[0]);
-  checkInputDefaults(emailInput, credentialInputs[1]);
-  checkInputDefaults(passwordInput, {
+  await checkInputDefaults(firstnameInput, nameInputs[0]);
+  await checkInputDefaults(lastnameInput, nameInputs[1]);
+  await checkInputDefaults(usernameInput, credentialInputs[0]);
+  await checkInputDefaults(emailInput, credentialInputs[1]);
+  await checkInputDefaults(passwordInput, {
     ...credentialInputs[2],
     type: 'password',
   });

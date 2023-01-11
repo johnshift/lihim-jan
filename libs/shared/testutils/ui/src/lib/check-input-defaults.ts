@@ -1,5 +1,6 @@
-import { expect } from '@storybook/jest';
-import { screen, waitFor } from '@storybook/testing-library';
+/* eslint-disable testing-library/no-node-access */
+
+import { screen, waitFor } from '@testing-library/react';
 
 type CheckOptions = {
   name: string;
@@ -18,7 +19,6 @@ export const checkInputDefaults = async (
   expect(input).toHaveAttribute('type', options.type ?? 'text');
   await waitFor(() => {
     expect(
-      // eslint-disable-next-line testing-library/no-node-access
       options.name === 'password' ? input.parentElement : input,
     ).toHaveAttribute('aria-invalid', options.invalid ?? 'false');
   });

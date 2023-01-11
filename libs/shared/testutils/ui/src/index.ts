@@ -9,3 +9,5 @@ export { TestWrapper } from './lib/test-wrapper';
 
 // Export User event
 export const user = userEvent.setup();
+
+export { checkInputDefaults } from './lib/check-input-defaults';
