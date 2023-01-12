@@ -11,6 +11,7 @@ import { useDarkMode } from 'storybook-dark-mode';
 import { QueryClient } from '@tanstack/react-query';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 
+import { AuthModal } from '@lihim/auth/feature';
 import { mockSessionResponse } from '@lihim/auth/testutils';
 import { RootProvider } from '@lihim/shared/data-access';
 import { MantineProvider } from '@lihim/shared/mantine';
@@ -62,6 +63,7 @@ const ThemeWrapper = (props: { children: ReactNode }) => (
     <ReactQueryProvider client={queryClient}>
       <RootProvider>
         <Center>{props.children}</Center>
+        <AuthModal />
       </RootProvider>
     </ReactQueryProvider>
   </MantineProvider>
