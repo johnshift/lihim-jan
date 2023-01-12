@@ -27,7 +27,7 @@ import { ERR_INTERNAL } from '@lihim/shared/core';
 import { render, screen, user, waitFor } from '@lihim/shared/testutils/feature';
 import { checkInputDefaults } from '@lihim/shared/testutils/ui';
 
-import { SignupForm } from './signup-form';
+import SignupForm from './signup-form';
 
 const locateElements = () => {
   // Locate elements

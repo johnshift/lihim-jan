@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { Center, LoadingOverlay, Paper } from '@mantine/core';
+import { Box, Center, LoadingOverlay } from '@mantine/core';
 
 import { TVoidFn } from '@lihim/shared/core';
 
@@ -12,15 +12,9 @@ type Props = {
 };
 
 export const FormPaper: FC<{ children: ReactNode }> = ({ children }) => (
-  <Paper
-    withBorder
-    sx={{ minWidth: 320, position: 'relative' }}
-    py={20}
-    px={40}
-    radius="lg"
-  >
+  <Box sx={{ minWidth: 320, position: 'relative' }} py={20} px={40}>
     {children}
-  </Paper>
+  </Box>
 );
 
 export const FormWrapper: FC<Props> = ({

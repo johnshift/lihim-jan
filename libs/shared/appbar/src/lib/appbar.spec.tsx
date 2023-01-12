@@ -1,8 +1,18 @@
 import { setupServer } from 'msw/node';
 
-import { mockSessionResponse } from '@lihim/auth/testutils';
+import {
+  fakeSession,
+  mockLogoutResponse,
+  mockSessionResponse,
+} from '@lihim/auth/testutils';
 import { TEXT_BRAND } from '@lihim/shared/core';
-import { render, screen, user, within } from '@lihim/shared/testutils/feature';
+import {
+  render,
+  screen,
+  user,
+  waitForElementToBeRemoved,
+  within,
+} from '@lihim/shared/testutils/feature';
 
 import { Appbar } from './appbar';
 import {
@@ -11,6 +21,7 @@ import {
   ARIA_SUN_ICON,
   ARIA_TOGGLE_THEME,
   TESTID_AUTH_MENUITEM,
+  TESTID_HEADER_LOADER,
 } from './constants';
 
 // Setup msw server
@@ -62,10 +73,9 @@ describe('Appbar', () => {
     expect(within(toggleTheme).getByText(ARIA_SUN_ICON)).toBeInTheDocument();
   });
 
-  // TODO: replace this with toggle signin/signup forms
-  test('open menu click auth action', async () => {
+  test('anon auth action', async () => {
     // Mock not loggedIn
-    mswServer.use(mockSessionResponse(200, { isAnon: true }));
+    mswServer.use(mockSessionResponse(200, { isAnon: true }, 200));
 
     // Render component
     render(<Appbar />);
@@ -73,10 +83,38 @@ describe('Appbar', () => {
     // Open header menu
     await user.click(screen.getByRole('button', { name: ARIA_HEADER_MENU }));
 
+    // Wait for loading to appear then disappear
+    await screen.findByTestId(TESTID_HEADER_LOADER);
+    await waitForElementToBeRemoved(
+      () => screen.queryByTestId(TESTID_HEADER_LOADER),
+      { timeout: 3000 },
+    );
+
     // Click action icon
     await user.click(screen.getByTestId(TESTID_AUTH_MENUITEM));
   });
 
-  // TODO: signout error
-  // TODO: signout ok
+  test('loggedin auth action', async () => {
+    // Mock loggedIn
+    mswServer.use(
+      mockSessionResponse(200, fakeSession(), 200),
+      mockLogoutResponse({ status: 200 }),
+    );
+
+    // Render component
+    render(<Appbar />);
+
+    // Open header menu
+    await user.click(screen.getByRole('button', { name: ARIA_HEADER_MENU }));
+
+    // Wait for loading to appear then disappear
+    await screen.findByTestId(TESTID_HEADER_LOADER);
+    await waitForElementToBeRemoved(
+      () => screen.queryByTestId(TESTID_HEADER_LOADER),
+      { timeout: 3000 },
+    );
+
+    // Click action icon
+    await user.click(screen.getByTestId(TESTID_AUTH_MENUITEM));
+  });
 });

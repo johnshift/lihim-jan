@@ -85,6 +85,7 @@ specifiers:
   react-test-renderer: 18.2.0
   regenerator-runtime: 0.13.7
   storybook-addon-next: ^1.6.6
+  storybook-addon-next-router: ^4.0.2
   storybook-addon-swc: ^1.1.7
   storybook-dark-mode: ^2.0.5
   ts-jest: 28.0.5
@@ -186,6 +187,7 @@ devDependencies:
   prettier: 2.8.1
   react-test-renderer: 18.2.0_react@18.2.0
   storybook-addon-next: 1.7.1_iakg5qqcmnxv7nt727fr4almry
+  storybook-addon-next-router: 4.0.2_p3konkdulp2uradliurjcz46wu
   storybook-addon-swc: 1.1.9_webpack@5.75.0
   storybook-dark-mode: 2.0.5_biqbaboplfbrettd7655fr4n2y
   ts-jest: 28.0.5_gforb6sncjlnszxhl7qvl2lzvm
@@ -18926,6 +18928,26 @@ packages:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: true
 
+  /storybook-addon-next-router/4.0.2_p3konkdulp2uradliurjcz46wu:
+    resolution: {integrity: sha512-0rjGAl7HziW4ecDq+VU03H1dwkw5f6phqA+PMquPzdowNVl29ejVwVadLMGlovG6x2snaxMGxtySR2c5bwegSw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@storybook/addon-actions': ^6.0.0
+      '@storybook/addons': ^6.0.0
+      '@storybook/client-api': ^6.0.0
+      next: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@storybook/addon-actions': 6.5.15_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addons': 6.5.15_biqbaboplfbrettd7655fr4n2y
+      '@storybook/client-api': 6.5.15_biqbaboplfbrettd7655fr4n2y
+      next: 13.1.1_a7mipu7kvrstgwvi56qu2qyzhe
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tslib: 2.4.0
+    dev: true
+
   /storybook-addon-next/1.7.1_iakg5qqcmnxv7nt727fr4almry:
     resolution: {integrity: sha512-SSbD91CUNSKiTMYfbqBGUkbRuSiC7+q7D4bRqDgHI2kSJn4wi99/ccFVGCegTRJoJqljwtEJ/vEqQ253L64hVQ==}
     peerDependencies:
@@ -19889,6 +19911,10 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+
+  /tslib/2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+    dev: true
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}

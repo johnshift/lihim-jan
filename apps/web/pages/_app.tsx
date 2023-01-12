@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { AuthModal } from '@lihim/auth/feature';
 import { Appbar } from '@lihim/shared/appbar';
 import { RootProvider } from '@lihim/shared/data-access';
 import { MantineProvider } from '@lihim/shared/mantine';
@@ -21,6 +22,7 @@ const App = ({ Component, pageProps }: AppProps) => (
           <RootProvider>
             <Appbar />
             <Component {...pageProps} />
+            <AuthModal />
           </RootProvider>
         </ReactQueryProvider>
       </MantineProvider>

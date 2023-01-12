@@ -7,7 +7,7 @@ import { LoginForm as LoginFormUi } from '@lihim/auth/ui';
 import { ERR_INTERNAL } from '@lihim/shared/core';
 import { useRootContext } from '@lihim/shared/data-access';
 
-export const LoginForm = () => {
+const LoginForm = () => {
   // Auth modal state
   const { setAuthModalState } = useRootContext();
   const closeAuthModal = () => setAuthModalState(AuthModalState.Closed);
@@ -44,3 +44,5 @@ export const LoginForm = () => {
     />
   );
 };
+
+export default LoginForm;

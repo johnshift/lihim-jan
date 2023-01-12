@@ -1,14 +1,17 @@
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 import * as NextImage from 'next/image';
 import { ImageProps } from 'next/image';
 import React, { ReactNode } from 'react';
 
 import { Center } from '@mantine/core';
 
+import { WithNextRouter } from 'storybook-addon-next-router/dist/decorators';
 import { useDarkMode } from 'storybook-dark-mode';
 
 import { QueryClient } from '@tanstack/react-query';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 
+import { AuthModal } from '@lihim/auth/feature';
 import { mockSessionResponse } from '@lihim/auth/testutils';
 import { RootProvider } from '@lihim/shared/data-access';
 import { MantineProvider } from '@lihim/shared/mantine';
@@ -60,6 +63,7 @@ const ThemeWrapper = (props: { children: ReactNode }) => (
     <ReactQueryProvider client={queryClient}>
       <RootProvider>
         <Center>{props.children}</Center>
+        <AuthModal />
       </RootProvider>
     </ReactQueryProvider>
   </MantineProvider>
@@ -73,9 +77,13 @@ export const parameters = {
   msw: {
     handlers: [mockSessionResponse(200, { isAnon: true })],
   },
+  nextRouter: {
+    Provider: RouterContext.Provider,
+  },
 };
 export const decorators = [
   // eslint-disable-next-line @typescript-eslint/ban-types
   (renderStory: Function) => <ThemeWrapper>{renderStory()}</ThemeWrapper>,
   mswDecorator,
+  WithNextRouter,
 ];
