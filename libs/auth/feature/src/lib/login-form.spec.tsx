@@ -22,7 +22,7 @@ import { ERR_INTERNAL, ERR_INVALID_REQUEST } from '@lihim/shared/core';
 import { render, screen, user, waitFor } from '@lihim/shared/testutils/feature';
 import { checkInputDefaults } from '@lihim/shared/testutils/ui';
 
-import { LoginForm } from './login-form';
+import LoginForm from './login-form';
 
 // Setup msw server
 const mswServer = setupServer();

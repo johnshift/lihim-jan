@@ -10,7 +10,7 @@ import { useSignupMutation } from '@lihim/auth/data-access';
 import { SignupForm as SignupFormUi } from '@lihim/auth/ui';
 import { useRootContext } from '@lihim/shared/data-access';
 
-export const SignupForm = () => {
+const SignupForm = () => {
   // Auth modal state
   const { setAuthModalState } = useRootContext();
   const closeAuthModal = () => setAuthModalState(AuthModalState.Closed);
@@ -59,3 +59,5 @@ export const SignupForm = () => {
     />
   );
 };
+
+export default SignupForm;
