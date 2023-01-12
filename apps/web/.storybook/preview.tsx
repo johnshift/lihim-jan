@@ -1,9 +1,11 @@
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 import * as NextImage from 'next/image';
 import { ImageProps } from 'next/image';
 import React, { ReactNode } from 'react';
 
 import { Center } from '@mantine/core';
 
+import { WithNextRouter } from 'storybook-addon-next-router/dist/decorators';
 import { useDarkMode } from 'storybook-dark-mode';
 
 import { QueryClient } from '@tanstack/react-query';
@@ -73,9 +75,13 @@ export const parameters = {
   msw: {
     handlers: [mockSessionResponse(200, { isAnon: true })],
   },
+  nextRouter: {
+    Provider: RouterContext.Provider,
+  },
 };
 export const decorators = [
   // eslint-disable-next-line @typescript-eslint/ban-types
   (renderStory: Function) => <ThemeWrapper>{renderStory()}</ThemeWrapper>,
   mswDecorator,
+  WithNextRouter,
 ];

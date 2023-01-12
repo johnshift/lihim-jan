@@ -8,5 +8,6 @@ export const rootMain: StorybookConfig = {
     'storybook-dark-mode',
     '@storybook/addon-a11y',
     'msw-storybook-addon',
+    'storybook-addon-next-router',
   ],
 };
