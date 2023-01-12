@@ -1,6 +1,10 @@
 import { Group, useMantineColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
+import { AuthModalState } from '@lihim/auth/core';
+import { useLogoutMutation } from '@lihim/auth/data-access';
+import { useRootContext } from '@lihim/shared/data-access';
+
 import { Brand } from './ui/brand';
 import { Menu } from './ui/menu';
 import { ThemeToggle } from './ui/theme-toggle';
@@ -15,6 +19,23 @@ export const Appbar = () => {
   // Menu controls
   const [menuIsOpen, menuHandlers] = useDisclosure(false);
 
+  // Session state
+  const {
+    isLoading: sessionIsLoading,
+    setAuthModalState,
+    session,
+  } = useRootContext();
+  const showLoginForm = () => setAuthModalState(AuthModalState.Login);
+
+  // Logout mutation
+  const { isLoading: logoutIsLoading, mutate: logoutMutate } =
+    useLogoutMutation();
+
+  // Computed vars
+  const isLoggedIn = !session.isAnon;
+  const isLoading = sessionIsLoading || logoutIsLoading;
+  const authFn = isLoggedIn ? logoutMutate : showLoginForm;
+
   return (
     <Wrapper>
       <Brand />
@@ -22,9 +43,9 @@ export const Appbar = () => {
         <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
         <Menu
           isOpen={menuIsOpen}
-          isLoading={false}
-          isLoggedIn={false}
-          authFn={() => null}
+          isLoading={isLoading}
+          isLoggedIn={isLoggedIn}
+          authFn={authFn}
           onOpen={menuHandlers.open}
           onClose={menuHandlers.close}
         />
