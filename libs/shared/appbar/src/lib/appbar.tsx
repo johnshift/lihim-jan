@@ -39,7 +39,7 @@ export const Appbar = () => {
   return (
     <Wrapper>
       <Brand />
-      <Group spacing={5}>
+      <Group spacing={0}>
         <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
         <Menu
           isOpen={menuIsOpen}
