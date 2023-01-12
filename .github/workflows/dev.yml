@@ -262,6 +262,7 @@ jobs:
       - name: Fail on skipped/cancelled/failure
         if: |
           contains(needs.*.result, 'failure') ||
-          contains(needs.*.result, 'cancelled')
+          contains(needs.*.result, 'cancelled')||
+          contains(needs.*.result, 'skipped')
         run: exit 1
       - run: echo "All checks passed"
