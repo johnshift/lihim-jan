@@ -42,6 +42,8 @@ export const TEXT_LOGIN_FOOTER = "Don't have an account?";
 export const TEXT_SIGNUP = 'Signup';
 export const TEXT_SIGNUP_FOOTER = 'Already have an account?';
 export const TEXT_LOGOUT = 'Logout';
+export const TEXT_LOGOUT_TITLE = 'Confirm Action';
+export const TEXT_LOGOUT_SUBTITLE = 'Are you sure you want to logout?';
 
 // Attributes
 export const ARIA_SUBMIT_LOGIN = 'Submit login';
@@ -52,6 +54,7 @@ export const TESTID_SIGNUP_LINK = 'signup-link';
 export const TESTID_SIGNUP_LOADING = 'signup-loading';
 export const TESTID_LOGIN_SKELETON = 'login-skeleton';
 export const TESTID_SIGNUP_SKELETON = 'signup-skeleton';
+export const TESTID_LOGOUT_LOADING = 'logout-loading';
 
 // Messages
 export const MSG_LOGIN_OK = 'Login successful';
