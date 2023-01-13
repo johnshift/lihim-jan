@@ -12,7 +12,7 @@ const useStyles = createStyles<string, StyleParam>(
       display: 'flex',
       width: '100vw',
       [theme.fn.largerThan(theme.breakpoints.xs)]: {
-        width: '95%',
+        width: '98%',
       },
       [theme.fn.largerThan(theme.breakpoints.md)]: {
         width: '80%',
@@ -33,6 +33,10 @@ const useStyles = createStyles<string, StyleParam>(
         flexBasis: '16.67%', // 2/12
       },
       [theme.fn.largerThan(theme.breakpoints.md)]: {
+        flexBasis: '25%',
+        paddingLeft: '9%',
+      },
+      [theme.fn.largerThan(theme.breakpoints.lg)]: {
         flexBasis: '25%',
         paddingLeft: '11%',
       },
