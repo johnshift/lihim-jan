@@ -20,14 +20,15 @@ export const NavItem: FC<Props> = ({
   isDisabled,
 }) => (
   <NavLink
+    mt={15}
     label={label}
     icon={icon}
     variant="light"
     active={isActive}
     styles={(theme) => ({
       root: {
-        height: 70,
-        paddingLeft: 30,
+        height: 60,
+        paddingLeft: 25,
         borderRadius: '10px 0 0 10px',
       },
       label: {
