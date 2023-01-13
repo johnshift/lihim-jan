@@ -3,6 +3,7 @@ export const METHOD_GET = 'GET';
 export const METHOD_POST = 'POST';
 export const TEXT_BRAND = 'lihim';
 export const TEXT_LOADING = 'Loading';
+export const TEXT_CANCEL = 'Cancel';
 
 // Http Errors
 export const ERR_INTERNAL = 'Something went wrong :(';
