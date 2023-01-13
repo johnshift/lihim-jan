@@ -225,6 +225,7 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
           externals: 'public/**'
+          traceChanged: 'expanded'
 
   dev-deploy:
     name: Dev Deploy

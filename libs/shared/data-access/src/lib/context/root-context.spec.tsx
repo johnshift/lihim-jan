@@ -30,15 +30,18 @@ describe('rootContext', () => {
     });
 
     // Destructure current values
-    const { session, isLoading, authModalState, setAuthModalState } =
+    const { session, isLoading, authModalState, authModalActions } =
       result.current;
 
     // Assert default values
     expect(session).toStrictEqual({ isAnon: true });
     expect(isLoading).toBe(false);
     expect(authModalState).toBe(AuthModalState.Closed);
-    expect(setAuthModalState).toBeDefined();
-    expect(setAuthModalState(AuthModalState.Closed)).toBeNull();
+    expect(authModalActions).toBeDefined();
+    expect(authModalActions.close()).toBeNull();
+    expect(authModalActions.openLogin()).toBeNull();
+    expect(authModalActions.openLogout()).toBeNull();
+    expect(authModalActions.openSignup()).toBeNull();
   });
 
   test('auth modal controls', async () => {
@@ -49,12 +52,13 @@ describe('rootContext', () => {
     // Arrange
     const testIdModalState = 'auth-modal-state';
     const testIdCloseModal = 'close-modal';
-    const testIdShowSignin = 'show-signin';
+    const testIdShowLogin = 'show-login';
+    const testIdShowLogout = 'show-logout';
     const testIdShowSignup = 'show-signup';
 
     // Test component
     const TestComponent = () => {
-      const { authModalState, setAuthModalState } = useRootContext();
+      const { authModalState, authModalActions } = useRootContext();
 
       return (
         <>
@@ -62,23 +66,30 @@ describe('rootContext', () => {
           <button
             data-testid={testIdCloseModal}
             type="button"
-            onClick={() => setAuthModalState(AuthModalState.Closed)}
+            onClick={authModalActions.close}
           >
             close modal
           </button>
           <button
-            data-testid={testIdShowSignin}
+            data-testid={testIdShowLogin}
             type="button"
-            onClick={() => setAuthModalState(AuthModalState.Login)}
+            onClick={authModalActions.openLogin}
           >
-            show signin
+            show login
           </button>
           <button
             data-testid={testIdShowSignup}
             type="button"
-            onClick={() => setAuthModalState(AuthModalState.Signup)}
+            onClick={authModalActions.openSignup}
           >
             show signup
+          </button>
+          <button
+            data-testid={testIdShowLogout}
+            type="button"
+            onClick={authModalActions.openLogout}
+          >
+            show logout
           </button>
         </>
       );
@@ -96,8 +107,8 @@ describe('rootContext', () => {
       AuthModalState.Closed.toString(),
     );
 
-    // Assert show signin
-    await user.click(screen.getByTestId(testIdShowSignin));
+    // Assert show login
+    await user.click(screen.getByTestId(testIdShowLogin));
     await waitFor(() => {
       expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
         AuthModalState.Login.toString(),
@@ -109,6 +120,14 @@ describe('rootContext', () => {
     await waitFor(() => {
       expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
         AuthModalState.Signup.toString(),
+      );
+    });
+
+    // Assert show logout
+    await user.click(screen.getByTestId(testIdShowLogout));
+    await waitFor(() => {
+      expect(screen.getByTestId(testIdModalState)).toHaveTextContent(
+        AuthModalState.Logout.toString(),
       );
     });
 

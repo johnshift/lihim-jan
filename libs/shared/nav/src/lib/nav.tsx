@@ -98,10 +98,10 @@ export const Nav = () => {
   const {
     isLoading: sessionIsLoading,
     session,
-    setAuthModalState,
+    authModalActions,
   } = useRootContext();
   const openAuthModal = (isAnon: boolean) => {
-    setAuthModalState(isAnon ? AuthModalState.Login : AuthModalState.Logout);
+    isAnon ? authModalActions.openLogin() : authModalActions.openLogout();
   };
 
   // Styles

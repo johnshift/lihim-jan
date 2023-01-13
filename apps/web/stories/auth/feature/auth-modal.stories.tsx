@@ -5,7 +5,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { screen, userEvent, waitFor, within } from '@storybook/testing-library';
 
 import {
-  AuthModalState,
   PLACEHOLDER_PRINCIPAL,
   TEXT_LOGIN_FOOTER,
   TEXT_SIGNUP_FOOTER,
@@ -20,11 +19,10 @@ export default {
 
 const TESTID_SHOW = 'show-auth-modal';
 const Template: ComponentStory<typeof AuthModal> = () => {
-  const { setAuthModalState } = useRootContext();
-  const show = () => setAuthModalState(AuthModalState.Login);
+  const { authModalActions } = useRootContext();
 
   return (
-    <Button data-testid={TESTID_SHOW} onClick={show}>
+    <Button data-testid={TESTID_SHOW} onClick={authModalActions.openLogin}>
       Show
     </Button>
   );
