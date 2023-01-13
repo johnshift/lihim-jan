@@ -4,7 +4,6 @@ import { setupServer } from 'msw/node';
 import { uid } from 'uid';
 
 import {
-  AuthModalState,
   PLACEHOLDER_PRINCIPAL,
   TEXT_LOGIN_FOOTER,
   TEXT_SIGNUP_FOOTER,
@@ -43,16 +42,22 @@ describe('AuthModal', () => {
 
     // Component that can open the modal
     const TestComponent = () => {
-      const { setAuthModalState } = useRootContext();
-      const show = () => setAuthModalState(AuthModalState.Login);
-      const close = () => setAuthModalState(AuthModalState.Closed);
+      const { authModalActions } = useRootContext();
 
       return (
         <>
-          <button type="button" data-testid={showTestId} onClick={show}>
+          <button
+            type="button"
+            data-testid={showTestId}
+            onClick={authModalActions.openLogin}
+          >
             Show
           </button>
-          <button type="button" data-testid={closeTestId} onClick={close}>
+          <button
+            type="button"
+            data-testid={closeTestId}
+            onClick={authModalActions.close}
+          >
             Close
           </button>
           <AuthModal />

@@ -15,8 +15,7 @@ const SignupForm = dynamic(() => import('./signup-form'), {
 });
 
 export const AuthModal = () => {
-  const { authModalState, setAuthModalState } = useRootContext();
-  const closeAuthModal = () => setAuthModalState(AuthModalState.Closed);
+  const { authModalState, authModalActions } = useRootContext();
 
   return (
     <Modal
@@ -25,7 +24,7 @@ export const AuthModal = () => {
       opened={authModalState !== AuthModalState.Closed}
       size="auto"
       radius="lg"
-      onClose={closeAuthModal}
+      onClose={authModalActions.close}
     >
       {authModalState === AuthModalState.Login && <LoginForm />}
       {authModalState === AuthModalState.Signup && <SignupForm />}

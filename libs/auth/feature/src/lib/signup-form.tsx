@@ -5,19 +5,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { SignupPayload } from '@lihim/auth/core';
 import { SignupPayloadSchema } from '@lihim/auth/core';
-import { AuthModalState } from '@lihim/auth/core';
 import { useSignupMutation } from '@lihim/auth/data-access';
 import { SignupForm as SignupFormUi } from '@lihim/auth/ui';
 import { useRootContext } from '@lihim/shared/data-access';
 
 const SignupForm = () => {
   // Auth modal state
-  const { setAuthModalState } = useRootContext();
-  const closeAuthModal = () => setAuthModalState(AuthModalState.Closed);
-  const showLogin = () => setAuthModalState(AuthModalState.Login);
+  const { authModalActions } = useRootContext();
 
   // Signin mutation
-  const { mutate, error, isLoading } = useSignupMutation(closeAuthModal);
+  const { mutate, error, isLoading } = useSignupMutation(
+    authModalActions.close,
+  );
 
   // Form controls
   const {
@@ -34,7 +33,7 @@ const SignupForm = () => {
     <SignupFormUi
       isLoading={isLoading}
       control={control}
-      showLogin={showLogin}
+      showLogin={authModalActions.openLogin}
       errors={{
         firstname: Boolean(
           error?.field === 'firstname' || errors.firstname?.message,

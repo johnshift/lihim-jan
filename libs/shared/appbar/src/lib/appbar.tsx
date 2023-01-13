@@ -1,7 +1,6 @@
 import { Group, useMantineColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { AuthModalState } from '@lihim/auth/core';
 import { useLogoutMutation } from '@lihim/auth/data-access';
 import { useRootContext } from '@lihim/shared/data-access';
 
@@ -22,10 +21,9 @@ export const Appbar = () => {
   // Session state
   const {
     isLoading: sessionIsLoading,
-    setAuthModalState,
+    authModalActions,
     session,
   } = useRootContext();
-  const showLoginForm = () => setAuthModalState(AuthModalState.Login);
 
   // Logout mutation
   const { isLoading: logoutIsLoading, mutate: logoutMutate } =
@@ -34,7 +32,7 @@ export const Appbar = () => {
   // Computed vars
   const isLoggedIn = !session.isAnon;
   const isLoading = sessionIsLoading || logoutIsLoading;
-  const authFn = isLoggedIn ? logoutMutate : showLoginForm;
+  const authFn = isLoggedIn ? logoutMutate : authModalActions.openLogin;
 
   return (
     <Wrapper>
