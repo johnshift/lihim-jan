@@ -27,3 +27,4 @@ export type ErrSuffix =
 export const ARIA_SHOW_PASSWORD_ICON = 'show password icon';
 export const ARIA_HIDE_PASSWORD_ICON = 'hide password icon';
 export const TESTID_PASSWORD_VISIBILITY = 'password-visibility';
+export const TESTID_NAV_AUTH_ACTION = 'nav-auth-action';

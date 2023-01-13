@@ -11,7 +11,6 @@ const useStyles = createStyles<string, StyleParam>(
     container: {
       display: 'flex',
       width: '100vw',
-      minHeight: '400vh',
       [theme.fn.largerThan(theme.breakpoints.xs)]: {
         width: '95%',
       },
@@ -35,20 +34,25 @@ const useStyles = createStyles<string, StyleParam>(
       },
       [theme.fn.largerThan(theme.breakpoints.md)]: {
         flexBasis: '25%',
+        paddingLeft: '11%',
       },
     },
-    contentWrapper: {
+    mainWrapper: {
       display: 'flex',
       width: '100%',
       flexDirection: 'column',
+      borderLeft: `1px solid ${borderColor}`,
+      borderRight: `1px solid ${borderColor}`,
       [theme.fn.largerThan(theme.breakpoints.xs)]: {
         flexGrow: 1,
-        borderLeft: `1px solid ${borderColor}`,
-        borderRight: `1px solid ${borderColor}`,
       },
       [theme.fn.largerThan(theme.breakpoints.md)]: {
         flexBasis: '50%',
       },
+    },
+    contentWrapper: {
+      minHeight: '400vh', // Temporary
+      padding: '10px 10px 0',
     },
     asideWrapper: {
       display: 'none',
@@ -67,27 +71,32 @@ const useStyles = createStyles<string, StyleParam>(
   }),
 );
 
-export const PageLayout: FC<{ children: ReactNode }> = ({ children }) => {
+type Props = {
+  children: ReactNode;
+  nav: ReactNode;
+  appbar: ReactNode;
+};
+
+export const PageLayout: FC<Props> = ({ nav, appbar, children }) => {
   const { colorScheme, colors } = useMantineTheme();
 
   const { classes } = useStyles({
-    borderColor: colorScheme === 'dark' ? colors.dark[5] : colors.gray[2],
+    borderColor: colorScheme === 'dark' ? colors.dark[5] : colors.gray[3],
   });
 
   return (
     <Center>
       <div className={classes.container}>
-        <div className={classes.navWrapper}>
-          <Center>
-            <h1>Nav</h1>
-          </Center>
-        </div>
-        <div className={classes.contentWrapper}>{children}</div>
-        <div className={classes.asideWrapper}>
+        <nav className={classes.navWrapper}>{nav}</nav>
+        <main className={classes.mainWrapper}>
+          {appbar}
+          <div className={classes.contentWrapper}>{children}</div>
+        </main>
+        <aside className={classes.asideWrapper}>
           <Center>
             <h1>Aside</h1>
           </Center>
-        </div>
+        </aside>
       </div>
     </Center>
   );
