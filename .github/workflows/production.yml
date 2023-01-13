@@ -83,4 +83,5 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
           externals: 'public/**'
+          traceChanged: 'expanded'
           autoAcceptChanges: true # (checks happen in PR, main branch means already accepted)
