@@ -1,12 +1,11 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { Box } from '@mantine/core';
-
 import { AuthModal } from '@lihim/auth/feature';
 import { Appbar } from '@lihim/shared/appbar';
 import { RootProvider } from '@lihim/shared/data-access';
 import { MantineProvider } from '@lihim/shared/mantine';
+import { Nav } from '@lihim/shared/nav';
 import { ReactQueryProvider } from '@lihim/shared/react-query';
 import { PageLayout } from '@lihim/shared/ui';
 
@@ -23,11 +22,8 @@ const App = ({ Component, pageProps }: AppProps) => (
       <MantineProvider colorScheme="dark">
         <ReactQueryProvider>
           <RootProvider>
-            <PageLayout>
-              <Appbar />
-              <Box px={10}>
-                <Component {...pageProps} />
-              </Box>
+            <PageLayout nav={<Nav />} appbar={<Appbar />}>
+              <Component {...pageProps} />
             </PageLayout>
             <AuthModal />
           </RootProvider>

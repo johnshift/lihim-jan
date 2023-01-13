@@ -9,9 +9,12 @@ export const theme: MantineThemeOverride = {
     // largerThan(lg) -> hd screens -> 1500..2000
     // largerThan(xl) -> ultra hd -> 2000...
     xs: 600,
-    sm: 830,
+    sm: 850,
     md: 1200,
     lg: 1540,
     xl: 1930,
   },
+  primaryColor: 'indigo',
+  black: '#333645',
+  white: '#fdfeff',
 };
