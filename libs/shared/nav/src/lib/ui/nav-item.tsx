@@ -29,7 +29,9 @@ export const NavItem: FC<Props> = ({
       root: {
         height: 60,
         paddingLeft: 25,
-        borderRadius: '10px 0 0 10px',
+        [theme.fn.largerThan(theme.breakpoints.xs)]: {
+          borderRadius: '10px 0 0 10px',
+        },
       },
       label: {
         fontSize: 17,
