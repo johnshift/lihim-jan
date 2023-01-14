@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, FormEventHandler } from 'react';
 
 import { Button, Flex, Group, Stack, Title } from '@mantine/core';
 
@@ -15,7 +15,7 @@ import { FormWrapper } from './form-wrapper';
 type Props = {
   isLoading: boolean;
   onCancel: TVoidFn;
-  onSubmit: TVoidFn;
+  onSubmit: FormEventHandler<HTMLFormElement>;
 };
 
 export const LogoutForm: FC<Props> = ({ isLoading, onCancel, onSubmit }) => (
