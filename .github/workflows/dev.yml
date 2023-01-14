@@ -13,29 +13,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # db-migration:
-  #   name: DB Migration local -> dev
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: Dev
-  #   env:
-  #     SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-  #     SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-  #     SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #         token: ${{ secrets.GA_PAT }}
-  #     - name: Setup supabase-cli
-  #       uses: supabase/setup-cli@v1
-  #       with:
-  #         version: 1.27.5
-  #     - name: Supabase migration
-  #       run: |
-  #         supabase link --project-ref $SUPABASE_PROJECT_ID
-  #         supabase db push
+  db-migration:
+    name: DB Migration local -> dev
+    runs-on: ubuntu-latest
+    environment:
+      name: Dev
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GA_PAT }}
+      - name: Setup supabase-cli
+        uses: supabase/setup-cli@v1
+        with:
+          version: 1.33.0
+      - name: Supabase migration
+        run: |
+          supabase link --project-ref $SUPABASE_PROJECT_ID
+          supabase db push
 
   create-pull-request:
     name: Create Pull Request
@@ -254,7 +254,7 @@ jobs:
   final-check:
     name: Final Check
     runs-on: ubuntu-latest
-    needs: [create-pull-request, test-report, dev-deploy, chromatic]
+    needs: [test-report, dev-deploy, chromatic]
     # Always run even any of needs was skipped/failed/canceled
     if:
       always()
