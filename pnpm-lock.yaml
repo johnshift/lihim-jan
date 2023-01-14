@@ -80,6 +80,7 @@ specifiers:
   msw: ^0.49.2
   msw-storybook-addon: ^1.6.3
   next: ^13.1.2
+  node-mocks-http: ^1.12.1
   nx: 15.4.2
   prettier: ^2.8.1
   react: 18.2.0
@@ -191,6 +192,7 @@ devDependencies:
   jest-environment-jsdom: 28.1.1
   msw: 0.49.2_typescript@4.8.4
   msw-storybook-addon: 1.6.3_hqjmemrlubrdinu76juhfilxoe
+  node-mocks-http: 1.12.1
   nx: 15.4.2_@swc+core@1.3.24
   prettier: 2.8.1
   react-test-renderer: 18.2.0_react@18.2.0
@@ -15936,6 +15938,22 @@ packages:
 
   /node-machine-id/1.1.12:
     resolution: {integrity: sha512-QNABxbrPa3qEIfrE6GOJ7BYIuignnJw7iQ2YPbc3Nla1HzRJjXzZOiikfF8m7eAMfichLt3M4VgLOetqgDmgGQ==}
+    dev: true
+
+  /node-mocks-http/1.12.1:
+    resolution: {integrity: sha512-jrA7Sn3qI6GsHgWtUW3gMj0vO6Yz0nJjzg3jRZYjcfj4tzi8oWPauDK1qHVJoAxTbwuDHF1JiM9GISZ/ocI/ig==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      accepts: 1.3.8
+      content-disposition: 0.5.4
+      depd: 1.1.2
+      fresh: 0.5.2
+      merge-descriptors: 1.0.1
+      methods: 1.1.2
+      mime: 1.6.0
+      parseurl: 1.3.3
+      range-parser: 1.2.1
+      type-is: 1.6.18
     dev: true
 
   /node-preload/0.2.1:
