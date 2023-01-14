@@ -44,6 +44,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': 13.4.0
   '@testing-library/user-event': ^14.4.3
+  '@types/crypto-js': ^4.1.1
   '@types/jest': 28.1.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
@@ -54,6 +55,7 @@ specifiers:
   babel-jest: 28.1.1
   babel-loader: 8.1.0
   core-js: ^3.6.5
+  crypto-js: ^4.1.1
   cypress: ^11.0.0
   eslint: ^8.31.0
   eslint-config-next: ^13.1.1
@@ -108,6 +110,7 @@ dependencies:
   '@nrwl/next': 15.4.2_2lvdkmkyt3cyeyc6o2aonfysqu
   '@tanstack/react-query': 4.20.9_biqbaboplfbrettd7655fr4n2y
   core-js: 3.27.1
+  crypto-js: 4.1.1
   next: 13.1.2_a7mipu7kvrstgwvi56qu2qyzhe
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -153,6 +156,7 @@ devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.4.3_ua4wuun3fnehcjqtqj2e2ldgpe
+  '@types/crypto-js': 4.1.1
   '@types/jest': 28.1.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
@@ -7221,6 +7225,10 @@ packages:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
     dev: true
 
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
+    dev: true
+
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -10106,6 +10114,10 @@ packages:
       randombytes: 2.1.0
       randomfill: 1.0.4
     dev: true
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
 
   /crypto-random-string/2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
