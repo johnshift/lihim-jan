@@ -12,6 +12,7 @@ export const ERR_METHOD = 'Method not allowed';
 export const ERR_INVALID_REQUEST = 'Invalid request data';
 export const ERR_INVALID_RESPONSE = 'Invalid response data';
 export const ERR_OFFLINE = 'No internet connection';
+export const ERR_CONSOLE_CAUGHT_INTERNAL = 'Caught internal error:';
 
 // Error suffix
 export const ERR_SUFFIX_REQUIRED = 'is required';
