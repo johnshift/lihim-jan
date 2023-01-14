@@ -44,6 +44,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': 13.4.0
   '@testing-library/user-event': ^14.4.3
+  '@types/cookie': ^0.5.1
   '@types/crypto-js': ^4.1.1
   '@types/jest': 28.1.1
   '@types/node': 18.11.9
@@ -54,6 +55,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.36.1
   babel-jest: 28.1.1
   babel-loader: 8.1.0
+  cookie: ^0.5.0
   core-js: ^3.6.5
   crypto-js: ^4.1.1
   cypress: ^11.0.0
@@ -109,6 +111,8 @@ dependencies:
   '@mantine/notifications': 5.10.0_3m53ouna3laykmqkiimzgz4i2m
   '@nrwl/next': 15.4.2_2lvdkmkyt3cyeyc6o2aonfysqu
   '@tanstack/react-query': 4.20.9_biqbaboplfbrettd7655fr4n2y
+  '@types/cookie': 0.5.1
+  cookie: 0.5.0
   core-js: 3.27.1
   crypto-js: 4.1.1
   next: 13.1.2_a7mipu7kvrstgwvi56qu2qyzhe
@@ -7224,6 +7228,10 @@ packages:
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
     dev: true
+
+  /@types/cookie/0.5.1:
+    resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
+    dev: false
 
   /@types/crypto-js/4.1.1:
     resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
