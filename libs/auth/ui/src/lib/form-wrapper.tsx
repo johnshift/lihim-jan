@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, FormEventHandler, ReactNode } from 'react';
 
 import { Box, Center, LoadingOverlay } from '@mantine/core';
 
@@ -6,7 +6,7 @@ import { TVoidFn } from '@lihim/shared/core';
 
 type Props = {
   children: ReactNode;
-  onSubmit: TVoidFn;
+  onSubmit: TVoidFn | FormEventHandler<HTMLFormElement>;
   isLoading: boolean;
   loadingTestId: string;
 };

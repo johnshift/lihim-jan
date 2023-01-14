@@ -61,7 +61,7 @@ export const MSG_LOGIN_OK = 'Login successful';
 export const MSG_LOGIN_OK_INFO = 'You are now logged in';
 export const MSG_SIGNUP_OK = 'Signup successful';
 export const MSG_LOGOUT_LOADING = 'You are being logged out';
-export const MSG_LOGOUT_DONE = ' You have been logged out';
+export const MSG_LOGOUT_DONE = 'You have been logged out';
 export const MSG_LOGOUT_OK = 'Logout successful';
 
 // Error Messages
