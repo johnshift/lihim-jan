@@ -26,14 +26,12 @@ export const getSessionInfo = async (email: string) => {
 
   // Throw 500 if error
   if (error) {
-    console.error('get-session-info error (500): error =', error.message);
-    throw new Error(error.message);
+    throw new Error('get-session-info error: ' + error.message);
   }
 
   // Throw 500 if no data
   if (!data) {
-    console.error('get-session-info no data returned (500): data =', data);
-    throw new Error('No data returned');
+    throw new Error('get-session-info no data returned');
   }
 
   return data;

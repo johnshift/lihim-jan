@@ -1,6 +1,6 @@
 import { EmailSchema, ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
 import { createSupabaseClient, supabaseRpc } from '@lihim/shared/api';
-import { ApiError, ERR_INTERNAL } from '@lihim/shared/core';
+import { ApiError } from '@lihim/shared/core';
 
 import { RPC_GET_EMAIL } from '../constants';
 
@@ -35,14 +35,13 @@ export const getEmail = async (_principal: string): Promise<string> => {
 
   // This is expected to work, if error meaning on supabase's end -> return 500
   if (error) {
-    console.error(
-      'getEmail postgres error:',
-      `\n\tcode=${error.code}`,
-      `\n\tmsg=${error.message}`,
-      `\n\thint=${error.hint}`,
-      `\n\tdetails=${error.details}`,
+    throw new Error(
+      `getEmail postgres error: ` +
+        `\n\tcode=${error.code}` +
+        `\n\tmsg=${error.message}` +
+        `\n\thint=${error.hint}` +
+        `\n\tdetails=${error.details}`,
     );
-    throw new Error(ERR_INTERNAL);
   }
 
   // If no email matches principal, incorrect signin

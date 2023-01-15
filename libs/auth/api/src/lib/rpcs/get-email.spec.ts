@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { waitFor } from '@testing-library/react';
-
 import { faker } from '@faker-js/faker';
 
 import { ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
 import * as sharedApi from '@lihim/shared/api';
-import { ApiError, ERR_INTERNAL } from '@lihim/shared/core';
+import { ApiError } from '@lihim/shared/core';
 
 import { getEmail } from './get-email';
 
@@ -28,9 +26,6 @@ describe('getEmail', () => {
   });
 
   it('throws error on rpc error', async () => {
-    // Spy console.log
-    const consoleSpy = jest.spyOn(console, 'error');
-
     // Test value(s)
     const principal = 'test-username';
 
@@ -60,19 +55,14 @@ describe('getEmail', () => {
     try {
       await getEmail(principal);
     } catch (error) {
-      expect((error as Error).message).toBe(ERR_INTERNAL);
+      expect((error as Error).message).toBe(
+        'getEmail postgres error: ' +
+          `\n\tcode=${code}` +
+          `\n\tmsg=${message}` +
+          `\n\thint=${hint}` +
+          `\n\tdetails=${details}`,
+      );
     }
-
-    // Assert console log
-    await waitFor(() =>
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'getEmail postgres error:',
-        `\n\tcode=${code}`,
-        `\n\tmsg=${message}`,
-        `\n\thint=${hint}`,
-        `\n\tdetails=${details}`,
-      ),
-    );
   });
 
   it('throws error when no data was returned by rpc', async () => {

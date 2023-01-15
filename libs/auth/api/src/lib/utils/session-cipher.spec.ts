@@ -1,7 +1,4 @@
-import { waitFor } from '@testing-library/react';
-
 import { fakeSession } from '@lihim/auth/testutils';
-import { ERR_INTERNAL } from '@lihim/shared/core';
 
 import { decryptSessionCookie, encryptSessionCookie } from './session-cipher';
 
@@ -19,9 +16,6 @@ describe('sessionCookieCipher', () => {
   });
 
   test('encrypt no aesKey throws 500', async () => {
-    // Spy console.log
-    const consoleSpy = jest.spyOn(console, 'error');
-
     // Unset env
     process.env['AES_KEY'] = undefined;
 
@@ -32,20 +26,10 @@ describe('sessionCookieCipher', () => {
     // Assert throws error
     expect(async () =>
       encryptSessionCookie(accessToken, session),
-    ).rejects.toThrow(ERR_INTERNAL);
-
-    // Assert console log
-    await waitFor(() =>
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'encryptSessionCookie missing env: AES_KEY',
-      ),
-    );
+    ).rejects.toThrow('encryptSessionCookie missing env: AES_KEY');
   });
 
   test('decrypt no aesKey throws 500', async () => {
-    // Spy console.log
-    const consoleSpy = jest.spyOn(console, 'error');
-
     // Provide dummy data
     const accessToken = 'test-token';
     const session = fakeSession();
@@ -64,14 +48,7 @@ describe('sessionCookieCipher', () => {
 
     // Assert throws error
     expect(async () => decryptSessionCookie(sessionToken)).rejects.toThrow(
-      ERR_INTERNAL,
-    );
-
-    // Assert console log
-    await waitFor(() =>
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'decryptSessionCookie missing env: AES_KEY',
-      ),
+      'decryptSessionCookie missing env: AES_KEY',
     );
   });
 

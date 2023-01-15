@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { waitFor } from '@testing-library/react';
 
 import { faker } from '@faker-js/faker';
 import { Session } from '@supabase/supabase-js';
 
 import { ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
 import * as sharedApi from '@lihim/shared/api';
-import { ApiError, ERR_INTERNAL } from '@lihim/shared/core';
+import { ApiError } from '@lihim/shared/core';
 
 import { dbLogin } from './db-login';
 
@@ -20,61 +19,63 @@ describe('supabase login', () => {
   const testEmail = faker.internet.email();
   const testPassword = faker.internet.password();
 
-  test.each([
-    ['error', 401, ERR_LOGIN_INCORRECT],
-    ['internal-error', 500, ERR_INTERNAL],
-  ])(
-    'throws error on supabase signin %s',
-    async (errorType, status, errMsg) => {
-      // Spy console.log
-      const consoleSpy = jest.spyOn(console, 'error');
+  test('signin error', async () => {
+    // Test values
+    const errorMsg = faker.lorem.sentence();
 
-      // Test values
-      const errorMsg = faker.lorem.sentence();
+    // Mock supabase signin error
+    const signInWithPassword = jest.fn().mockReturnValue({
+      data: { session: null, user: null },
+      error: {
+        status: 401,
+        message: errorMsg,
+      },
+    });
+    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+      auth: {
+        signInWithPassword,
+      },
+    } as any);
 
-      // Mock supabase signin error
-      const signInWithPassword = jest.fn().mockReturnValue({
-        data: { session: null, user: null },
-        error: {
-          status,
-          message: errorMsg,
-        },
-      });
-      jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
-        auth: {
-          signInWithPassword,
-        },
-      } as any);
+    // Assert error
+    try {
+      await dbLogin(testEmail, testPassword);
+    } catch (error) {
+      const err = error as ApiError;
+      expect(err.status).toBe(401);
+      expect(err.message).toBe(ERR_LOGIN_INCORRECT);
+    }
+  });
 
-      // Exec
-      try {
-        await dbLogin(testEmail, testPassword);
-      } catch (error) {
-        if (errorType !== 'internal-error') {
-          expect((error as ApiError).status).toBe(status);
-        }
+  test('signin internal error', async () => {
+    // Test values
+    const errorMsg = faker.lorem.sentence();
 
-        expect((error as Error).message).toBe(errMsg);
-      }
+    // Mock supabase signin error
+    const signInWithPassword = jest.fn().mockReturnValue({
+      data: { session: null, user: null },
+      error: {
+        status: 500,
+        message: errorMsg,
+      },
+    });
+    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+      auth: {
+        signInWithPassword,
+      },
+    } as any);
 
-      // Assert console if internal error
-      if (errorType === 'internal-error') {
-        // Assert console log
-        await waitFor(() =>
-          expect(consoleSpy).toHaveBeenCalledWith(
-            'signin api error:',
-            `\n\tstatus=${status}`,
-            `\n\tmsg=${errorMsg}`,
-          ),
-        );
-      }
-    },
-  );
+    // Assert error
+    try {
+      await dbLogin(testEmail, testPassword);
+    } catch (error) {
+      expect((error as Error).message).toBe(
+        `signin api error: \n\tstatus=500 \n\tmsg=${errorMsg}`,
+      );
+    }
+  });
 
-  it('throws error when signin does not return data.session', async () => {
-    // Spy console.log
-    const consoleSpy = jest.spyOn(console, 'error');
-
+  test('no session returned', async () => {
     // Mock supabase signin no data returned
     const signInWithPassword = jest.fn().mockReturnValue({
       data: { session: null, user: null },
@@ -90,18 +91,11 @@ describe('supabase login', () => {
     try {
       await dbLogin(testEmail, testPassword);
     } catch (error) {
-      expect((error as Error).message).toBe(ERR_INTERNAL);
+      expect((error as Error).message).toBe('No session returned after signin');
     }
-
-    // Assert console log
-    await waitFor(() =>
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'No session returned after signin',
-      ),
-    );
   });
 
-  it('returns access-token when no error was thrown', async () => {
+  test('returns access-token on success', async () => {
     // Test values
     const testAccessToken = faker.datatype.uuid();
 
