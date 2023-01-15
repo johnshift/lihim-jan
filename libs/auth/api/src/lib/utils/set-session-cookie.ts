@@ -1,20 +1,16 @@
 import type { NextApiResponse } from 'next';
 
-import { CookieSerializeOptions, serialize } from 'cookie';
+import { serialize } from 'cookie';
 
 import type { Session } from '@lihim/auth/core';
 
-import { COOKEY_CSRF, COOKEY_SESSION } from '../constants';
+import {
+  COOKEY_CSRF,
+  COOKEY_SESSION,
+  defaultCookieOptions,
+} from '../constants';
 
 import { encryptSessionCookie } from './session-cipher';
-
-const defaultCookieOptions = {
-  httpOnly: true,
-  maxAge: 1000 * 60 * 60,
-  path: '/',
-  sameSite: 'strict',
-  secure: process.env['NODE_ENV'] === 'production',
-} as CookieSerializeOptions;
 
 export const setSessionCookie = (
   res: NextApiResponse,
