@@ -1,5 +1,6 @@
 export * from './lib/constants';
 export * from './lib/misc';
+export { EmailSchema } from './lib/schemas/email-schema';
 export type { LoginPayload } from './lib/schemas/login-payload-schema';
 export { LoginPayloadSchema } from './lib/schemas/login-payload-schema';
 export type { LoginResponse } from './lib/schemas/login-response-schema';

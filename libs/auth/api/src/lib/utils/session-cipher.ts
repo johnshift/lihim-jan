@@ -9,10 +9,10 @@ import { ApiError, ERR_INTERNAL } from '@lihim/shared/core';
 // This way, we only need to decrypt the session cookie (if there's any) -
 
 // and avoid a roundtrip call to db instance.
-export const encryptSessionCookie = async (
+export const encryptSessionCookie = (
   accessToken: string,
   session: Session,
-): Promise<[string, string]> => {
+): [string, string] => {
   // Get aes key from env
   const { AES_KEY } = process.env;
   if (!AES_KEY) {
@@ -35,9 +35,9 @@ export const encryptSessionCookie = async (
 };
 
 // DecryptSessionCookie ...
-export const decryptSessionCookie = async (
+export const decryptSessionCookie = (
   encryptedToken: string,
-): Promise<[string, Session, string]> => {
+): [string, Session, string] => {
   // Get aes key from env
   const { AES_KEY } = process.env;
   if (!AES_KEY) {
