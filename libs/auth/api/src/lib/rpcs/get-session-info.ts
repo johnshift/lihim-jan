@@ -1,5 +1,5 @@
 import { LoggedInSession } from '@lihim/auth/core';
-import { createSupabaseClient } from '@lihim/shared/api';
+import { createSupabaseClient, supabaseRpc } from '@lihim/shared/api';
 
 import { RPC_GET_SESSION_INFO } from '../constants';
 
@@ -8,7 +8,7 @@ type RpcSignature = {
   Args: {
     emailInput: string;
   };
-  Returns: LoggedInSession;
+  Returns: Omit<LoggedInSession, 'isAnon'>;
 };
 
 export const getSessionInfo = async (email: string) => {
@@ -16,11 +16,13 @@ export const getSessionInfo = async (email: string) => {
   const supabase = createSupabaseClient();
 
   // Execute get-session-info rpc
-  const { data, error } = await supabase
-    .rpc<RpcName, RpcSignature>(RPC_GET_SESSION_INFO, {
+  const { data, error } = await supabaseRpc<RpcName, RpcSignature>(
+    supabase,
+    RPC_GET_SESSION_INFO,
+    {
       emailInput: email,
-    })
-    .single();
+    },
+  );
 
   // Throw 500 if error
   if (error) {
