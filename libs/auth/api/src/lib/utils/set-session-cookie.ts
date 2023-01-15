@@ -16,16 +16,13 @@ const defaultCookieOptions = {
   secure: process.env['NODE_ENV'] === 'production',
 } as CookieSerializeOptions;
 
-export const setSessionCookie = async (
+export const setSessionCookie = (
   res: NextApiResponse,
   session: Session,
   accessToken: string,
 ) => {
   // Generate session tokens
-  const [sessionToken, csrfToken] = await encryptSessionCookie(
-    accessToken,
-    session,
-  );
+  const [sessionToken, csrfToken] = encryptSessionCookie(accessToken, session);
 
   // Create auth cookies
   const csrfCookie = serialize(COOKEY_CSRF, csrfToken, defaultCookieOptions);

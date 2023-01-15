@@ -30,9 +30,9 @@ describe('sessionCookieCipher', () => {
     const session = fakeSession();
 
     // Assert throws error
-    expect(encryptSessionCookie(accessToken, session)).rejects.toThrow(
-      ERR_INTERNAL,
-    );
+    expect(async () =>
+      encryptSessionCookie(accessToken, session),
+    ).rejects.toThrow(ERR_INTERNAL);
 
     // Assert console log
     await waitFor(() =>
@@ -51,7 +51,7 @@ describe('sessionCookieCipher', () => {
     const session = fakeSession();
 
     // Encrypt
-    const encryptedToken = await encryptSessionCookie(accessToken, session);
+    const encryptedToken = encryptSessionCookie(accessToken, session);
     if (!encryptedToken) {
       throw new Error('No encrypted token generated');
     }
@@ -63,7 +63,9 @@ describe('sessionCookieCipher', () => {
     process.env['AES_KEY'] = undefined;
 
     // Assert throws error
-    expect(decryptSessionCookie(sessionToken)).rejects.toThrow(ERR_INTERNAL);
+    expect(async () => decryptSessionCookie(sessionToken)).rejects.toThrow(
+      ERR_INTERNAL,
+    );
 
     // Assert console log
     await waitFor(() =>
@@ -73,18 +75,18 @@ describe('sessionCookieCipher', () => {
     );
   });
 
-  test('ok', async () => {
+  test('ok', () => {
     const accessToken = 'test-token';
     const session = fakeSession();
 
     // Encrypt session cookie
-    const [sessionToken, csrfToken] = await encryptSessionCookie(
+    const [sessionToken, csrfToken] = encryptSessionCookie(
       accessToken,
       session,
     );
 
     // Decrypt session cookie
-    const decryptedToken = await decryptSessionCookie(sessionToken);
+    const decryptedToken = decryptSessionCookie(sessionToken);
     if (!decryptedToken) {
       throw new Error('No decrypted token generated');
     }
