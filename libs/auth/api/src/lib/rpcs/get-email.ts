@@ -1,5 +1,5 @@
 import { EmailSchema, ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
-import { createSupabaseClient } from '@lihim/shared/api';
+import { createSupabaseClient, supabaseRpc } from '@lihim/shared/api';
 import { ApiError, ERR_INTERNAL } from '@lihim/shared/core';
 
 import { RPC_GET_EMAIL } from '../constants';
@@ -25,11 +25,13 @@ export const getEmail = async (_principal: string): Promise<string> => {
   const supabase = createSupabaseClient();
 
   // Execute get-email rpc
-  const { data, error } = await supabase
-    .rpc<RpcName, RpcSignature>(RPC_GET_EMAIL, {
+  const { data, error } = await supabaseRpc<RpcName, RpcSignature>(
+    supabase,
+    RPC_GET_EMAIL,
+    {
       principal,
-    })
-    .single();
+    },
+  );
 
   // This is expected to work, if error meaning on supabase's end -> return 500
   if (error) {
