@@ -78,6 +78,7 @@ specifiers:
   html-webpack-plugin: ^5.5.0
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
+  jwt-decode: ^3.1.2
   msw: ^0.49.2
   msw-storybook-addon: ^1.6.3
   next: ^13.1.2
@@ -118,6 +119,7 @@ dependencies:
   cookie: 0.5.0
   core-js: 3.27.1
   crypto-js: 4.1.1
+  jwt-decode: 3.1.2
   next: 13.1.2_a7mipu7kvrstgwvi56qu2qyzhe
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -15062,6 +15064,10 @@ packages:
     resolution: {integrity: sha512-pBxcB3LFc8QVgdggvZWyeys+hnrNWg4OcZIU/1X59k5jQdLBlCsYGRQaz234SqoRLTCgMH00fY0xRJH+F9METQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+    dev: false
 
   /kind-of/3.2.2:
     resolution: {integrity: sha512-NOW9QQXMoZGg/oqnVNoNTTIFEIid1627WCffUBJEdMxYApq7mNE7CpzucIPc+ZQg25Phej7IJSmX3hO+oblOtQ==}
