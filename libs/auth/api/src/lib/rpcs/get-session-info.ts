@@ -8,7 +8,7 @@ type RpcSignature = {
   Args: {
     emailInput: string;
   };
-  Returns: Omit<LoggedInSession, 'isAnon'>;
+  Returns: LoggedInSession;
 };
 
 export const getSessionInfo = async (email: string) => {
