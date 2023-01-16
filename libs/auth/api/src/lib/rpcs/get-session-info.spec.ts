@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { waitFor } from '@testing-library/react';
-
 import { faker } from '@faker-js/faker';
 
 import { fakeSession } from '@lihim/auth/testutils';
@@ -19,9 +17,6 @@ describe('getSessionInfo', () => {
   const testEmail = faker.internet.email();
 
   it('throws error when rpc fails', async () => {
-    // Spy console.log
-    const consoleSpy = jest.spyOn(console, 'error');
-
     // Mock rpc returns error
     const message = 'test-error-message';
     const singleFn = jest.fn().mockReturnValue({
@@ -40,22 +35,13 @@ describe('getSessionInfo', () => {
     try {
       await getSessionInfo(testEmail);
     } catch (error) {
-      expect((error as Error).message).toBe(message);
+      expect((error as Error).message).toBe(
+        'get-session-info error: ' + message,
+      );
     }
-
-    // Assert console log
-    await waitFor(() =>
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'get-session-info error (500): error =',
-        message,
-      ),
-    );
   });
 
   it('throws error when no data was returned by data', async () => {
-    // Spy console.log
-    const consoleSpy = jest.spyOn(console, 'error');
-
     // Mock rpc no data returned
     const singleFn = jest.fn().mockReturnValue({
       data: null,
@@ -72,16 +58,10 @@ describe('getSessionInfo', () => {
     try {
       await getSessionInfo(testEmail);
     } catch (error) {
-      expect((error as Error).message).toBe('No data returned');
+      expect((error as Error).message).toBe(
+        'get-session-info no data returned',
+      );
     }
-
-    // Assert console log
-    await waitFor(() =>
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'get-session-info no data returned (500): data =',
-        null,
-      ),
-    );
   });
 
   it('returns data when no error was thrown', async () => {

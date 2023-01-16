@@ -2,7 +2,6 @@ import CryptoJS from 'crypto-js';
 import { uid } from 'uid';
 
 import type { Session } from '@lihim/auth/core';
-import { ApiError, ERR_INTERNAL } from '@lihim/shared/core';
 
 // EncryptSessionCookie converts accessToken, session object and a csrf token -
 // into an encrypted string that will be stored in cookie.
@@ -16,8 +15,7 @@ export const encryptSessionCookie = (
   // Get aes key from env
   const { AES_KEY } = process.env;
   if (!AES_KEY) {
-    console.error('encryptSessionCookie missing env: AES_KEY');
-    throw new ApiError(500, ERR_INTERNAL);
+    throw new Error('encryptSessionCookie missing env: AES_KEY');
   }
 
   // Generate csrf token
@@ -41,8 +39,7 @@ export const decryptSessionCookie = (
   // Get aes key from env
   const { AES_KEY } = process.env;
   if (!AES_KEY) {
-    console.error('decryptSessionCookie missing env: AES_KEY');
-    throw new ApiError(500, ERR_INTERNAL);
+    throw new Error('decryptSessionCookie missing env: AES_KEY');
   }
 
   // Decrypt token
