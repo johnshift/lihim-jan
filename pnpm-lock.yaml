@@ -10,7 +10,6 @@ specifiers:
   '@emotion/server': ^11.10.0
   '@faker-js/faker': ^7.6.0
   '@hookform/resolvers': ^2.9.10
-  '@mands/nx-playwright': ^0.1.26
   '@mantine/core': ^5.9.6
   '@mantine/hooks': ^5.9.6
   '@mantine/next': ^5.9.6
@@ -26,7 +25,6 @@ specifiers:
   '@nrwl/storybook': 15.4.4
   '@nrwl/web': 15.4.2
   '@nrwl/workspace': 15.4.2
-  '@playwright/test': ^1.29.2
   '@storybook/addon-a11y': ^6.5.15
   '@storybook/addon-essentials': ^6.5.15
   '@storybook/addon-interactions': ^6.5.15
@@ -64,6 +62,7 @@ specifiers:
   core-js: ^3.6.5
   crypto-js: ^4.1.1
   cypress: ^11.0.0
+  dotenv: ^16.0.3
   eslint: ^8.31.0
   eslint-config-next: ^13.1.1
   eslint-config-prettier: ^8.6.0
@@ -88,7 +87,6 @@ specifiers:
   next: ^13.1.2
   node-mocks-http: ^1.12.1
   nx: 15.4.2
-  playwright: ^1.29.2
   prettier: ^2.8.1
   react: 18.2.0
   react-dom: 18.2.0
@@ -144,7 +142,6 @@ devDependencies:
   '@commitlint/cli': 17.4.0_iquupanxhvhyfxgvdronrzc3xa
   '@commitlint/config-nx-scopes': 17.4.0_nx@15.4.2
   '@faker-js/faker': 7.6.0
-  '@mands/nx-playwright': 0.1.26_65owvv3rkspjamif7doh7ksbiq
   '@next/bundle-analyzer': 13.1.1
   '@nrwl/cypress': 15.4.2_7wpmug4vtbm5w7gengsjvnja3e
   '@nrwl/eslint-plugin-nx': 15.4.2_fuz6q66j3d6b5jixslfgstepfi
@@ -155,7 +152,6 @@ devDependencies:
   '@nrwl/storybook': 15.4.4_7wpmug4vtbm5w7gengsjvnja3e
   '@nrwl/web': 15.4.2_7bryi44dir6ax2scwpg4m4rr7y
   '@nrwl/workspace': 15.4.2_mz2bp6p5h2nzdnsecxrkuu5ozy
-  '@playwright/test': 1.29.2
   '@storybook/addon-a11y': 6.5.15_biqbaboplfbrettd7655fr4n2y
   '@storybook/addon-essentials': 6.5.15_en7jwav2wfcahsua4mpg6paasq
   '@storybook/addon-interactions': 6.5.15_v3n4hlgsm3ywuxw3iiran3wtj4
@@ -185,6 +181,7 @@ devDependencies:
   babel-jest: 28.1.1_@babel+core@7.12.13
   babel-loader: 8.1.0_skbaznkilwxrc76cda7pmkel3a
   cypress: 11.2.0
+  dotenv: 16.0.3
   eslint: 8.31.0
   eslint-config-next: 13.1.1_hxm4ti6flr4ebpn5txq2vx72t4
   eslint-config-prettier: 8.6.0_eslint@8.31.0
@@ -207,7 +204,6 @@ devDependencies:
   msw-storybook-addon: 1.6.3_hqjmemrlubrdinu76juhfilxoe
   node-mocks-http: 1.12.1
   nx: 15.4.2_@swc+core@1.3.24
-  playwright: 1.29.2
   prettier: 2.8.1
   react-test-renderer: 18.2.0_react@18.2.0
   storybook-addon-next: 1.7.1_pyjyh5lgn3hyeow7zynizwub4a
@@ -3801,16 +3797,6 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /@mands/nx-playwright/0.1.26_65owvv3rkspjamif7doh7ksbiq:
-    resolution: {integrity: sha512-Ugi5YWEPLSTAh2s/USFZlJblMTKu1w83lYgTSa7A/tYoP0wi4VpCPLFh6Fjq/N9wowTMjOEV9jDJ3fAyLJLG1Q==}
-    peerDependencies:
-      '@playwright/test': ^1.29.2
-      playwright: ^1.29.2
-    dependencies:
-      '@playwright/test': 1.29.2
-      playwright: 1.29.2
-    dev: true
-
   /@mantine/core/5.10.0_b4x4ypfkqdgbz6unljzza6keeu:
     resolution: {integrity: sha512-if272RiYPK0nQQdGNwcCSY7bCPJW9455qXlRhnYOr021xh89T8WFVPeDw4uwcxoXsXdKRV5GAi9irSnsUqsjJQ==}
     peerDependencies:
@@ -4898,15 +4884,6 @@ packages:
       picocolors: 1.0.0
       tiny-glob: 0.2.9
       tslib: 2.4.1
-    dev: true
-
-  /@playwright/test/1.29.2:
-    resolution: {integrity: sha512-+3/GPwOgcoF0xLz/opTnahel1/y42PdcgZ4hs+BZGIUjtmEFSXGg+nFoaH3NSmuc7a6GSFwXDJ5L7VXpqzigNg==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dependencies:
-      '@types/node': 18.11.9
-      playwright-core: 1.29.2
     dev: true
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.10_ohj47mxwagpoxvu7nhhwxzphqm:
@@ -11025,6 +11002,11 @@ packages:
   /dotenv/10.0.0:
     resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
     engines: {node: '>=10'}
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: true
 
   /dotenv/8.6.0:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
