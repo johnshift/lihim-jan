@@ -1,12 +1,11 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { Session, SignupPayload } from '@lihim/auth/core';
-import { createSupabaseClient } from '@lihim/shared/api';
 
 export const dbSignup = async (
+  supabase: SupabaseClient,
   payload: SignupPayload,
 ): Promise<[Session, string]> => {
-  // Supabase anon client
-  const supabase = createSupabaseClient();
-
   // Avatar url
   const avatar = `https://avatars.dicebear.com/api/identicon/${payload.username}.svg`;
   const { data, error } = await supabase.auth.signUp({

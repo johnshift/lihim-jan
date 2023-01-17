@@ -1,6 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { serialize } from 'cookie';
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { deleteCookie } from 'cookies-next';
 
 import { MSG_LOGOUT_DONE } from '@lihim/auth/core';
 import { apiMiddleware } from '@lihim/shared/api';
@@ -11,24 +12,24 @@ import {
   COOKEY_SESSION,
   defaultCookieOptions,
 } from '../constants';
-import { dbLogout } from '../rpcs/db-logout';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // Supabase client
+  const supabaseServerClient = createServerSupabaseClient({
+    req,
+    res,
+  });
+
   // Logout in supabase
-  await dbLogout();
+  const { error } = await supabaseServerClient.auth.signOut();
+  if (error) {
+    throw new Error('logout error = ' + error.message);
+  }
 
-  // Remove session cookies (set empty expired cookies)
-  const sessionCookie = serialize(COOKEY_SESSION, '', {
-    ...defaultCookieOptions,
-    maxAge: 0,
-  });
-  const csrfCookie = serialize(COOKEY_CSRF, '', {
-    ...defaultCookieOptions,
-    maxAge: 0,
-  });
-
-  // Set header
-  res.setHeader('Set-Cookie', [sessionCookie, csrfCookie]);
+  // Remove session cookies
+  const cookieOptions = { req, res, ...defaultCookieOptions };
+  deleteCookie(COOKEY_SESSION, cookieOptions);
+  deleteCookie(COOKEY_CSRF, cookieOptions);
 
   // Success response
   return res.status(200).json({ message: MSG_LOGOUT_DONE });

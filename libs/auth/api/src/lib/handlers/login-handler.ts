@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+
 import {
   ERR_LOGIN_INCORRECT,
   LoginPayloadSchema,
@@ -8,6 +10,7 @@ import {
 import { apiMiddleware } from '@lihim/shared/api';
 import { ApiError, METHOD_POST } from '@lihim/shared/core';
 
+import { defaultCookieOptions } from '../constants';
 import { dbLogin } from '../rpcs/db-login';
 import { getEmail } from '../rpcs/get-email';
 import { getSessionInfo } from '../rpcs/get-session-info';
@@ -21,19 +24,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // Validated payload
-  const payload = parseResult.data;
+  const { principal, password } = parseResult.data;
+
+  // Supabase client
+  const supabaseServerClient = createServerSupabaseClient({
+    req,
+    res,
+  });
 
   // Retrieve email (since principal can be username)
-  const email = await getEmail(payload.principal);
+  const email = await getEmail(supabaseServerClient, principal);
 
   // Login in supabase
-  const accessToken = await dbLogin(email, payload.password);
+  const accessToken = await dbLogin(supabaseServerClient, { email, password });
 
   // Retrieve session info
-  const session = await getSessionInfo(email);
+  const session = await getSessionInfo(supabaseServerClient, email);
 
   // Set session cookie
-  setSessionCookie(res, session, accessToken);
+  const cookieOptions = { req, res, ...defaultCookieOptions };
+  setSessionCookie(session, accessToken, cookieOptions);
 
   // Success response
   return res.status(200).json({ session, message: MSG_LOGIN_OK_INFO });

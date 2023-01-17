@@ -38,6 +38,7 @@ specifiers:
   '@storybook/react': ^6.5.15
   '@storybook/test-runner': ^0.9.2
   '@storybook/testing-library': ^0.0.13
+  '@supabase/auth-helpers-nextjs': ^0.5.2
   '@supabase/supabase-js': ^2.4.0
   '@svgr/webpack': ^5.4.0
   '@swc/core': ^1.2.173
@@ -59,6 +60,7 @@ specifiers:
   babel-jest: 28.1.1
   babel-loader: 8.1.0
   cookie: ^0.5.0
+  cookies-next: ^2.1.1
   core-js: ^3.6.5
   crypto-js: ^4.1.1
   cypress: ^11.0.0
@@ -116,10 +118,12 @@ dependencies:
   '@mantine/next': 5.10.0_knfl6ps6qqqwpiywkokbtml6se
   '@mantine/notifications': 5.10.0_3m53ouna3laykmqkiimzgz4i2m
   '@nrwl/next': 15.4.2_2lvdkmkyt3cyeyc6o2aonfysqu
+  '@supabase/auth-helpers-nextjs': 0.5.2_fjsejuhspb6db5pg2h5ujso754
   '@supabase/supabase-js': 2.4.0
   '@tanstack/react-query': 4.20.9_biqbaboplfbrettd7655fr4n2y
   '@types/cookie': 0.5.1
   cookie: 0.5.0
+  cookies-next: 2.1.1
   core-js: 3.27.1
   crypto-js: 4.1.1
   jwt-decode: 3.1.2
@@ -6696,6 +6700,23 @@ packages:
       resolve-from: 5.0.0
     dev: true
 
+  /@supabase/auth-helpers-nextjs/0.5.2_fjsejuhspb6db5pg2h5ujso754:
+    resolution: {integrity: sha512-B+sQFVEImAYOJKyyNX1DWqTF2qVf9SocOM1GD4eGHon6ulvLOo2a8V+v1jZAuLOBF6yzVIYnZucuYKZCiNP/Eg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.0.4
+    dependencies:
+      '@supabase/auth-helpers-shared': 0.2.3_fjsejuhspb6db5pg2h5ujso754
+      '@supabase/supabase-js': 2.4.0
+    dev: false
+
+  /@supabase/auth-helpers-shared/0.2.3_fjsejuhspb6db5pg2h5ujso754:
+    resolution: {integrity: sha512-Xwnd2UQ/VTjTKIuVg1Xl/ryrElbSccOJhC11jbVPHOs7Y6yxzy9APxQs//jj4IpbDH4uOEDCdpMIJ0tzRxj9DQ==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.0.4
+    dependencies:
+      '@supabase/supabase-js': 2.4.0
+    dev: false
+
   /@supabase/functions-js/2.0.0:
     resolution: {integrity: sha512-ozb7bds2yvf5k7NM2ZzUkxvsx4S4i2eRKFSJetdTADV91T65g4gCzEs9L3LUXSrghcGIkUaon03VPzOrFredqg==}
     dependencies:
@@ -7313,7 +7334,6 @@ packages:
 
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
-    dev: true
 
   /@types/cookie/0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
@@ -7481,7 +7501,6 @@ packages:
 
   /@types/node/16.11.7:
     resolution: {integrity: sha512-QB5D2sqfSjCmTuWcBWyJ+/44bcjO7VbjSbOE0ucoVbAsSNQc4Lt6QkgkVXkTDwkL4z/beecZNDvVX15D4P8Jbw==}
-    dev: true
 
   /@types/node/18.11.9:
     resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
@@ -10014,11 +10033,18 @@ packages:
   /cookie/0.4.2:
     resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
+
+  /cookies-next/2.1.1:
+    resolution: {integrity: sha512-AZGZPdL1hU3jCjN2UMJTGhLOYzNUN9Gm+v8BdptYIHUdwz397Et1p+sZRfvAl8pKnnmMdX2Pk9xDRKCGBum6GA==}
+    dependencies:
+      '@types/cookie': 0.4.1
+      '@types/node': 16.11.7
+      cookie: 0.4.2
+    dev: false
 
   /copy-anything/3.0.3:
     resolution: {integrity: sha512-fpW2W/BqEzqPp29QS+MwwfisHCQZtiduTe/m8idFo0xbti9fIZ2WVhAsCv4ggFVH3AgCkVdpoOCtQC6gBrdhjw==}

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { fakeSignupPayload } from '@lihim/auth/testutils';
 import * as sharedApi from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
@@ -16,6 +18,7 @@ jest.mock('@lihim/shared/api', () => ({
 describe('signupPreflight', () => {
   // Test vars
   const payload = fakeSignupPayload();
+  const supabase = jest.fn() as unknown as SupabaseClient;
 
   test('rpc error', async () => {
     // Mock rpc error
@@ -28,7 +31,7 @@ describe('signupPreflight', () => {
     } as any);
 
     // Assert error
-    expect(signupPreflight(payload)).rejects.toThrowError(
+    expect(signupPreflight(supabase, payload)).rejects.toThrowError(
       'signup-preflight error: ' + errmsg,
     );
   });
@@ -41,7 +44,7 @@ describe('signupPreflight', () => {
     } as any);
 
     // Assert error
-    expect(signupPreflight(payload)).rejects.toThrowError(
+    expect(signupPreflight(supabase, payload)).rejects.toThrowError(
       'signup-preflight no data returned',
     );
   });
@@ -55,7 +58,7 @@ describe('signupPreflight', () => {
 
     // Assert error
     try {
-      await signupPreflight(payload);
+      await signupPreflight(supabase, payload);
     } catch (error) {
       const err = error as ApiError;
       expect(err.status).toBe(400);
@@ -72,7 +75,7 @@ describe('signupPreflight', () => {
 
     // Assert error
     try {
-      await signupPreflight(payload);
+      await signupPreflight(supabase, payload);
     } catch (error) {
       const err = error as ApiError;
       expect(err.status).toBe(400);

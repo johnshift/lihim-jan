@@ -1,5 +1,7 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { SignupPayload } from '@lihim/auth/core';
-import { createSupabaseClient, supabaseRpc } from '@lihim/shared/api';
+import { supabaseRpc } from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
 
 import {
@@ -21,10 +23,10 @@ type RpcSignature = {
   };
 };
 
-export const signupPreflight = async (payload: SignupPayload) => {
-  // Supabase anon client
-  const supabase = createSupabaseClient();
-
+export const signupPreflight = async (
+  supabase: SupabaseClient,
+  payload: SignupPayload,
+) => {
   // Exec signup-preflight rpc
   const { data, error } = await supabaseRpc<RpcName, RpcSignature>(
     supabase,

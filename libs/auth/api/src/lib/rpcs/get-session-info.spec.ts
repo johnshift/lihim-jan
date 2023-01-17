@@ -1,17 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { faker } from '@faker-js/faker';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 import { LoggedInSession } from '@lihim/auth/core';
 import { fakeSession } from '@lihim/auth/testutils';
-import * as sharedApi from '@lihim/shared/api';
 
 import { getSessionInfo } from './get-session-info';
-
-jest.mock('@lihim/shared/api', () => ({
-  __esModule: true,
-  ...jest.requireActual('@lihim/shared/api'),
-}));
 
 describe('getSessionInfo', () => {
   // Test value(s)
@@ -28,13 +21,13 @@ describe('getSessionInfo', () => {
     const rpcFn = jest.fn().mockReturnValue({
       single: singleFn,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       rpc: rpcFn,
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
     try {
-      await getSessionInfo(testEmail);
+      await getSessionInfo(supabase, testEmail);
     } catch (error) {
       expect((error as Error).message).toBe(
         'get-session-info error: ' + message,
@@ -51,13 +44,13 @@ describe('getSessionInfo', () => {
     const rpcFn = jest.fn().mockReturnValue({
       single: singleFn,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       rpc: rpcFn,
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
     try {
-      await getSessionInfo(testEmail);
+      await getSessionInfo(supabase, testEmail);
     } catch (error) {
       expect((error as Error).message).toBe(
         'get-session-info no data returned',
@@ -75,12 +68,15 @@ describe('getSessionInfo', () => {
     const rpcFn = jest.fn().mockReturnValue({
       single: singleFn,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       rpc: rpcFn,
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
-    const result = await getSessionInfo((testSession as LoggedInSession).email);
+    const result = await getSessionInfo(
+      supabase,
+      (testSession as LoggedInSession).email,
+    );
 
     // Assert console log
     expect(result).toStrictEqual(testSession);
