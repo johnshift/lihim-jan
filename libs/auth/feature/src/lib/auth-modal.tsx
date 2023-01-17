@@ -6,6 +6,8 @@ import { AuthModalState } from '@lihim/auth/core';
 import { LoginFormSkeleton, SignupFormSkeleton } from '@lihim/auth/ui';
 import { useRootContext } from '@lihim/shared/data-access';
 
+import LogoutForm from './logout-form';
+
 const LoginForm = dynamic(() => import('./login-form'), {
   loading: () => <LoginFormSkeleton />,
 });
@@ -28,6 +30,7 @@ export const AuthModal = () => {
     >
       {authModalState === AuthModalState.Login && <LoginForm />}
       {authModalState === AuthModalState.Signup && <SignupForm />}
+      {authModalState === AuthModalState.Logout && <LogoutForm />}
     </Modal>
   );
 };
