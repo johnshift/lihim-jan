@@ -15,7 +15,10 @@
     "pull": "node tools/scripts/pull-remote.js",
     "build-storybook": "build-storybook --webpack-stats-json -c apps/web/.storybook",
     "chromatic": "chromatic --only-changed --externals \"public/**\" ",
-    "nx": "npx nx"
+    "nx": "npx nx",
+    "ssl-proxy": "local-ssl-proxy --source 4200 --target 4201 --key certs/localhost-key.pem --cert certs/localhost.pem",
+    "dev:ssl": "E2E_BASE_URL=https://localhost:4200 pnpm dev --port=4201 & pnpm ssl-proxy",
+    "start:ssl": "(pnpm build && E2E_BASE_URL=https://localhost:4200 pnpm start --port=4201) & pnpm ssl-proxy"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
