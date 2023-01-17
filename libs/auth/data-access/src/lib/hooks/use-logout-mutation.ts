@@ -9,7 +9,7 @@ import {
 } from '@lihim/auth/core';
 import type { GenericResponse } from '@lihim/shared/core';
 import { GenericResponseSchema, METHOD_POST } from '@lihim/shared/core';
-import { apiFetch } from '@lihim/shared/data-access';
+import { apiFetch, useRootContext } from '@lihim/shared/data-access';
 import { useNotify } from '@lihim/shared/utils';
 
 const logoutMutation = apiFetch<GenericResponse>(API_URL_LOGOUT, {
@@ -19,7 +19,7 @@ const logoutMutation = apiFetch<GenericResponse>(API_URL_LOGOUT, {
 
 export const useLogoutMutation = () => {
   const queryClient = useQueryClient();
-
+  const { authModalActions } = useRootContext();
   const { notifyLoading, notifySuccess, notifyError } = useNotify();
 
   return useMutation<GenericResponse, GenericResponse>(() => logoutMutation(), {
@@ -32,6 +32,9 @@ export const useLogoutMutation = () => {
       queryClient.setQueryData(['session'], {
         isAnon: true,
       });
+
+      // Close auth modal
+      authModalActions.close();
 
       // Display success message
       notifySuccess(MSG_LOGOUT_OK, MSG_LOGOUT_DONE, true);
