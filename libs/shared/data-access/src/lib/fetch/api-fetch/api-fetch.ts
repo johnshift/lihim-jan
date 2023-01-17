@@ -40,7 +40,15 @@ export const apiFetch =
 
       const { url, body } = getUrlBody(reqUrl, method, payload);
 
-      const res = await fetch(url, { method, body });
+      const res = await fetch(url, {
+        method,
+        body,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+      });
       const jsonBody = await res.json();
 
       if (!res.ok) {

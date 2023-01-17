@@ -4,7 +4,6 @@ import { uid } from 'uid';
 import {
   ERR_LOGIN_INCORRECT,
   LoggedInSession,
-  LoginPayload,
   MSG_LOGIN_OK_INFO,
 } from '@lihim/auth/core';
 import { fakeLoginPayload, fakeSession } from '@lihim/auth/testutils';
@@ -72,8 +71,8 @@ describe('loginHandler', () => {
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       // Defaults to 'POST' method with valid fake payload
       method: METHOD_POST,
-      body: '{"message":"test-message"' as unknown as LoginPayload,
-    } as RequestOptions);
+      body: '{"message":"test-message"',
+    } as unknown as RequestOptions);
 
     await loginHandler(req, res);
 

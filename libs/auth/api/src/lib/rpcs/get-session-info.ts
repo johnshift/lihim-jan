@@ -11,7 +11,9 @@ type RpcSignature = {
   Returns: LoggedInSession;
 };
 
-export const getSessionInfo = async (email: string) => {
+export const getSessionInfo = async (
+  email: string,
+): Promise<LoggedInSession> => {
   // Supabase anon client
   const supabase = createSupabaseClient();
 
@@ -34,5 +36,5 @@ export const getSessionInfo = async (email: string) => {
     throw new Error('get-session-info no data returned');
   }
 
-  return data;
+  return { ...data, email, isAnon: false, bio: data.bio ?? '' };
 };
