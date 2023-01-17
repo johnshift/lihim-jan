@@ -1,18 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { faker } from '@faker-js/faker';
-import { Session } from '@supabase/supabase-js';
+import { Session, SupabaseClient } from '@supabase/supabase-js';
 
 import { ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
-import * as sharedApi from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
 
 import { dbLogin } from './db-login';
-
-jest.mock('@lihim/shared/api', () => ({
-  __esModule: true,
-  ...jest.requireActual('@lihim/shared/api'),
-}));
 
 describe('supabase login', () => {
   // Mock values
@@ -31,15 +23,15 @@ describe('supabase login', () => {
         message: errorMsg,
       },
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signInWithPassword,
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Assert error
     try {
-      await dbLogin(testEmail, testPassword);
+      await dbLogin(supabase, { email: testEmail, password: testPassword });
     } catch (error) {
       const err = error as ApiError;
       expect(err.status).toBe(401);
@@ -59,15 +51,15 @@ describe('supabase login', () => {
         message: errorMsg,
       },
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signInWithPassword,
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Assert error
     try {
-      await dbLogin(testEmail, testPassword);
+      await dbLogin(supabase, { email: testEmail, password: testPassword });
     } catch (error) {
       expect((error as Error).message).toBe(
         `signin api error: \n\tstatus=500 \n\tmsg=${errorMsg}`,
@@ -81,15 +73,15 @@ describe('supabase login', () => {
       data: { session: null, user: null },
       error: null,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signInWithPassword,
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
     try {
-      await dbLogin(testEmail, testPassword);
+      await dbLogin(supabase, { email: testEmail, password: testPassword });
     } catch (error) {
       expect((error as Error).message).toBe('No session returned after signin');
     }
@@ -108,14 +100,17 @@ describe('supabase login', () => {
       },
       error: null,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signInWithPassword,
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
-    const accessToken = await dbLogin(testEmail, testPassword);
+    const accessToken = await dbLogin(supabase, {
+      email: testEmail,
+      password: testPassword,
+    });
 
     // Assert
     expect(accessToken).toBe(testAccessToken);

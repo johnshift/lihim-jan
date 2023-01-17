@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import * as supabaseAuthHelpers from '@supabase/auth-helpers-nextjs';
 import { createMocks } from 'node-mocks-http';
 
 import { MSG_LOGOUT_DONE } from '@lihim/auth/core';
@@ -10,13 +13,11 @@ import {
   METHOD_POST,
 } from '@lihim/shared/core';
 
-import * as dbLogoutModule from '../rpcs/db-logout';
-
 import { logoutHandler } from './logout-handler';
 
-jest.mock('../rpcs/db-logout', () => ({
+jest.mock('@supabase/auth-helpers-nextjs', () => ({
   __esModule: true,
-  ...jest.requireActual('../rpcs/db-logout'),
+  ...jest.requireActual('@supabase/auth-helpers-nextjs'),
 }));
 
 describe('logoutHandler', () => {
@@ -42,7 +43,13 @@ describe('logoutHandler', () => {
 
     // Mock dbLogout error
     const errmsg = 'Test error message';
-    jest.spyOn(dbLogoutModule, 'dbLogout').mockRejectedValue(new Error(errmsg));
+    jest
+      .spyOn(supabaseAuthHelpers, 'createServerSupabaseClient')
+      .mockReturnValueOnce({
+        auth: {
+          signOut: jest.fn().mockRejectedValueOnce(new Error(errmsg)),
+        },
+      } as any);
 
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
@@ -67,8 +74,13 @@ describe('logoutHandler', () => {
 
   test('success', async () => {
     // Mock dbLogout success
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    jest.spyOn(dbLogoutModule, 'dbLogout').mockImplementation(async () => {});
+    jest
+      .spyOn(supabaseAuthHelpers, 'createServerSupabaseClient')
+      .mockReturnValueOnce({
+        auth: {
+          signOut: jest.fn().mockResolvedValueOnce({ error: null }),
+        },
+      } as any);
 
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({

@@ -1,14 +1,10 @@
 /* eslint-disable camelcase */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { fakeSignupPayload } from '@lihim/auth/testutils';
-import * as sharedApi from '@lihim/shared/api';
 
 import { dbSignup } from './db-signup';
-
-jest.mock('@lihim/shared/api', () => ({
-  __esModule: true,
-  ...jest.requireActual('@lihim/shared/api'),
-}));
 
 describe('dbSignup', () => {
   // Test vars
@@ -17,7 +13,7 @@ describe('dbSignup', () => {
   test('signup error', () => {
     // Mock signup error
     const errmsg = 'Test error message';
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signUp: jest.fn().mockResolvedValueOnce({
           data: null,
@@ -26,44 +22,44 @@ describe('dbSignup', () => {
           },
         }),
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Assert error
-    expect(dbSignup(payload)).rejects.toThrowError(
+    expect(dbSignup(supabase, payload)).rejects.toThrowError(
       'db-signup error: ' + errmsg,
     );
   });
 
   test('signup no user returned', () => {
     // Mock signup no user
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signUp: jest.fn().mockResolvedValueOnce({
           data: { user: null },
           error: null,
         }),
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Assert error
-    expect(dbSignup(payload)).rejects.toThrowError(
+    expect(dbSignup(supabase, payload)).rejects.toThrowError(
       'db-signup no user returned',
     );
   });
 
   test('signup no session returned', () => {
     // Mock signup no user
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signUp: jest.fn().mockResolvedValueOnce({
           data: { user: 'fake-user', session: null },
           error: null,
         }),
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Assert error
-    expect(dbSignup(payload)).rejects.toThrowError(
+    expect(dbSignup(supabase, payload)).rejects.toThrowError(
       'db-signup no session returned',
     );
   });
@@ -72,7 +68,7 @@ describe('dbSignup', () => {
     // Mock signup success
     const userId = 'fake-id';
     const access_token = 'fake-access-token';
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       auth: {
         signUp: jest.fn().mockResolvedValueOnce({
           data: {
@@ -82,10 +78,10 @@ describe('dbSignup', () => {
           error: null,
         }),
       },
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec signup
-    const [session, accessToken] = await dbSignup(payload);
+    const [session, accessToken] = await dbSignup(supabase, payload);
 
     // Assert
     expect(session).toStrictEqual({

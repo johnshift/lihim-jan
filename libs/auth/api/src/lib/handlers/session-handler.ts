@@ -1,21 +1,35 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import {
+  createServerSupabaseClient,
+  SupabaseClient,
+} from '@supabase/auth-helpers-nextjs';
+import type { CookieSerializeOptions } from 'cookie';
+import { getCookie } from 'cookies-next';
 import jwtDecode from 'jwt-decode';
 
 import type { Session } from '@lihim/auth/core';
-import { apiMiddleware, createSupabaseClient } from '@lihim/shared/api';
+import { apiMiddleware } from '@lihim/shared/api';
 import type { GenericResponse } from '@lihim/shared/core';
 import { METHOD_GET } from '@lihim/shared/core';
 
-import { COOKEY_CSRF, COOKEY_SESSION } from '../constants';
+import {
+  COOKEY_CSRF,
+  COOKEY_SESSION,
+  defaultCookieOptions,
+} from '../constants';
 import type { SupabaseAccessToken } from '../types';
 import { decryptSessionCookie } from '../utils/session-cipher';
 import { setSessionCookie } from '../utils/set-session-cookie';
 
-const getSessionCookies = (req: NextApiRequest) => {
-  // Get cookies from request
-  const encryptedToken = req.cookies[COOKEY_SESSION];
-  const csrfToken = req.cookies[COOKEY_CSRF];
+const getSessionFromCookies = (cookieOptions: CookieSerializeOptions) => {
+  // Retrieve cookie from request
+  const encryptedCookie = getCookie(COOKEY_SESSION, cookieOptions);
+  const csrfCookie = getCookie(COOKEY_CSRF, cookieOptions);
+
+  // Convert cookie to string
+  const encryptedToken = encryptedCookie?.toString();
+  const csrfToken = csrfCookie?.toString();
 
   if (!encryptedToken) {
     throw new Error('Anon: missing encrypted token');
@@ -25,10 +39,6 @@ const getSessionCookies = (req: NextApiRequest) => {
     throw new Error('Anon: missing csrf token');
   }
 
-  return { encryptedToken, csrfToken };
-};
-
-const getSessionFromCookies = (encryptedToken: string, csrfToken: string) => {
   // Decrypt session cookie
   const [accessToken, session, csrf] = decryptSessionCookie(encryptedToken);
 
@@ -64,10 +74,11 @@ const getSessionFromCookies = (encryptedToken: string, csrfToken: string) => {
   return { session };
 };
 
-const refreshSessionCookie = async (res: NextApiResponse, session: Session) => {
-  // Supabase anon client
-  const supabase = createSupabaseClient();
-
+const refreshSessionCookie = async (
+  supabase: SupabaseClient,
+  session: Session,
+  cookieOptions: CookieSerializeOptions,
+) => {
   // Exec get-sesison using supabase
   const { data, error } = await supabase.auth.getSession();
 
@@ -80,7 +91,7 @@ const refreshSessionCookie = async (res: NextApiResponse, session: Session) => {
   }
 
   // Update cookies with refreshed access-token
-  setSessionCookie(res, session, data.session.access_token);
+  setSessionCookie(session, data.session.access_token, cookieOptions);
 };
 
 const handler = async (
@@ -89,14 +100,18 @@ const handler = async (
 ) => {
   // If any error occurs, we return anon session
   try {
-    // Retrieve session cookie from request
-    const { encryptedToken, csrfToken } = getSessionCookies(req);
-
     // Decrypt cookie session
-    const { session } = getSessionFromCookies(encryptedToken, csrfToken);
+    const cookieOptions = { req, res, ...defaultCookieOptions };
+    const { session } = getSessionFromCookies(cookieOptions);
+
+    // Supabase client
+    const supabaseServerClient = createServerSupabaseClient({
+      req,
+      res,
+    });
 
     // Refresh session
-    await refreshSessionCookie(res, session);
+    await refreshSessionCookie(supabaseServerClient, session, cookieOptions);
 
     // Success response
     return res.status(200).json({ ...session });

@@ -1,25 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { faker } from '@faker-js/faker';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 import { ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
-import * as sharedApi from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
 
 import { getEmail } from './get-email';
-
-jest.mock('@lihim/shared/api', () => ({
-  __esModule: true,
-  ...jest.requireActual('@lihim/shared/api'),
-}));
 
 describe('getEmail', () => {
   it('returns immediately if principal is already email', async () => {
     // Test value(s)
     const principal = faker.internet.email();
 
+    // Mock supabase
+    const supabase = {
+      rpc: jest.fn().mockReturnValue({
+        single: jest.fn(),
+      }),
+    } as unknown as SupabaseClient;
+
     // Exec
-    const email = await getEmail(principal);
+    const email = await getEmail(supabase, principal);
 
     // Assert
     expect(email).toBe(principal.toLowerCase());
@@ -47,13 +47,13 @@ describe('getEmail', () => {
     const rpcFn = jest.fn().mockReturnValue({
       single: singleFn,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       rpc: rpcFn,
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
     try {
-      await getEmail(principal);
+      await getEmail(supabase, principal);
     } catch (error) {
       expect((error as Error).message).toBe(
         'getEmail postgres error: ' +
@@ -77,13 +77,13 @@ describe('getEmail', () => {
     const rpcFn = jest.fn().mockReturnValue({
       single: singleFn,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       rpc: rpcFn,
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
     try {
-      await getEmail(principal);
+      await getEmail(supabase, principal);
     } catch (error) {
       expect((error as ApiError).status).toBe(400);
       expect((error as ApiError).message).toBe(ERR_LOGIN_INCORRECT);
@@ -103,12 +103,12 @@ describe('getEmail', () => {
     const rpcFn = jest.fn().mockReturnValue({
       single: singleFn,
     });
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
+    const supabase = {
       rpc: rpcFn,
-    } as any);
+    } as unknown as SupabaseClient;
 
     // Exec
-    const result = await getEmail(principal);
+    const result = await getEmail(supabase, principal);
 
     // Assert
     expect(result).toBe(testEmail.toLowerCase());

@@ -1,5 +1,7 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { LoggedInSession } from '@lihim/auth/core';
-import { createSupabaseClient, supabaseRpc } from '@lihim/shared/api';
+import { supabaseRpc } from '@lihim/shared/api';
 
 import { RPC_GET_SESSION_INFO } from '../constants';
 
@@ -12,11 +14,9 @@ type RpcSignature = {
 };
 
 export const getSessionInfo = async (
+  supabase: SupabaseClient,
   email: string,
 ): Promise<LoggedInSession> => {
-  // Supabase anon client
-  const supabase = createSupabaseClient();
-
   // Execute get-session-info rpc
   const { data, error } = await supabaseRpc<RpcName, RpcSignature>(
     supabase,

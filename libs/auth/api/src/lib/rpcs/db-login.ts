@@ -1,13 +1,17 @@
-import { AuthApiError } from '@supabase/supabase-js';
+import { AuthApiError, SupabaseClient } from '@supabase/supabase-js';
 
 import { ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
-import { createSupabaseClient } from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
 
-export const dbLogin = async (email: string, password: string) => {
-  // Supabase anon client
-  const supabase = createSupabaseClient();
+type Credentials = {
+  email: string;
+  password: string;
+};
 
+export const dbLogin = async (
+  supabase: SupabaseClient,
+  { email, password }: Credentials,
+) => {
   // Signin using email
   const { data, error } = await supabase.auth.signInWithPassword({
     email,

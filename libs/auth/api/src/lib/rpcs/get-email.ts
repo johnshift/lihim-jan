@@ -1,5 +1,7 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { EmailSchema, ERR_LOGIN_INCORRECT } from '@lihim/auth/core';
-import { createSupabaseClient, supabaseRpc } from '@lihim/shared/api';
+import { supabaseRpc } from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
 
 import { RPC_GET_EMAIL } from '../constants';
@@ -11,7 +13,10 @@ type RpcSignature = {
   Returns: string;
 };
 
-export const getEmail = async (_principal: string): Promise<string> => {
+export const getEmail = async (
+  supabase: SupabaseClient,
+  _principal: string,
+): Promise<string> => {
   // Convert principal to lowercase
   const principal = _principal.toLowerCase();
 
@@ -20,9 +25,6 @@ export const getEmail = async (_principal: string): Promise<string> => {
   if (parseResult.success) {
     return principal;
   }
-
-  // Supabase anon client
-  const supabase = createSupabaseClient();
 
   // Execute get-email rpc
   const { data, error } = await supabaseRpc<RpcName, RpcSignature>(

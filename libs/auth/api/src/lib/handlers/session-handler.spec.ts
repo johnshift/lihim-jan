@@ -1,15 +1,14 @@
-/* eslint-disable camelcase */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable unicorn/no-useless-undefined, camelcase, @typescript-eslint/no-explicit-any */
 
+import * as supabaseAuthHelpers from '@supabase/auth-helpers-nextjs';
+import * as cookiesNext from 'cookies-next';
 import * as jwtDecodeModule from 'jwt-decode';
 import { createMocks } from 'node-mocks-http';
 
 import { fakeSession } from '@lihim/auth/testutils';
 import { MockApiRequest, MockApiResponse } from '@lihim/shared/api';
-import * as sharedApi from '@lihim/shared/api';
 import { ERR_METHOD, METHOD_GET, METHOD_POST } from '@lihim/shared/core';
 
-import { COOKEY_CSRF, COOKEY_SESSION } from '../constants';
 import * as sessionCipherModule from '../utils/session-cipher';
 import { encryptSessionCookie } from '../utils/session-cipher';
 
@@ -30,6 +29,16 @@ jest.mock('@lihim/shared/api', () => ({
   ...jest.requireActual('@lihim/shared/api'),
 }));
 
+jest.mock('@supabase/auth-helpers-nextjs', () => ({
+  __esModule: true,
+  ...jest.requireActual('@supabase/auth-helpers-nextjs'),
+}));
+
+jest.mock('cookies-next', () => ({
+  __esModule: true,
+  ...jest.requireActual('cookies-next'),
+}));
+
 describe('sessionHandler', () => {
   // Test vars
   const errmsg = 'Test error message';
@@ -42,10 +51,6 @@ describe('sessionHandler', () => {
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_POST,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -61,13 +66,13 @@ describe('sessionHandler', () => {
   });
 
   test('no session cookie', async () => {
+    // Mock undefined session cookie
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(undefined);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: undefined as unknown as string,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -83,13 +88,13 @@ describe('sessionHandler', () => {
   });
 
   test('no csrf cookie', async () => {
+    // Mock undefined csrf cookie
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(undefined);
+
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: undefined as unknown as string,
-      },
     });
 
     // Exec handler
@@ -105,6 +110,10 @@ describe('sessionHandler', () => {
   });
 
   test('csrf token mismatch', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock decrypt returns mismatched csrf
     jest
       .spyOn(sessionCipherModule, 'decryptSessionCookie')
@@ -113,10 +122,6 @@ describe('sessionHandler', () => {
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -132,6 +137,10 @@ describe('sessionHandler', () => {
   });
 
   test('jwt-decode error', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock jwt-decode error
     jest.spyOn(jwtDecodeModule, 'default').mockImplementationOnce(() => {
       throw new Error(errmsg);
@@ -140,10 +149,6 @@ describe('sessionHandler', () => {
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -159,6 +164,10 @@ describe('sessionHandler', () => {
   });
 
   test('expired access-token', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock jwt-decode returns expired token
     jest.spyOn(jwtDecodeModule, 'default').mockReturnValueOnce({
       exp: Math.floor(Date.now() / 1000) - 3600, // Expired 1hr before
@@ -168,10 +177,6 @@ describe('sessionHandler', () => {
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -187,6 +192,10 @@ describe('sessionHandler', () => {
   });
 
   test('unauthenticated access-token', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock jwt-decode returns expired token
     jest.spyOn(jwtDecodeModule, 'default').mockReturnValueOnce({
       exp: Math.floor(Date.now() / 1000) + 3600, // Valid for 1hr
@@ -196,10 +205,6 @@ describe('sessionHandler', () => {
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -215,23 +220,25 @@ describe('sessionHandler', () => {
   });
 
   test('supabase getSession error', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock getSession error
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
-      auth: {
-        getSession: jest.fn().mockResolvedValueOnce({
-          data: { session: null },
-          error: { message: errmsg },
-        }),
-      },
-    } as any);
+    jest
+      .spyOn(supabaseAuthHelpers, 'createServerSupabaseClient')
+      .mockReturnValueOnce({
+        auth: {
+          getSession: jest.fn().mockResolvedValueOnce({
+            data: { session: null },
+            error: { message: errmsg },
+          }),
+        },
+      } as any);
 
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -247,23 +254,25 @@ describe('sessionHandler', () => {
   });
 
   test('supabase getSession no access-token returned', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock getSession no access token
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
-      auth: {
-        getSession: jest.fn().mockResolvedValueOnce({
-          data: { session: null },
-          error: null,
-        }),
-      },
-    } as any);
+    jest
+      .spyOn(supabaseAuthHelpers, 'createServerSupabaseClient')
+      .mockReturnValueOnce({
+        auth: {
+          getSession: jest.fn().mockResolvedValueOnce({
+            data: { session: null },
+            error: null,
+          }),
+        },
+      } as any);
 
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
@@ -279,23 +288,25 @@ describe('sessionHandler', () => {
   });
 
   test('success response', async () => {
+    // Mock cookies
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(sessionToken);
+    jest.spyOn(cookiesNext, 'getCookie').mockReturnValueOnce(csrfToken);
+
     // Mock getSession success
-    jest.spyOn(sharedApi, 'createSupabaseClient').mockReturnValueOnce({
-      auth: {
-        getSession: jest.fn().mockResolvedValueOnce({
-          data: { session: { access_token: 'fake-new-token' } },
-          error: null,
-        }),
-      },
-    } as any);
+    jest
+      .spyOn(supabaseAuthHelpers, 'createServerSupabaseClient')
+      .mockReturnValueOnce({
+        auth: {
+          getSession: jest.fn().mockResolvedValueOnce({
+            data: { session: { access_token: 'fake-new-token' } },
+            error: null,
+          }),
+        },
+      } as any);
 
     // Mock request
     const { req, res } = createMocks<MockApiRequest, MockApiResponse>({
       method: METHOD_GET,
-      cookies: {
-        [COOKEY_SESSION]: sessionToken,
-        [COOKEY_CSRF]: csrfToken,
-      },
     });
 
     // Exec handler
