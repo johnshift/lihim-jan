@@ -7,7 +7,6 @@ import {
 } from '@lihim/auth/core';
 import { apiMiddleware } from '@lihim/shared/api';
 import { ApiError, METHOD_POST } from '@lihim/shared/core';
-import { parseObject } from '@lihim/shared/utils';
 
 import { dbLogin } from '../rpcs/db-login';
 import { getEmail } from '../rpcs/get-email';
@@ -16,11 +15,13 @@ import { setSessionCookie } from '../utils/set-session-cookie';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Validate payload
-  const payload = parseObject(
-    req.body,
-    new ApiError(400, ERR_LOGIN_INCORRECT),
-    LoginPayloadSchema,
-  );
+  const parseResult = LoginPayloadSchema.safeParse(req.body);
+  if (!parseResult.success) {
+    throw new ApiError(400, ERR_LOGIN_INCORRECT);
+  }
+
+  // Validated payload
+  const payload = parseResult.data;
 
   // Retrieve email (since principal can be username)
   const email = await getEmail(payload.principal);

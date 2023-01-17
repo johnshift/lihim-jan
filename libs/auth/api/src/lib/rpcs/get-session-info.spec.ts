@@ -2,6 +2,7 @@
 
 import { faker } from '@faker-js/faker';
 
+import { LoggedInSession } from '@lihim/auth/core';
 import { fakeSession } from '@lihim/auth/testutils';
 import * as sharedApi from '@lihim/shared/api';
 
@@ -79,9 +80,9 @@ describe('getSessionInfo', () => {
     } as any);
 
     // Exec
-    const result = await getSessionInfo(testEmail);
+    const result = await getSessionInfo((testSession as LoggedInSession).email);
 
     // Assert console log
-    expect(result).toBe(testSession);
+    expect(result).toStrictEqual(testSession);
   });
 });

@@ -9,5 +9,6 @@ export const fakeSession = (isAnon = false): Session => ({
   username: faker.internet.domainWord(),
   firstname: 'Firstname',
   lastname: 'Lastname',
+  bio: '',
   isAnon,
 });
