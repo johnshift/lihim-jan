@@ -47,6 +47,10 @@ const getSessionFromCookies = (cookieOptions: CookieSerializeOptions) => {
     throw new Error('Anon: csrf token mismatch');
   }
 
+  return { accessToken, session };
+};
+
+const validateAccessToken = (accessToken: string) => {
   // Parse accessToken
   let token: SupabaseAccessToken;
   try {
@@ -70,8 +74,6 @@ const getSessionFromCookies = (cookieOptions: CookieSerializeOptions) => {
   if (!authenticated) {
     throw new Error('Anon: unauthenticated access-token');
   }
-
-  return { session };
 };
 
 const refreshSessionCookie = async (
@@ -102,7 +104,10 @@ const handler = async (
   try {
     // Decrypt cookie session
     const cookieOptions = { req, res, ...defaultCookieOptions };
-    const { session } = getSessionFromCookies(cookieOptions);
+    const { accessToken, session } = getSessionFromCookies(cookieOptions);
+
+    // Validate accessToken
+    validateAccessToken(accessToken);
 
     // Supabase client
     const supabaseServerClient = createServerSupabaseClient({
