@@ -20,7 +20,11 @@
     "dev:ssl": "pnpm dev --port=4201 & pnpm ssl-proxy",
     "kill:ssl": "./tools/scripts/kill-ssl-proxy.sh",
     "start:ssl": "(pnpm build && pnpm start --port=4201) & pnpm ssl-proxy",
-    "setup:e2e": "pnpm kill:ssl && pnpm start:ssl"
+    "setup:e2e": "pnpm kill:ssl && pnpm start:ssl",
+    "e2e": "nx run web-e2e:e2e --browser=chrome --skipServe --baseUrl=https://lihim-dev.vercel.app",
+    "e2e:w": "nx run web-e2e:e2e --browser=chrome --baseUrl=https://lihim-dev.vercel.app --skipServe --watch",
+    "e2e:local": "nx run web-e2e:e2e --browser=chrome  --skipServe --baseUrl=https://localhost:4200",
+    "e2e:local:w": "nx run web-e2e:e2e --browser=chrome --skipServe --baseUrl=https://localhost:4200 --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -95,7 +99,7 @@
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
     "babel-loader": "8.1.0",
-    "cypress": "^11.0.0",
+    "cypress": "^12.3.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.31.0",
     "eslint-config-next": "^13.1.1",

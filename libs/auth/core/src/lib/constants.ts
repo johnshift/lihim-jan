@@ -69,3 +69,5 @@ export const ERR_LOGIN_FAILED = 'Login Failed';
 export const ERR_LOGIN_INCORRECT = 'Incorrect username/email or password';
 export const ERR_SIGNUP_FAILED = 'Signup Failed';
 export const ERR_LOGOUT_FAILED = 'Logout Failed';
+export const ERR_EMAIL_TAKEN = 'Email address is already taken';
+export const ERR_USERNAME_TAKEN = 'Username is already taken';
