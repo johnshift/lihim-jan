@@ -23,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Logout in supabase
   const { error } = await supabaseServerClient.auth.signOut();
   if (error) {
-    throw new Error('logout error = ' + error.message);
+    throw new Error(error.message);
   }
 
   // Remove session cookies

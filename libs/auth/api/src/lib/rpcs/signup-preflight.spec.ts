@@ -82,4 +82,15 @@ describe('signupPreflight', () => {
       expect(err.message).toBe(ERR_EMAIL_TAKEN);
     }
   });
+
+  test('success', async () => {
+    // Mock rpc email taken
+    jest.spyOn(sharedApi, 'supabaseRpc').mockResolvedValueOnce({
+      data: { emailTaken: false, usernameTaken: false },
+      error: null,
+    } as any);
+
+    // Assert error
+    expect(async () => signupPreflight(supabase, payload)).not.toThrowError();
+  });
 });
