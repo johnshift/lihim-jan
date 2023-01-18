@@ -2,15 +2,14 @@ import { Burger, Loader, Menu as BaseMenu } from '@mantine/core';
 import { HiLogin } from 'react-icons/hi';
 
 import { TEXT_LOGIN, TEXT_LOGOUT } from '@lihim/auth/core';
-import type { TVoidFn } from '@lihim/shared/core';
-import { TEXT_LOADING } from '@lihim/shared/core';
-
 import {
   ARIA_AUTH_ICON,
   ARIA_HEADER_MENU,
   TESTID_AUTH_MENUITEM,
   TESTID_HEADER_LOADER,
-} from '../constants';
+  TVoidFn,
+} from '@lihim/shared/core';
+import { TEXT_LOADING } from '@lihim/shared/core';
 
 type Props = {
   isOpen: boolean;

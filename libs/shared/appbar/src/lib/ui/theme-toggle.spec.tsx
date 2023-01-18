@@ -1,6 +1,9 @@
+import {
+  ARIA_MOON_ICON,
+  ARIA_SUN_ICON,
+  ARIA_TOGGLE_THEME,
+} from '@lihim/shared/core';
 import { render, screen, user, within } from '@lihim/shared/testutils/ui';
-
-import { ARIA_MOON_ICON, ARIA_SUN_ICON, ARIA_TOGGLE_THEME } from '../constants';
 
 import { ThemeToggle } from './theme-toggle';
 

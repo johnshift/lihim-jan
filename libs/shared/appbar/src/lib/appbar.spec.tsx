@@ -5,7 +5,15 @@ import {
   mockLogoutResponse,
   mockSessionResponse,
 } from '@lihim/auth/testutils';
-import { TEXT_BRAND } from '@lihim/shared/core';
+import {
+  ARIA_HEADER_MENU,
+  ARIA_MOON_ICON,
+  ARIA_SUN_ICON,
+  ARIA_TOGGLE_THEME,
+  TESTID_AUTH_MENUITEM,
+  TESTID_HEADER_LOADER,
+  TEXT_BRAND,
+} from '@lihim/shared/core';
 import {
   render,
   screen,
@@ -15,14 +23,6 @@ import {
 } from '@lihim/shared/testutils/feature';
 
 import { Appbar } from './appbar';
-import {
-  ARIA_HEADER_MENU,
-  ARIA_MOON_ICON,
-  ARIA_SUN_ICON,
-  ARIA_TOGGLE_THEME,
-  TESTID_AUTH_MENUITEM,
-  TESTID_HEADER_LOADER,
-} from './constants';
 
 // Setup msw server
 const mswServer = setupServer();

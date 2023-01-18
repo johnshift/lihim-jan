@@ -1,4 +1,4 @@
-import { ARIA_HEADER_MENU } from '@lihim/shared/appbar';
+import { ARIA_HEADER_MENU } from '@lihim/shared/core';
 
 import { click } from '../support/helpers';
 
