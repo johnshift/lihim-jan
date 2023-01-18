@@ -20,7 +20,11 @@
     "dev:ssl": "pnpm dev --port=4201 & pnpm ssl-proxy",
     "kill:ssl": "./tools/scripts/kill-ssl-proxy.sh",
     "start:ssl": "(pnpm build && pnpm start --port=4201) & pnpm ssl-proxy",
-    "setup:e2e": "pnpm kill:ssl && pnpm start:ssl"
+    "setup:e2e": "pnpm kill:ssl && pnpm start:ssl",
+    "e2e": "nx run web-e2e:e2e --browser=chrome --skipServe --baseUrl=https://lihim-dev.vercel.app",
+    "e2e:w": "nx run web-e2e:e2e --browser=chrome --baseUrl=https://lihim-dev.vercel.app --skipServe --watch",
+    "e2e:local": "nx run web-e2e:e2e --browser=chrome  --skipServe --baseUrl=https://localhost:4200",
+    "e2e:local:w": "nx run web-e2e:e2e --browser=chrome --skipServe --baseUrl=https://localhost:4200 --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
