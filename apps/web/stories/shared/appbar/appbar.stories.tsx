@@ -66,8 +66,3 @@ export const ToggleTheme: StoryObj<Props> = {
     ).toBeVisible();
   },
 };
-
-// TODO: toggle signin/signup errors
-// TODO: login error
-// TODO: logout error
-// TODO: signup error

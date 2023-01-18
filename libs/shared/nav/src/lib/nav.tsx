@@ -8,8 +8,7 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdPower } from 'react-icons/io';
 import { RiSettings4Fill } from 'react-icons/ri';
 
-import { AuthModalState, LoggedInSession } from '@lihim/auth/core';
-import { useLogoutMutation } from '@lihim/auth/data-access';
+import { LoggedInSession } from '@lihim/auth/core';
 import { TESTID_NAV_AUTH_ACTION } from '@lihim/shared/core';
 import { useRootContext } from '@lihim/shared/data-access';
 
@@ -135,7 +134,7 @@ export const Nav = () => {
             icon={
               session.isAnon ? <BiLogIn size={24} /> : <IoMdPower size={24} />
             }
-            isDisabled={sessionIsLoading} // TODO: add logout loading condition
+            isDisabled={sessionIsLoading}
             onClick={() => openAuthModal(session.isAnon)}
           />
         </div>
