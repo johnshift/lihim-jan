@@ -2,10 +2,8 @@ export default {
   displayName: 'auth-api',
   preset: '../../../jest.preset.js',
   transform: {
-    '^.+\\.[tj]sx?$': [
-      '@swc/jest',
-      { jsc: { transform: { react: { runtime: 'automatic' } } } },
-    ],
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
+    '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nrwl/react/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/auth/api',
