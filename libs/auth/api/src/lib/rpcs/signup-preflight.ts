@@ -1,14 +1,14 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { SignupPayload } from '@lihim/auth/core';
-import { supabaseRpc } from '@lihim/shared/api';
-import { ApiError } from '@lihim/shared/core';
-
 import {
   ERR_EMAIL_TAKEN,
   ERR_USERNAME_TAKEN,
-  RPC_SIGNUP_PREFLIGHT,
-} from '../constants';
+  SignupPayload,
+} from '@lihim/auth/core';
+import { supabaseRpc } from '@lihim/shared/api';
+import { ApiError } from '@lihim/shared/core';
+
+import { RPC_SIGNUP_PREFLIGHT } from '../constants';
 
 // Supabase RPC generics
 type RpcName = typeof RPC_SIGNUP_PREFLIGHT;

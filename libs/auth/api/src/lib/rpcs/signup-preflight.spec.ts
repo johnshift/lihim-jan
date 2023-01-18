@@ -2,11 +2,10 @@
 
 import { SupabaseClient } from '@supabase/supabase-js';
 
+import { ERR_EMAIL_TAKEN, ERR_USERNAME_TAKEN } from '@lihim/auth/core';
 import { fakeSignupPayload } from '@lihim/auth/testutils';
 import * as sharedApi from '@lihim/shared/api';
 import { ApiError } from '@lihim/shared/core';
-
-import { ERR_EMAIL_TAKEN, ERR_USERNAME_TAKEN } from '../constants';
 
 import { signupPreflight } from './signup-preflight';
 
