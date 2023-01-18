@@ -81,4 +81,28 @@ describe('getSessionInfo', () => {
     // Assert console log
     expect(result).toStrictEqual(testSession);
   });
+
+  it('returns data (without bio) when no error was thrown', async () => {
+    // Mock rpc ok
+    const testSession = fakeSession();
+    const singleFn = jest.fn().mockReturnValue({
+      data: { ...testSession, bio: undefined },
+      error: null,
+    });
+    const rpcFn = jest.fn().mockReturnValue({
+      single: singleFn,
+    });
+    const supabase = {
+      rpc: rpcFn,
+    } as unknown as SupabaseClient;
+
+    // Exec
+    const result = await getSessionInfo(
+      supabase,
+      (testSession as LoggedInSession).email,
+    );
+
+    // Assert console log
+    expect(result).toStrictEqual(testSession);
+  });
 });

@@ -47,7 +47,9 @@ describe('logoutHandler', () => {
       .spyOn(supabaseAuthHelpers, 'createServerSupabaseClient')
       .mockReturnValueOnce({
         auth: {
-          signOut: jest.fn().mockRejectedValueOnce(new Error(errmsg)),
+          signOut: jest
+            .fn()
+            .mockResolvedValueOnce({ error: { message: errmsg } }),
         },
       } as any);
 
