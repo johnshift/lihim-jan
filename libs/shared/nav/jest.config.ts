@@ -16,15 +16,15 @@ export default {
   coverageReporters: ['json', 'lcov', 'html'],
   coverageThreshold: {
     global: {
-      branches: 95,
-      functions: 95,
-      lines: 95,
-      statements: 95,
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
       watermark: {
-        branches: [80, 95],
-        functions: [80, 95],
-        lines: [80, 95],
-        statements: [80, 95],
+        branches: [90, 100],
+        functions: [90, 100],
+        lines: [90, 100],
+        statements: [90, 100],
       },
     },
   },

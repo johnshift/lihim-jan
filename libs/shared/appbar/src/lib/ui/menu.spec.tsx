@@ -1,8 +1,10 @@
 import { TEXT_LOGIN, TEXT_LOGOUT } from '@lihim/auth/core';
-import { TEXT_LOADING } from '@lihim/shared/core';
+import {
+  ARIA_HEADER_MENU,
+  TESTID_HEADER_LOADER,
+  TEXT_LOADING,
+} from '@lihim/shared/core';
 import { render, screen, user } from '@lihim/shared/testutils/ui';
-
-import { ARIA_HEADER_MENU, TESTID_HEADER_LOADER } from '../constants';
 
 import { Menu } from './menu';
 

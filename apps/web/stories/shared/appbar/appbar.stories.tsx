@@ -6,13 +6,13 @@ import { expect } from '@storybook/jest';
 import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
+import { Appbar } from '@lihim/shared/appbar';
 import {
-  Appbar,
   ARIA_MOON_ICON,
   ARIA_SUN_ICON,
   ARIA_TOGGLE_THEME,
-} from '@lihim/shared/appbar';
-import { TEXT_BRAND } from '@lihim/shared/core';
+  TEXT_BRAND,
+} from '@lihim/shared/core';
 
 type Props = ComponentProps<typeof Appbar>;
 

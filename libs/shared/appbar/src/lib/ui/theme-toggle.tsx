@@ -3,7 +3,11 @@ import { DispatchWithoutAction } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { HiMoon, HiOutlineSun } from 'react-icons/hi';
 
-import { ARIA_MOON_ICON, ARIA_SUN_ICON, ARIA_TOGGLE_THEME } from '../constants';
+import {
+  ARIA_MOON_ICON,
+  ARIA_SUN_ICON,
+  ARIA_TOGGLE_THEME,
+} from '@lihim/shared/core';
 
 type Props = {
   isDark: boolean;

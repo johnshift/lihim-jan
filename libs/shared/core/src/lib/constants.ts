@@ -28,5 +28,12 @@ export type ErrSuffix =
 // Attributes
 export const ARIA_SHOW_PASSWORD_ICON = 'show password icon';
 export const ARIA_HIDE_PASSWORD_ICON = 'hide password icon';
+export const ARIA_MOON_ICON = 'moon icon';
+export const ARIA_SUN_ICON = 'sun icon';
+export const ARIA_TOGGLE_THEME = 'toggle theme';
+export const ARIA_HEADER_MENU = 'header menu';
+export const ARIA_AUTH_ICON = 'auth icon';
 export const TESTID_PASSWORD_VISIBILITY = 'password-visibility';
 export const TESTID_NAV_AUTH_ACTION = 'nav-auth-action';
+export const TESTID_HEADER_LOADER = 'header-loader';
+export const TESTID_AUTH_MENUITEM = 'auth-menuitem';
