@@ -64,3 +64,5 @@ exclude_patterns:
   - '**/*.stories.tsx'
   # exclude generated mockServiceWorker file
   - '**/mockServiceWorker.js'
+  # exclude cypress tests from code analysis
+  - '**/*.cy.ts'
