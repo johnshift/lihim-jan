@@ -271,6 +271,8 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install --frozen-lockfile
+      - name: Cypress manual install
+        run: ./node_modules/cypress/bin/cypress install
       - name: Cypress e2e
         uses: cypress-io/github-action@v5
         env:
