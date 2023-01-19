@@ -105,4 +105,26 @@ describe('Nav loggedIn', () => {
         : pathname,
     );
   });
+
+  test('brand click', async () => {
+    // Mock loggedin session
+    const session = fakeSession();
+    mswServer.use(mockSessionResponse(200, session));
+
+    // Spy on next router
+    const push = jest.fn();
+
+    jest
+      .spyOn(nextRouter, 'useRouter')
+      .mockReturnValue({ push, pathname: '/' } as any);
+
+    // Render component
+    render(<TestComponent />);
+
+    // Click nav item
+    await user.click(screen.getByRole('heading', { name: TEXT_BRAND }));
+
+    // Assert push called
+    expect(push).toHaveBeenCalledWith('/');
+  });
 });

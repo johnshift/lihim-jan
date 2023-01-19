@@ -97,4 +97,25 @@ describe('Nav anon', () => {
     // Assert push called
     expect(push).toHaveBeenCalledWith(pathname);
   });
+
+  test('brand click', async () => {
+    // Mock anon session
+    mswServer.use(mockSessionResponse(200, { isAnon: true }));
+
+    // Spy on next router
+    const push = jest.fn();
+
+    jest
+      .spyOn(nextRouter, 'useRouter')
+      .mockReturnValue({ push, pathname: '/' } as any);
+
+    // Render component
+    render(<TestComponent />);
+
+    // Click nav item
+    await user.click(screen.getByRole('heading', { name: TEXT_BRAND }));
+
+    // Assert push called
+    expect(push).toHaveBeenCalledWith('/');
+  });
 });
