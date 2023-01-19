@@ -54,7 +54,6 @@ const loggedInNavs = [
 const getNavs = (pathname: string, isAnon: boolean, username?: string) =>
   [...(isAnon ? anonNavs : loggedInNavs)].map((nav) => ({
     ...nav,
-    active: nav.href === pathname,
     href: nav.label === 'Profile' ? `/profile/${username}` : nav.href,
   }));
 
@@ -86,7 +85,15 @@ const useStyles = createStyles((theme) => ({
 
 export const Nav = () => {
   // Router
-  const { push, pathname } = useRouter();
+  const { push, pathname, query } = useRouter();
+
+  // Manual check since query.username can be undefined
+  let queryUsername: string | undefined;
+  try {
+    queryUsername = query.username as string;
+  } catch {
+    queryUsername = undefined;
+  }
 
   // Session
   const {
@@ -118,7 +125,13 @@ export const Nav = () => {
               key={nav.label}
               label={nav.label}
               icon={<nav.icon size={24} />}
-              isActive={nav.active}
+              isActive={
+                queryUsername
+                  ? `/profile/${queryUsername}` ===
+                      `/profile/${(session as LoggedInSession).username}` &&
+                    nav.href === `/profile/${queryUsername}`
+                  : nav.href === pathname
+              }
               onClick={() => push(nav.href)}
             />
           ))}
