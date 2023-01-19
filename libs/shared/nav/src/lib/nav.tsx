@@ -1,12 +1,15 @@
 import { useRouter } from 'next/router';
 
 import { createStyles } from '@mantine/core';
+import type { IconType } from 'react-icons';
 import { AiOutlineHome, AiOutlineUser } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import { CgFeed } from 'react-icons/cg';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdPower } from 'react-icons/io';
 import { RiSettings4Fill } from 'react-icons/ri';
+
+import { ParsedUrlQuery } from 'node:querystring';
 
 import { LoggedInSession } from '@lihim/auth/core';
 import { TESTID_NAV_AUTH_ACTION } from '@lihim/shared/core';
@@ -15,7 +18,13 @@ import { useRootContext } from '@lihim/shared/data-access';
 import { NavBrand } from './ui/nav-brand';
 import { NavItem } from './ui/nav-item';
 
-const commonNavs = [
+type NavItemProps = {
+  icon: IconType;
+  label: string;
+  href: string;
+};
+
+const commonNavs: NavItemProps[] = [
   {
     icon: HiOutlineSearch,
     label: 'Search',
@@ -28,7 +37,7 @@ const commonNavs = [
   },
 ];
 
-const anonNavs = [
+const anonNavs: NavItemProps[] = [
   {
     icon: CgFeed,
     label: 'Explore',
@@ -37,7 +46,7 @@ const anonNavs = [
   ...commonNavs,
 ];
 
-const loggedInNavs = [
+const loggedInNavs: NavItemProps[] = [
   {
     icon: AiOutlineHome,
     label: 'Home',
@@ -56,6 +65,18 @@ const getNavs = (pathname: string, isAnon: boolean, username?: string) =>
     ...nav,
     href: nav.label === 'Profile' ? `/profile/${username}` : nav.href,
   }));
+
+// Manual check since query.username can be undefined
+const getQueryUsername = (query: ParsedUrlQuery) => {
+  let queryUsername: string | undefined;
+  try {
+    queryUsername = query.username as string;
+  } catch {
+    queryUsername = undefined;
+  }
+
+  return queryUsername;
+};
 
 const useStyles = createStyles((theme) => ({
   nav: {
@@ -86,14 +107,7 @@ const useStyles = createStyles((theme) => ({
 export const Nav = () => {
   // Router
   const { push, pathname, query } = useRouter();
-
-  // Manual check since query.username can be undefined
-  let queryUsername: string | undefined;
-  try {
-    queryUsername = query.username as string;
-  } catch {
-    queryUsername = undefined;
-  }
+  const queryUsername = getQueryUsername(query);
 
   // Session
   const {
