@@ -8,3 +8,11 @@ export const click = (attrName: AttrName, attrValue: string) =>
 
 export const input = (attrValue: string, value: string) =>
   select('name', attrValue).type(value);
+
+export const getViewport = () => {
+  const dimensions = Cypress.env('VIEWPORT').split('x') as [string, string];
+  return {
+    width: Number(dimensions[0]),
+    height: Number(dimensions[1]),
+  };
+};
