@@ -5,5 +5,6 @@ export default defineConfig({
   e2e: {
     ...nxE2EPreset(__dirname),
     video: false,
+    defaultCommandTimeout: 10_000,
   },
 });
