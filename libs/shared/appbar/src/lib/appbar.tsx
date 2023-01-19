@@ -1,10 +1,9 @@
-import { Group, useMantineColorScheme } from '@mantine/core';
+import { Box, Group, useMantineColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useLogoutMutation } from '@lihim/auth/data-access';
 import { useRootContext } from '@lihim/shared/data-access';
 
-import { Brand } from './ui/brand';
 import { Menu } from './ui/menu';
 import { ThemeToggle } from './ui/theme-toggle';
 import { Wrapper } from './ui/wrapper';
@@ -36,7 +35,7 @@ export const Appbar = () => {
 
   return (
     <Wrapper>
-      <Brand />
+      <Box h={50} />
       <Group spacing={0}>
         <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
         <Menu

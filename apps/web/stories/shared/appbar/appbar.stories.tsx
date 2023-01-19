@@ -11,7 +11,6 @@ import {
   ARIA_MOON_ICON,
   ARIA_SUN_ICON,
   ARIA_TOGGLE_THEME,
-  TEXT_BRAND,
 } from '@lihim/shared/core';
 
 type Props = ComponentProps<typeof Appbar>;
@@ -24,11 +23,6 @@ export const Default: StoryObj<Props> = {
   args: {},
   async play({ canvasElement }) {
     const canvas = within(canvasElement);
-
-    // Assert brand defaults
-    const brand = canvas.getByText(TEXT_BRAND);
-    expect(brand).toBeVisible();
-    expect(brand.closest('a')).toHaveAttribute('href', '/');
 
     // Toggle theme (dark mode set in parameters)
     const toggleTheme = canvas.getByRole('button', {

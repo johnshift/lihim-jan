@@ -12,7 +12,6 @@ import {
   ARIA_TOGGLE_THEME,
   TESTID_AUTH_MENUITEM,
   TESTID_HEADER_LOADER,
-  TEXT_BRAND,
 } from '@lihim/shared/core';
 import {
   render,
@@ -38,11 +37,6 @@ describe('Appbar', () => {
 
     // Render component
     render(<Appbar />);
-
-    // Assert brand defaults
-    const brand = screen.getByText(TEXT_BRAND);
-    expect(brand).toBeVisible();
-    expect(brand.closest('a')).toHaveAttribute('href', '/');
 
     // Toggle theme
     const toggleTheme = screen.getByRole('button', {
