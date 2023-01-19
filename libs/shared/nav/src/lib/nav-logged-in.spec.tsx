@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 
 import { LoggedInSession } from '@lihim/auth/core';
 import { fakeSession, mockSessionResponse } from '@lihim/auth/testutils';
-import { TESTID_NAV_AUTH_ACTION } from '@lihim/shared/core';
+import { TESTID_NAV_AUTH_ACTION, TEXT_BRAND } from '@lihim/shared/core';
 import { render, screen, user, waitFor } from '@lihim/shared/testutils/feature';
 import { PageLayout } from '@lihim/shared/ui';
 
@@ -35,6 +35,7 @@ const checkVisibility = async () => {
   expect(screen.getByTestId(TESTID_CONTENT)).toBeInTheDocument();
 
   // Common Navs
+  expect(screen.getByText(TEXT_BRAND)).toBeVisible();
   expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Settings' })).toBeInTheDocument();
 
