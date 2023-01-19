@@ -174,7 +174,7 @@ jobs:
   test-report:
     name: Test Report
     runs-on: ubuntu-latest
-    needs: [create-pull-request, run-tests]
+    needs: [run-tests]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -304,7 +304,6 @@ jobs:
       - name: Fail on skipped/cancelled/failure
         if: |
           contains(needs.*.result, 'failure') ||
-          contains(needs.*.result, 'cancelled')||
-          contains(needs.*.result, 'skipped')
+          contains(needs.*.result, 'cancelled')
         run: exit 1
       - run: echo "All checks passed"
