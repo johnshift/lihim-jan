@@ -17,6 +17,7 @@ import {
   render,
   screen,
   user,
+  waitFor,
   waitForElementToBeRemoved,
   within,
 } from '@lihim/shared/testutils/feature';
@@ -110,5 +111,28 @@ describe('Appbar', () => {
 
     // Click action icon
     await user.click(screen.getByTestId(TESTID_AUTH_MENUITEM));
+  });
+
+  test('search input in-progress message', async () => {
+    // Mock not loggedIn
+    mswServer.use(mockSessionResponse(200, { isAnon: true }, 200));
+
+    // Mock alert
+    const mockAlert = jest.fn();
+    jest.spyOn(window, 'alert').mockImplementationOnce(mockAlert);
+
+    // Render component
+    render(<Appbar />);
+
+    // Type something in search bar then submit
+    await user.type(screen.getByPlaceholderText('Search'), 'something');
+    await user.keyboard('{Enter}');
+
+    // Assert alert message
+    await waitFor(() => {
+      expect(mockAlert).toHaveBeenCalledWith(
+        'Search feature is currently in progress',
+      );
+    });
   });
 });
