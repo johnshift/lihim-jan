@@ -1,10 +1,13 @@
-import { Box, Group, useMantineColorScheme } from '@mantine/core';
+import { FormEventHandler } from 'react';
+
+import { Flex, Group, useMantineColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useLogoutMutation } from '@lihim/auth/data-access';
 import { useRootContext } from '@lihim/shared/data-access';
 
 import { Menu } from './ui/menu';
+import { SearchInput } from './ui/search-input';
 import { ThemeToggle } from './ui/theme-toggle';
 import { Wrapper } from './ui/wrapper';
 
@@ -33,9 +36,28 @@ export const Appbar = () => {
   const isLoading = sessionIsLoading || logoutIsLoading;
   const authFn = isLoggedIn ? logoutMutate : authModalActions.openLogin;
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const searchOnSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line no-alert
+    alert('Search feature is currently in progress');
+  };
+
   return (
     <Wrapper>
-      <Box h={50} />
+      <Flex
+        h={50}
+        px={20}
+        align="center"
+        sx={{
+          flexGrow: 1,
+          cursor: 'pointer',
+        }}
+      >
+        <form style={{ width: '100%' }} onSubmit={searchOnSubmit}>
+          <SearchInput />
+        </form>
+      </Flex>
       <Group spacing={0}>
         <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
         <Menu
