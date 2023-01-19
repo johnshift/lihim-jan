@@ -12,6 +12,7 @@ import { LoggedInSession } from '@lihim/auth/core';
 import { TESTID_NAV_AUTH_ACTION } from '@lihim/shared/core';
 import { useRootContext } from '@lihim/shared/data-access';
 
+import { NavBrand } from './ui/nav-brand';
 import { NavItem } from './ui/nav-item';
 
 const commonNavs = [
@@ -58,12 +59,6 @@ const getNavs = (pathname: string, isAnon: boolean, username?: string) =>
   }));
 
 const useStyles = createStyles((theme) => ({
-  brand: {
-    paddingBottom: 80,
-    [theme.fn.smallerThan(theme.breakpoints.xs)]: {
-      display: 'none',
-    },
-  },
   nav: {
     display: 'flex',
     width: '100%',
@@ -115,7 +110,7 @@ export const Nav = () => {
 
   return (
     <>
-      <div className={classes.brand} />
+      <NavBrand push={push} />
       <div className={classes.separator}>
         <div className={classes.nav}>
           {navs.map((nav) => (
