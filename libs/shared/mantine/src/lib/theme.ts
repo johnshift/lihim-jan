@@ -15,6 +15,6 @@ export const theme: MantineThemeOverride = {
     xl: 1930,
   },
   primaryColor: 'indigo',
-  black: '#333645',
+  black: '#384268',
   white: '#fdfeff',
 };
