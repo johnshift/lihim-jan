@@ -40,14 +40,18 @@ jobs:
           workflow: dev.yml
           name: coverage-artifacts
           path: coverage
+          if_no_artifact_found: warn
 
       - name: Merge Code Coverage
+        if: steps.download-artifact.outputs.found_artifact == 'true'
         run: npx nyc merge coverage/ merged-output/merged-coverage.json
 
       - name: Generate coverage report
+        if: steps.download-artifact.outputs.found_artifact == 'true'
         run: npx nyc report -t merged-output --report-dir merged-output --reporter lcov
 
       - name: Upload coverage to codeclimate
+        if: steps.download-artifact.outputs.found_artifact == 'true'
         uses: paambaati/codeclimate-action@v3.2.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPORTER_ID }}
