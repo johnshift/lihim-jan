@@ -125,6 +125,10 @@ jobs:
         run: echo "e2e_files=$(bash tools/scripts/list-e2e-files.sh)" >> $GITHUB_ENV
       - name: Echo E2E files
         run: echo "affected e2e files = ${{ env.e2e_files }}"
+      - name: Cypress install
+        uses: cypress-io/github-action@v5
+        with:
+          runTests: false
     outputs:
       test_libs: ${{ env.test_libs }}
       e2e_files: ${{ env.e2e_files}}
