@@ -19,11 +19,13 @@ import {
 import { fakeSignupPayload } from '@lihim/auth/testutils';
 import { ARIA_HEADER_MENU, TESTID_AUTH_MENUITEM } from '@lihim/shared/core';
 
-import { click, input, select } from '../support/helpers';
+import { click, getViewport, input, select } from '../support/helpers';
 
 describe('auth', () => {
   beforeEach(() => {
     cy.visit('/');
+    const { width, height } = getViewport();
+    cy.viewport(width, height);
   });
 
   // Since tests for auth depend on previous step,

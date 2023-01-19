@@ -255,12 +255,22 @@ jobs:
           vercel-args: --prod
 
   e2e-chrome:
-    name: 'chrome e2e: ${{ matrix.spec }}'
+    name: '${{ matrix.spec }} (${{ matrix.viewport }})'
     runs-on: ubuntu-latest
     needs: [dev-deploy, matrix-deps]
     strategy:
       matrix:
         spec: ${{ fromJson(needs.matrix-deps.outputs.e2e_files ) }}
+        viewport: [
+            # '320x480', # small phone
+            '375x667', # hd phone
+            '768x1024', # tab
+            # '1280x800', # small screen
+            '1366x768', # common screen
+            # '1440x900', # md screen
+            # '1536x960', # lg screen
+            # '1920x1080', # xl screen
+          ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -285,6 +295,7 @@ jobs:
         uses: cypress-io/github-action@v5
         env:
           E2E_BASE_URL: https://lihim-dev.vercel.app
+          CYPRESS_VIEWPORT: ${{ matrix.viewport }}
         with:
           browser: chrome
           wait-on: https://lihim-dev.vercel.app
