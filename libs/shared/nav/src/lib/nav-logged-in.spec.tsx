@@ -84,7 +84,14 @@ describe('Nav loggedIn', () => {
 
     jest
       .spyOn(nextRouter, 'useRouter')
-      .mockReturnValue({ push, pathname } as any);
+      .mockReturnValue({
+        push,
+        pathname,
+        query:
+          label === 'Profile'
+            ? { username: (session as LoggedInSession).username }
+            : undefined,
+      } as any);
 
     // Render component
     render(<TestComponent />);
