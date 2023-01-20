@@ -7,6 +7,7 @@ import { emojiPropsFace } from './ui/emoji-props-faces';
 import { emojiPropsFace2 } from './ui/emoji-props-faces-2';
 import { emojiPropsHands } from './ui/emoji-props-hands';
 import { emojiPropsMisc } from './ui/emoji-props-misc';
+import { emojiPropsStatic } from './ui/emoji-props-static';
 import { emojiPropsSymbols } from './ui/emoji-props-symbols';
 
 const emojiProps = [
@@ -15,6 +16,7 @@ const emojiProps = [
   ...emojiPropsHands,
   ...emojiPropsMisc,
   ...emojiPropsSymbols,
+  ...emojiPropsStatic,
 ];
 
 type EmojiMapKey = typeof emojiProps[number]['key'];

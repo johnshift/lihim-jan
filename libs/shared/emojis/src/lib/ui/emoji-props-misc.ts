@@ -1,8 +1,6 @@
 import {
   EMOJI_KEY_BEER_MUG,
-  EMOJI_KEY_BIKINI,
   EMOJI_KEY_BIRTHDAY_CAKE,
-  EMOJI_KEY_BRIEFS,
   EMOJI_KEY_BROKEN_HEART,
   EMOJI_KEY_CAMERA_FLASH,
   EMOJI_KEY_CHICKEN,
@@ -22,10 +20,8 @@ import {
 } from '../constants';
 import BeerMugEmoji from '../images/misc/Beer Mug.gif';
 import BeerMugEmojiPlaceholder from '../images/misc/Beer Mug.png';
-import BikiniEmoji from '../images/misc/Bikini.png';
 import BirthdayCakeEmoji from '../images/misc/Birthday Cake.gif';
 import BirthdayCakeEmojiPlaceholder from '../images/misc/Birthday Cake.png';
-import BriefsEmoji from '../images/misc/Briefs.png';
 import BrokenHeartEmoji from '../images/misc/Broken Heart.gif';
 import BrokenHeartEmojiPlaceholder from '../images/misc/Broken Heart.png';
 import CameraFlashEmoji from '../images/misc/Camera with Flash.gif';
@@ -67,22 +63,10 @@ export const emojiPropsMisc = [
     placeholder: BeerMugEmojiPlaceholder,
   },
   {
-    key: EMOJI_KEY_BIKINI,
-    alt: 'Bikini',
-    src: BikiniEmoji,
-    placeholder: BikiniEmoji,
-  },
-  {
     key: EMOJI_KEY_BIRTHDAY_CAKE,
     alt: 'Birthday cake',
     src: BirthdayCakeEmoji,
     placeholder: BirthdayCakeEmojiPlaceholder,
-  },
-  {
-    key: EMOJI_KEY_BRIEFS,
-    alt: 'Briefs',
-    src: BriefsEmoji,
-    placeholder: BriefsEmoji,
   },
   {
     key: EMOJI_KEY_BROKEN_HEART,
