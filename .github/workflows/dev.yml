@@ -162,10 +162,22 @@ jobs:
         #       which results to incorrect coverage paths (local and ci paths are structured differently)
         run: pnpm nx test ${{ matrix.projectName }} --codeCoverage --skip-nx-cache
 
+      - name: Check if coverage file is available
+        id: coverage-check
+        shell: bash
+        run: |
+          if [ $(find coverage -name coverage-final.json) ]; then
+            echo "available=true" >> $GITHUB_OUTPUT;
+          else
+            echo "available=false" >> $GITHUB_OUTPUT;
+          fi
+
       - name: Move shard coverage
+        if: steps.coverage-check.outputs.available == 'true'
         run: mv $(find coverage -name coverage-final.json) coverage/${{matrix.projectName}}.json
 
       - name: Upload coverage
+        if: steps.coverage-check.outputs.available == 'true'
         uses: actions/upload-artifact@v3
         with:
           name: coverage-artifacts
