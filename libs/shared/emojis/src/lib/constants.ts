@@ -73,3 +73,22 @@ export const EMOJI_KEY_ROCKET = 'rocket' as const;
 export const EMOJI_KEY_SEAL = 'seal' as const;
 export const EMOJI_KEY_SUN_FACE = 'sun-face' as const;
 export const EMOJI_KEY_UNICORN = 'unicorn' as const;
+
+// Symobl emoji keys
+export const EMOJI_KEY_BEATING_HEART = 'beating-heart' as const;
+export const EMOJI_KEY_DOUBLE_EXCLAMATION = 'double-exclamation' as const;
+export const EMOJI_KEY_DROPLET = 'droplet' as const;
+export const EMOJI_KEY_EXCLAMATION_QUESTION = 'exclamation-question' as const;
+export const EMOJI_KEY_FIRE = 'fire' as const;
+export const EMOJI_KEY_GROWING_HEART = 'growing-heart' as const;
+export const EMOJI_KEY_HIGH_VOLTAGE = 'high-voltage' as const;
+export const EMOJI_KEY_LIPSTICK = 'lipstick' as const;
+export const EMOJI_KEY_MOUTH = 'mouth' as const;
+export const EMOJI_KEY_NO_MINOR = 'no-minor' as const;
+export const EMOJI_KEY_PARTY_POPPER = 'party-popper' as const;
+export const EMOJI_KEY_RED_EXCLAMATION = 'red-exclamation' as const;
+export const EMOJI_KEY_RED_HEART = 'red-heart' as const;
+export const EMOJI_KEY_RED_QUESTION = 'red-question' as const;
+export const EMOJI_KEY_STAR = 'star' as const;
+export const EMOJI_KEY_TONGUE = 'tongue' as const;
+export const EMOJI_KEY_ZZZ = 'zzz' as const;
