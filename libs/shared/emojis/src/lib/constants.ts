@@ -39,3 +39,15 @@ export const EMOJI_KEY_UNUMUSED_FACE = 'unumused-face' as const;
 export const EMOJI_KEY_WEARY_FACE = 'weary-face' as const;
 export const EMOJI_KEY_WORRIED_FACE = 'worried-face' as const;
 export const EMOJI_KEY_ZANY_FACE = 'zany-face' as const;
+
+// Hand emoji keys
+export const EMOJI_KEY_CLAPPING_HANDS = 'clapping-hands' as const;
+export const EMOJI_KEY_CROSSED_FINGERS = 'crossed-fingers' as const;
+export const EMOJI_KEY_HAND_SHAKE = 'hand-shake' as const;
+export const EMOJI_KEY_HEART_HANDS = 'heart-hands' as const;
+export const EMOJI_KEY_MIDDLE_FINGER = 'middle-finger' as const;
+export const EMOJI_KEY_ONCOMING_FIST = 'oncoming-fist' as const;
+export const EMOJI_KEY_THUMBS_DOWN = 'thumbs-down' as const;
+export const EMOJI_KEY_THUMBS_UP = 'thumbs-up' as const;
+export const EMOJI_KEY_VICTORY_HAND = 'victory-hand' as const;
+export const EMOJI_KEY_WAVING_HAND = 'waving-hand' as const;
