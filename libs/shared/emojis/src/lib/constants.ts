@@ -51,3 +51,25 @@ export const EMOJI_KEY_THUMBS_DOWN = 'thumbs-down' as const;
 export const EMOJI_KEY_THUMBS_UP = 'thumbs-up' as const;
 export const EMOJI_KEY_VICTORY_HAND = 'victory-hand' as const;
 export const EMOJI_KEY_WAVING_HAND = 'waving-hand' as const;
+
+// Misc emoji keys
+export const EMOJI_KEY_BEER_MUG = 'beer-mug' as const;
+export const EMOJI_KEY_BIKINI = 'bikini' as const;
+export const EMOJI_KEY_BIRTHDAY_CAKE = 'birthday-cake' as const;
+export const EMOJI_KEY_BRIEFS = 'briefs' as const;
+export const EMOJI_KEY_BROKEN_HEART = 'broken-heart' as const;
+export const EMOJI_KEY_CAMERA_FLASH = 'camera-flash' as const;
+export const EMOJI_KEY_CHICKEN = 'chicken' as const;
+export const EMOJI_KEY_CLINKING_BEER = 'clinking-beer' as const;
+export const EMOJI_KEY_CLOUD_LIGHTNING_RAIN = 'cloud-lightning-rain' as const;
+export const EMOJI_KEY_COMET = 'comet' as const;
+export const EMOJI_KEY_DOG_FACE = 'dog-face' as const;
+export const EMOJI_KEY_GORILLA = 'gorilla' as const;
+export const EMOJI_KEY_HORSE_FACE = 'horse-face' as const;
+export const EMOJI_KEY_MONKEY_FACE = 'monkey-face' as const;
+export const EMOJI_KEY_PIG_FACE = 'pig-face' as const;
+export const EMOJI_KEY_PIG_NOSE = 'pig-nose' as const;
+export const EMOJI_KEY_ROCKET = 'rocket' as const;
+export const EMOJI_KEY_SEAL = 'seal' as const;
+export const EMOJI_KEY_SUN_FACE = 'sun-face' as const;
+export const EMOJI_KEY_UNICORN = 'unicorn' as const;
