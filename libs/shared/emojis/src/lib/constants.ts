@@ -1,0 +1,41 @@
+/**
+ * Note: we need to specify sql-column-friendly keys (alt description is not sql-column friendly)
+ */
+
+// Face emoji keys
+export const EMOJI_KEY_ANGRY_FACE = 'angry-face' as const;
+export const EMOJI_KEY_ASTONISHED_FACE = 'astonished-face' as const;
+export const EMOJI_KEY_ANXIOUS_FACE = 'anxious-face' as const;
+export const EMOJI_KEY_BEAMING_FACE = 'beaming-face' as const;
+export const EMOJI_KEY_CONFOUNDED_FACE = 'confounded-face' as const;
+export const EMOJI_KEY_CONFUSED_FACE = 'confused-face' as const;
+export const EMOJI_KEY_DISAPPOINTED_FACE = 'disappointed-face' as const;
+export const EMOJI_KEY_DOWNCAST_FACE = 'downcast-face' as const;
+export const EMOJI_KEY_ENRAGED_FACE = 'enraged-face' as const;
+export const EMOJI_KEY_EXPLODING_FACE = 'exploding-face' as const;
+export const EMOJI_KEY_FACE_HAND_OVER_MOUTH = 'face-hand-over-mouth' as const;
+export const EMOJI_KEY_FACE_ROLLING_EYES = 'face-rolling-eyes' as const;
+export const EMOJI_KEY_FACE_SCREAMING_FEAR = 'face-screaming-fear' as const;
+export const EMOJI_KEY_FACE_STEAM_NOSE = 'face-steam-nose' as const;
+export const EMOJI_KEY_FACE_TEARS_JOY = 'face-tears-joy' as const;
+export const EMOJI_KEY_FACE_VOMITTING = 'face-vomitting' as const;
+export const EMOJI_KEY_GRINNING_FACE_SMILING = 'grinning-face-smiling' as const;
+export const EMOJI_KEY_GRINNING_FACE_SQUINTING =
+  'grinning-face-squinting' as const;
+export const EMOJI_KEY_KISSING_FACE = 'kissing-face' as const;
+export const EMOJI_KEY_LOUDLY_CRYING_FACE = 'loudly-crying-face' as const;
+export const EMOJI_KEY_NEW_MOON_FACE = 'new-moon-face' as const;
+export const EMOJI_KEY_PARTYING_FACE = 'partying-face' as const;
+export const EMOJI_KEY_PENSIVE_FACE = 'pensive-face' as const;
+export const EMOJI_KEY_ROFL_FACE = 'rofl-face' as const;
+export const EMOJI_KEY_SMILING_FACE_HEART_EYES =
+  'smiling-face-heart-eyes' as const;
+export const EMOJI_KEY_SMILING_FACE_HEARTS = 'smiling-face-hearts' as const;
+export const EMOJI_KEY_SMILING_FACE_OPEN_HANDS =
+  'smiling-face-open-hands' as const;
+export const EMOJI_KEY_SMIRKING_FACE = 'smirking-face' as const;
+export const EMOJI_KEY_THINKING_FACE = 'thinking-face' as const;
+export const EMOJI_KEY_UNUMUSED_FACE = 'unumused-face' as const;
+export const EMOJI_KEY_WEARY_FACE = 'weary-face' as const;
+export const EMOJI_KEY_WORRIED_FACE = 'worried-face' as const;
+export const EMOJI_KEY_ZANY_FACE = 'zany-face' as const;
