@@ -32,8 +32,8 @@ export const EmojiImage: FC<EmojiImageProps> = (props) => {
     <div className={classes.outer}>
       <div className={classes.inner}>
         <NextImage
-          height={32}
-          width={32}
+          height={26}
+          width={26}
           src={props.isLoading ? props.placeholder : props.src}
           alt={props.alt}
           priority={props.isLoading}
