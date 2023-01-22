@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 import { ERR_SUFFIX_INVALID, errPhrase, zodString } from '@lihim/shared/core';
 
 import {
@@ -12,3 +14,5 @@ export const UsernameSchema = zodString(
   MIN_LENGTH_PRINCIPAL,
   MAX_LENGTH_PRINCIPAL,
 ).regex(RGX_USERNAME, errPhrase(LABEL_USERNAME, ERR_SUFFIX_INVALID));
+
+export type Username = z.infer<typeof UsernameSchema>;
