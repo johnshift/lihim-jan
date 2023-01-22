@@ -1,30 +1,49 @@
-import { timeSince } from './time-since';
+import {
+  DAY_MS,
+  HOUR_MS,
+  MINUTE_MS,
+  MONTH_MS,
+  SECOND_MS,
+  timeSince,
+  WEEK_MS,
+  YEAR_MS,
+} from './time-since';
 
 describe('timeSince', () => {
   describe.each([[true], [false]])('toISOString = %s', (isIso) => {
     test.each([
-      ['just now', 1000 * 59],
-      ['just now', 1000 * 59, false],
-      ['1min ago', 1000 * 60],
-      ['1 minute ago', 1000 * 60, false],
-      ['2mins ago', 1000 * 60 * 2],
-      ['2 minutes ago', 1000 * 60 * 2, false],
-      ['1h ago', 1000 * 60 * 60],
-      ['1 hour ago', 1000 * 60 * 60, false],
-      ['2h ago', 1000 * 60 * 60 * 2],
-      ['2 hours ago', 1000 * 60 * 60 * 2, false],
-      ['1d ago', 1000 * 60 * 60 * 24],
-      ['yesterday', 1000 * 60 * 60 * 24, false],
-      ['2d ago', 1000 * 60 * 60 * 24 * 2],
-      ['2 days ago', 1000 * 60 * 60 * 24 * 2, false],
-      ['1w ago', 1000 * 60 * 60 * 24 * 7],
-      ['1 week ago', 1000 * 60 * 60 * 24 * 7, false],
-      ['2w ago', 1000 * 60 * 60 * 24 * 7 * 2],
-      ['2 weeks ago', 1000 * 60 * 60 * 24 * 7 * 2, false],
-      ['1m ago', 1000 * 60 * 60 * 24 * 30],
-      ['1 month ago', 1000 * 60 * 60 * 24 * 30, false],
-      ['2m ago', 1000 * 60 * 60 * 24 * 30 * 2],
-      ['2 months ago', 1000 * 60 * 60 * 24 * 30 * 2, false],
+      ['just now', SECOND_MS * 59],
+      ['just now', SECOND_MS * 59, false],
+      ['1min ago', MINUTE_MS],
+      ['1 minute ago', MINUTE_MS, false],
+      ['2mins ago', MINUTE_MS * 2],
+      ['2 minutes ago', MINUTE_MS * 2, false],
+      ['59mins ago', MINUTE_MS * 59],
+      ['59 minutes ago', MINUTE_MS * 59, false],
+      ['1h ago', HOUR_MS],
+      ['1 hour ago', HOUR_MS, false],
+      ['2h ago', HOUR_MS * 2],
+      ['2 hours ago', HOUR_MS * 2, false],
+      ['23h ago', HOUR_MS * 23],
+      ['23 hours ago', HOUR_MS * 23, false],
+      ['1d ago', DAY_MS],
+      ['yesterday', DAY_MS, false],
+      ['2d ago', DAY_MS * 2],
+      ['2 days ago', DAY_MS * 2, false],
+      ['6d ago', DAY_MS * 6],
+      ['6 days ago', DAY_MS * 6, false],
+      ['1w ago', WEEK_MS],
+      ['1 week ago', WEEK_MS, false],
+      ['2w ago', WEEK_MS * 2],
+      ['2 weeks ago', WEEK_MS * 2, false],
+      ['3w ago', WEEK_MS * 3],
+      ['3 weeks ago', WEEK_MS * 3, false],
+      ['1m ago', MONTH_MS],
+      ['1 month ago', MONTH_MS, false],
+      ['2m ago', MONTH_MS * 2],
+      ['2 months ago', MONTH_MS * 2, false],
+      ['11m ago', MONTH_MS * 11],
+      ['11 months ago', MONTH_MS * 11, false],
     ])('%s', (expected, secondsBefore, isShorthand = true) => {
       // Now reference
       const now = new Date();
@@ -46,7 +65,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 1 year ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12);
+      const ts = new Date(now.getTime() - YEAR_MS);
 
       // Exec
       const result = timeSince(ts);
@@ -65,7 +84,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 1 year ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12);
+      const ts = new Date(now.getTime() - YEAR_MS);
 
       // Exec
       const result = timeSince(ts.toISOString());
@@ -84,7 +103,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 1 year ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12);
+      const ts = new Date(now.getTime() - YEAR_MS);
 
       // Exec
       const result = timeSince(ts, false);
@@ -103,7 +122,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 1 year ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12);
+      const ts = new Date(now.getTime() - YEAR_MS);
 
       // Exec
       const result = timeSince(ts.toISOString(), false);
@@ -122,7 +141,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 2 years ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12 * 2);
+      const ts = new Date(now.getTime() - YEAR_MS * 2);
 
       // Exec
       const result = timeSince(ts);
@@ -136,7 +155,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 2 years ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12 * 2);
+      const ts = new Date(now.getTime() - YEAR_MS * 2);
 
       // Exec
       const result = timeSince(ts.toISOString());
@@ -150,7 +169,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 2 years ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12 * 2);
+      const ts = new Date(now.getTime() - YEAR_MS * 2);
 
       // Exec
       const result = timeSince(ts, false);
@@ -164,7 +183,7 @@ describe('timeSince', () => {
       const now = new Date();
 
       // 2 years ago
-      const ts = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 30 * 12 * 2);
+      const ts = new Date(now.getTime() - YEAR_MS * 2);
 
       // Exec
       const result = timeSince(ts.toISOString(), false);

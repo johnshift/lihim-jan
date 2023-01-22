@@ -1,75 +1,108 @@
+const getTimeStamp = (timestamp: Date | string) =>
+  typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
+
+/** Returns spacebar if not shorthand */
+const getNumSpace = (shorthand: boolean) => `${shorthand ? '' : ' '}`;
+
+/** Returns 's' for non-shorthand plurals */
+const getPlural = (num: number, shorthand: boolean) =>
+  !shorthand && num > 1 ? 's' : '';
+
+/** Returns unit shorthand + plural form */
+const getUnit = (num: number, shorthand: boolean, unit: string) =>
+  `${shorthand ? unit.charAt(0) : unit}${getPlural(num, shorthand)}`;
+
+/** Returns minute unit "min" (redeclared since "min" has same charAt(0) with months) */
+const getMinuteUnit = (num: number, shorthand: boolean) =>
+  `min${shorthand ? '' : 'ute'}${num > 1 ? 's' : ''}`;
+
+type PrettyDateUnits = 'min' | 'hour' | 'day' | 'week' | 'month' | 'year';
+
+export const SECOND_MS = 1000;
+export const MINUTE_MS = SECOND_MS * 60;
+export const HOUR_MS = MINUTE_MS * 60;
+export const DAY_MS = HOUR_MS * 24;
+export const WEEK_MS = DAY_MS * 7;
+export const MONTH_MS = DAY_MS * 30;
+export const YEAR_MS = MONTH_MS * 12;
+
+const prettyDate = (
+  interval: number,
+  str: PrettyDateUnits,
+  shorthand: boolean,
+) => {
+  const num = Math.floor(interval);
+  const isMinute = str === 'min';
+  const getUnitFn = isMinute ? getMinuteUnit : getUnit;
+
+  const numSpace = getNumSpace(shorthand);
+  const unit = getUnitFn(num, shorthand, str);
+
+  return `${num}${numSpace}${unit} ago`;
+};
+
+const getUnitFn =
+  (baseline: number, intervalFactor: number, unit: PrettyDateUnits) =>
+  (_: Date, ms: number, shorthand: boolean) =>
+    ms < baseline
+      ? prettyDate(Math.floor(ms / intervalFactor), unit, shorthand)
+      : '';
+
+const getMinuteStr = getUnitFn(HOUR_MS, MINUTE_MS, 'min');
+const getHourStr = getUnitFn(DAY_MS, HOUR_MS, 'hour');
+const getWeekStr = getUnitFn(MONTH_MS - WEEK_MS, WEEK_MS, 'week');
+const getMonthStr = getUnitFn(YEAR_MS, MONTH_MS, 'month');
+
+const getJustNowStr = (_: Date, ms: number, _shorthand: boolean) =>
+  ms < MINUTE_MS ? 'just now' : '';
+
+const getDayStr = (_: Date, ms: number, shorthand: boolean) => {
+  if (ms < WEEK_MS) {
+    if (ms < 2 * DAY_MS && !shorthand) {
+      return 'yesterday';
+    }
+
+    return prettyDate(Math.floor(ms / DAY_MS), 'day', shorthand);
+  }
+
+  return '';
+};
+
+const getYearStr = (ts: Date, ms: number, shorthand: boolean) => {
+  const interval = Math.floor(ms / YEAR_MS);
+  console.log('INTERVAL =', interval);
+  const dateOptions = {
+    month: 'short',
+    day: '2-digit',
+    year: interval < 2 ? undefined : 'numeric',
+  } as Intl.DateTimeFormatOptions;
+
+  if (interval < 2) {
+    return ts.toLocaleDateString('en-US', dateOptions);
+  }
+
+  return prettyDate(interval, 'year', shorthand);
+};
+
 export const timeSince = (
   timestamp: Date | string,
   shorthand = true,
 ): string => {
   const now = new Date();
 
-  const ts = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
-  const seconds = Math.floor((now.getTime() - ts.getTime()) / 1000);
+  const ts = getTimeStamp(timestamp);
+  const ms = now.getTime() - ts.getTime();
 
-  if (seconds < 60) {
-    return 'just now';
-  }
-
-  let interval = Math.floor(seconds / 60);
-
-  const prettyDate = (str: 'min' | 'hour' | 'day' | 'week') => {
-    const num = Math.floor(interval);
-
-    if (str === 'min') {
-      return `${num}${shorthand ? '' : ' '}min${shorthand ? '' : 'ute'}${
-        num > 1 ? 's' : ''
-      } ago`;
-    }
-
-    return `${num}${shorthand ? '' : ' '}${shorthand ? str.charAt(0) : str}${
-      !shorthand && num !== 1 ? 's' : ''
-    } ago`;
-  };
-
-  if (interval < 60) {
-    return prettyDate('min');
-  }
-
-  interval = Math.floor(seconds / 3600);
-  if (interval < 24) {
-    return prettyDate('hour');
-  }
-
-  interval = Math.floor(seconds / 86_400);
-  if (interval < 7) {
-    if (interval === 1 && !shorthand) {
-      return 'yesterday';
-    }
-
-    return prettyDate('day');
-  }
-
-  interval = Math.floor(seconds / 604_800);
-  if (interval < 4) {
-    return prettyDate('week');
-  }
-
-  interval = Math.floor(seconds / 2_592_000);
-  if (interval < 12) {
-    return `${interval}${
-      shorthand ? 'm' : ` month${interval > 1 ? 's' : ''}`
-    } ago`;
-  }
-
-  interval = Math.floor(seconds / 31_536_000);
-  const dateOptions = {
-    month: 'short',
-    day: '2-digit',
-    year: interval === 0 ? undefined : 'numeric',
-  } as Intl.DateTimeFormatOptions;
-
-  // Show month + date if on the same year
-  if (interval < 1) {
-    return ts.toLocaleDateString('en-US', dateOptions);
-  }
-
-  return `${interval + 1}${shorthand ? '' : ' '}y${
-    shorthand ? '' : 'ears'
-  } ago`;
+  const fnArr = [
+    getJustNowStr,
+    getMinuteStr,
+    getHourStr,
+    getDayStr,
+    getWeekStr,
+    getMonthStr,
+    getYearStr,
+  ];
+  return fnArr
+    .map((fn) => fn(ts, ms, shorthand))
+    .find((s) => s !== '') as string;
 };
