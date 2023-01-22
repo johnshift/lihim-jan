@@ -22,6 +22,7 @@
       "@lihim/auth/testutils": ["libs/auth/testutils/src/index.ts"],
       "@lihim/auth/ui": ["libs/auth/ui/src/index.ts"],
       "@lihim/heart/ui": ["libs/heart/ui/src/index.ts"],
+      "@lihim/post/ui": ["libs/post/ui/src/index.ts"],
       "@lihim/reaction/ui": ["libs/reaction/ui/src/index.ts"],
       "@lihim/shared/api": ["libs/shared/api/src/index.ts"],
       "@lihim/shared/appbar": ["libs/shared/appbar/src/index.ts"],
