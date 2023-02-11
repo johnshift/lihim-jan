@@ -21,3 +21,5 @@ export {
   SignupErrorResponseSchema,
   SignupResponseSchema,
 } from './lib/schemas/signup-response-schema';
+export type { Username } from './lib/schemas/username-schema';
+export { UsernameSchema } from './lib/schemas/username-schema';
